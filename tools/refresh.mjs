@@ -269,6 +269,205 @@ function harvestPrices(html) {
   return book;
 }
 
+function cborLen(buf, st, info) {
+  if (info < 24) return info;
+  if (info === 24) return buf[st.i++];
+  if (info === 25) { const n = buf.readUInt16BE(st.i); st.i += 2; return n; }
+  if (info === 26) { const n = buf.readUInt32BE(st.i); st.i += 4; return n; }
+  if (info === 27) { const n = Number(buf.readBigUInt64BE(st.i)); st.i += 8; return n; }
+  throw new Error("unsupported cbor length");
+}
+
+function cbor(buf, st = { i: 0 }) {
+  const b = buf[st.i++];
+  const major = b >> 5;
+  const info = b & 31;
+  if (major === 0) return cborLen(buf, st, info);
+  if (major === 1) return -1 - cborLen(buf, st, info);
+  if (major === 2 || major === 3) {
+    const n = cborLen(buf, st, info);
+    const slice = buf.subarray(st.i, st.i + n);
+    st.i += n;
+    return major === 3 ? slice.toString("utf8") : slice;
+  }
+  if (major === 4) {
+    const n = cborLen(buf, st, info);
+    const out = [];
+    for (let i = 0; i < n; i++) out.push(cbor(buf, st));
+    return out;
+  }
+  if (major === 5) {
+    const n = cborLen(buf, st, info);
+    const out = {};
+    for (let i = 0; i < n; i++) out[cbor(buf, st)] = cbor(buf, st);
+    return out;
+  }
+  if (major === 6) { cborLen(buf, st, info); return cbor(buf, st); }
+  if (major === 7) {
+    if (info === 20) return false;
+    if (info === 21) return true;
+    if (info === 22 || info === 23) return null;
+    if (info === 25) { st.i += 2; return null; }
+    if (info === 26) { const n = buf.readFloatBE(st.i); st.i += 4; return n; }
+    if (info === 27) { const n = buf.readDoubleBE(st.i); st.i += 8; return n; }
+    return null;
+  }
+  throw new Error("bad cbor");
+}
+
+function prettyZone(key) {
+  const small = new Set(["of", "the", "and", "in", "a"]);
+  return key.split("_").map((word, i) => {
+    const lower = word.toLowerCase();
+    if (i > 0 && small.has(lower)) return lower;
+    return lower.charAt(0).toUpperCase() + lower.slice(1);
+  }).join(" ");
+}
+
+function foreverRoot(savedDir) {
+  return path.resolve(savedDir, "..", "..", "..", "..");
+}
+
+function loadZoneNames(root) {
+  const file = path.join(root, "Interface", "AddOns", "QuestieDB", "src", "corrections", "enum", "zones.lua");
+  const names = new Map();
+  if (!fs.existsSync(file)) return names;
+  const re = /^\s*([A-Z0-9_]+)\s*=\s*(\d+)\s*,/gm;
+  let m;
+  const text = fs.readFileSync(file, "utf8");
+  while ((m = re.exec(text))) if (!names.has(Number(m[2]))) names.set(Number(m[2]), prettyZone(m[1]));
+  return names;
+}
+
+function loadParents(root) {
+  const file = path.join(root, "Interface", "AddOns", "QuestieDB", "support", "Forever", "Zones", "subZoneToParentZone.lua");
+  const parents = new Map();
+  if (!fs.existsSync(file)) return parents;
+  const re = /\[(\d+)\]\s*=\s*(\d+)/g;
+  let m;
+  const text = fs.readFileSync(file, "utf8");
+  while ((m = re.exec(text))) parents.set(Number(m[1]), Number(m[2]));
+  return parents;
+}
+
+function loadCategories(root) {
+  const file = path.join(root, "Interface", "AddOns", "Questie", "Localization", "lookups", "lookupQuestCategories.lua");
+  const cats = new Map();
+  if (!fs.existsSync(file)) return cats;
+  const re = /\[(-?\d+)\]\s*=\s*"([^"]+)"/g;
+  let m;
+  const text = fs.readFileSync(file, "utf8");
+  while ((m = re.exec(text))) cats.set(Number(m[1]), m[2]);
+  return cats;
+}
+
+function rootZone(id, parents) {
+  const seen = new Set();
+  while (parents.has(id) && !seen.has(id)) { seen.add(id); id = parents.get(id); }
+  return id;
+}
+
+function asText(value) {
+  if (typeof value === "string") return value;
+  if (Buffer.isBuffer(value)) return value.toString("utf8");
+  return "";
+}
+
+function questBlurb(value) {
+  const lines = [];
+  const walk = (v) => {
+    if (typeof v === "string" || Buffer.isBuffer(v)) {
+      const text = asText(v).replace(/\|c[0-9a-fA-F]{8}|\|r/g, "").replace(/\s+/g, " ").trim();
+      if (text) lines.push(text);
+    } else if (Array.isArray(v)) v.forEach(walk);
+  };
+  walk(value);
+  const text = lines.join(" ");
+  return text.length > 240 ? `${text.slice(0, 237).trimEnd()}…` : text;
+}
+
+function questLookup(root, needed) {
+  const toc = path.join(root, "Interface", "AddOns", "QuestieDB", "QuestieDB_Forever.toc");
+  const found = new Map();
+  if (!needed.size || !fs.existsSync(toc)) return found;
+  const text = fs.readFileSync(toc, "utf8");
+  const re = /^## X-Quest-(\d+)-(S|8): (\S+)/gm;
+  let m;
+  while ((m = re.exec(text))) {
+    const id = Number(m[1]);
+    if (!needed.has(id)) continue;
+    let row;
+    try { row = cbor(Buffer.from(m[3], "base64")); } catch { continue; }
+    const entry = found.get(id) || { name: "", zone: null, level: null, desc: "" };
+    if (m[2] === "S") {
+      entry.name = asText(row[1]);
+      entry.zone = typeof row[17] === "number" ? row[17] : null;
+      entry.level = typeof row[5] === "number" && row[5] > 0 ? row[5] : null;
+    } else {
+      entry.desc = questBlurb(row);
+    }
+    found.set(id, entry);
+  }
+  return found;
+}
+
+function buildQuests(savedDir) {
+  const file = path.join(savedDir, "Questie.lua");
+  const byChar = {};
+  if (!fs.existsSync(file)) return byChar;
+  let parsed;
+  try { parsed = parseLuaFile(file); } catch { return byChar; }
+  const chars = parsed.QuestieConfig?.char || {};
+  const needed = new Set();
+  const done = new Map();
+  for (const [id, name] of ROSTER) {
+    const complete = chars[name]?.complete;
+    if (!complete) continue;
+    const ids = Object.keys(complete).map(Number).filter(n => Number.isInteger(n) && complete[n] === true);
+    done.set(id, ids);
+    ids.forEach(n => needed.add(n));
+  }
+  const root = foreverRoot(savedDir);
+  const rows = questLookup(root, needed);
+  const zones = loadZoneNames(root);
+  const parents = loadParents(root);
+  const categories = loadCategories(root);
+  for (const [id, ids] of done) {
+    const groups = new Map();
+    for (const qid of ids) {
+      const row = rows.get(qid);
+      const rawName = row?.name;
+      const title = (typeof rawName === "string" ? rawName : Buffer.isBuffer(rawName) ? rawName.toString("utf8") : "") || `Quest ${qid}`;
+      let zone = "Other";
+      if (typeof row?.zone === "number") {
+        if (row.zone < 0) zone = categories.get(row.zone) || "Other";
+        else {
+          const area = rootZone(row.zone, parents);
+          zone = zones.get(area) || zones.get(row.zone) || `Zone ${area}`;
+        }
+      }
+      if (!groups.has(zone)) groups.set(zone, new Map());
+      const bag = groups.get(zone);
+      const prev = bag.get(title) || { n: 0, lo: null, hi: null, desc: "" };
+      prev.n += 1;
+      if (typeof row?.level === "number") {
+        prev.lo = prev.lo == null ? row.level : Math.min(prev.lo, row.level);
+        prev.hi = prev.hi == null ? row.level : Math.max(prev.hi, row.level);
+      }
+      if (!prev.desc && row?.desc) prev.desc = row.desc;
+      bag.set(title, prev);
+    }
+    const lists = new Map();
+    for (const [zone, bag] of groups) {
+      lists.set(zone, [...bag.entries()]
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([title, q]) => [title, q.lo == null ? "" : q.lo === q.hi ? String(q.lo) : `${q.lo}–${q.hi}`, q.desc, q.n]));
+    }
+    byChar[id] = [...lists.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+  }
+  return byChar;
+}
+
 function build(dir, priceBook) {
   const characters = load(dir, "DataStore_Characters.lua");
   const ids = load(dir, "DataStore.lua");
@@ -434,6 +633,7 @@ function build(dir, priceBook) {
     scannedCount: Object.keys(scan).length,
     missingNote: missing.length ? `${missing.join(" and ")} ${missing.length > 1 ? "haven't" : "hasn't"} been scanned yet.` : "Every roster character has been scanned.",
     prices: Object.fromEntries([...priceBook.entries()].filter(([, v]) => v.price != null).map(([n, v]) => [n, [v.price, v.listed]])),
+    quests: buildQuests(dir),
     chars, scan, gold, bags, inv,
   };
 }
@@ -469,6 +669,9 @@ function applyRoster(){
   if(bagsP&&GENERATED.label) bagsP.textContent="Who has an empty bag slot, from the Bagnon save on "+GENERATED.label+". Send new bags to the gold rows first.";
   const scanned=document.getElementById("mkScanned");
   if(scanned&&GENERATED.scannedCount!=null) scanned.innerHTML=GENERATED.scannedCount+"<small> / "+chars.length+"</small>";
+  const freshText=GENERATED.label?"Scanned "+GENERATED.label:"";
+  const fresh=document.getElementById("fresh"); if(fresh) fresh.textContent=freshText;
+  const footFresh=document.getElementById("footFresh"); if(footFresh) footFresh.textContent=freshText;
   const learned=new Set(Object.values(GENERATED.chars).flatMap(c=>(c.profs||[]).map(p=>p[0])));
   document.querySelectorAll("#mats h3").forEach(h=>{
     const name=h.childNodes[0]&&h.childNodes[0].textContent.trim();
@@ -524,6 +727,12 @@ if (dry) {
     console.log(`${name}  lv ${c.lvl}  ${c.zone}${c.sub ? " / " + c.sub : ""}  ${c.gold}c  bags ${generated.scan[id][0]}/${generated.scan[id][1]}  ${profs}`);
   }
   console.log(`scan ${generated.label}  gold rows ${generated.gold.length}  missing: ${generated.missingNote}`);
+  for (const [id, name] of ROSTER) {
+    const zones = generated.quests[id];
+    if (!zones) continue;
+    const n = zones.reduce((a, z) => a + z[1].length, 0);
+    console.log(`quests ${name}: ${n} across ${zones.length} zones (${zones.slice(0, 3).map(z => z[0] + " " + z[1].length).join(", ")})`);
+  }
   const leif = generated.inv.leif?.find(r => r[0] === "Light Leather");
   console.log("Leif Light Leather:", leif ? leif.join(" ") : "not found");
   process.exit(0);
