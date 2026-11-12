@@ -16,7 +16,10 @@ These two are required for the refresh. Without them the script has nothing to r
 | --- | --- |
 | Altoholic | Saves level, zone, gold, experience, professions, and items (the DataStore files). |
 | Bagnon | Saves which bags are equipped and how full they are (the BagBrother file). |
-| Questie | Saves which quests each character has completed. The page groups those by zone and shows the quest text and level. It does not save the day a quest was turned in. |
+| Questie | Saves which quests each character has completed. The page can sort them by zone, level, or name, and shows the quest text and level. It does not save the day a quest was turned in. |
+| Altoholic quest log | Quests still in the log, including rewards. Use Show → In the log. |
+| Altoholic gear | Equipped items and average item level. |
+| Altoholic reputation | Home-city standing. The bar fills the current rank. |
 
 Log into each character once with both enabled, open the profession windows and the bank if you want those counted, then log out.
 

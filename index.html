@@ -327,8 +327,11 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
 .sk-flag{padding:8px 14px;font-size:13px;color:var(--gold);border-top:1px solid var(--line);margin:0}
 .qbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
 .qbar .inv-tabs{flex:1}
-.qfind{font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;min-width:min(100%,200px)}
-.qfind:focus{outline:2px solid var(--gold);outline-offset:2px}
+.qtools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.qfind,.qsort select{font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.qfind{min-width:min(100%,200px)}
+.qfind:focus,.qsort select:focus{outline:2px solid var(--gold);outline-offset:2px}
+.qsort{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
 .qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
 .qlist{list-style:none;margin:0;padding:0 0 6px;display:grid}
 .qlist .qq{display:grid;grid-template-columns:1fr;gap:2px;padding:8px 14px;border-top:1px solid var(--line)}
@@ -337,8 +340,27 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
 .qn b{font-weight:500}
 .qn i{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
 .qn em{margin-left:auto;font-style:normal;font-size:12px;letter-spacing:.04em;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.qz{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold)}
 .qd{color:var(--muted);font-size:13px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .qmeta{margin:0}
+.qready{font-style:normal;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.qr{font-size:12px;color:var(--gold)}
+.stand{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:14px}
+.stand-card{display:grid;gap:3px;padding:10px 12px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--cc);border-radius:6px}
+.stand-card b{font-family:var(--display);font-weight:500;color:var(--cc)}
+.stand-card small{color:var(--muted);font-size:13px}
+.glist,.rlist{list-style:none;margin:0;padding:0 0 8px}
+.glist li{display:grid;grid-template-columns:92px 1fr;gap:2px 12px;padding:7px 14px;border-top:1px solid var(--line);align-items:baseline}
+.glist li span{color:var(--muted);font-size:13px}
+.iq0{color:#9d9d9d}.iq2{color:#1a7f32}.iq3{color:#1a4fd8}.iq4{color:#7a3ec8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .iq2{color:#5dff8a}:root:not([data-theme="light"]) .iq3{color:#7eb0ff}:root:not([data-theme="light"]) .iq4{color:#c9a0ff}}
+:root[data-theme="dark"] .iq2{color:#5dff8a}:root[data-theme="dark"] .iq3{color:#7eb0ff}:root[data-theme="dark"] .iq4{color:#c9a0ff}
+.rlist li{display:grid;grid-template-columns:110px auto minmax(80px,1fr) auto;gap:6px 10px;padding:8px 14px;border-top:1px solid var(--line);align-items:center}
+.rlist li span{font-size:14px}
+.rlist li em{font-style:normal;font-size:13px;color:var(--muted)}
+.rlist li.met em{color:var(--gold)}
+.rlist small{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px;text-align:right}
+@media (max-width:640px){.rlist li{grid-template-columns:1fr auto}.rlist .mini{grid-column:1/-1}.rlist small{grid-column:1/-1;text-align:left}}
 /* scan: market */
 .callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:6px;padding:12px 14px;max-width:none}
 .callout p{margin:0}
@@ -449,6 +471,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     </div>
     <div class="scanbar"><span>Levels, zones and skills were last filled in from the addon scan on Nov 12. Anything you type here overrides them.</span><button type="button" id="useScan">Reset to scan values</button></div>
     <p class="hint">The bar under each level fills toward 25, and under each crafting skill toward 150. Guide links open Warcraft Tavern. Keg Kenobi can tank in a pinch, and Leif can go bear. Respecs cost gold (about 1g for the first, then more), so each character plans at most one.</p>
+    <div class="stand" id="stand"></div>
   </section>
 
   <section id="next">
@@ -589,13 +612,29 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
   </section>
 
   <section id="quests">
-    <div class="sh"><h2>Quests done</h2><p>Completed quests from Questie, grouped by zone. The level sits beside the name, and the quest text sits under it. Steps that share a name are listed once. Class and profession quests are filed under their own heading.</p></div>
+    <div class="sh"><h2>Quests</h2><p>Completed quests from Questie, and the quests still in the log from Altoholic. Sort by zone, level, or name.</p></div>
     <div class="qbar">
       <div class="inv-tabs" role="tablist" id="qTabs"></div>
-      <input class="qfind" id="qFind" type="search" placeholder="Find a quest" aria-label="Find a quest">
+      <div class="qtools">
+        <label class="qsort">Show <select id="qSrc" aria-label="Which quests"></select></label>
+        <label class="qsort">Sort <select id="qSort" aria-label="Sort quests"></select></label>
+        <input class="qfind" id="qFind" type="search" placeholder="Find a quest" aria-label="Find a quest">
+      </div>
     </div>
     <p class="hint qmeta" id="qMeta"></p>
     <div class="qgrid" id="qBody"></div>
+  </section>
+
+  <section id="gear">
+    <div class="sh"><h2>Gear</h2><p>What each character has equipped, from Altoholic. The number is the average item level.</p></div>
+    <div class="inv-tabs" role="tablist" id="gTabs"></div>
+    <div id="gBody"></div>
+  </section>
+
+  <section id="rep">
+    <div class="sh"><h2>Reputation</h2><p>Home-city standing. The bar fills the current rank. Honored is the discount for the level 40 mount.</p></div>
+    <div class="inv-tabs" role="tablist" id="rTabs"></div>
+    <div id="rBody"></div>
   </section>
 
   <section id="gold">
@@ -3029,6 +3068,1443 @@ const GENERATED = {
       ]
     ]
   },
+  "log": {
+    "leif": [
+      [
+        "Ashenvale",
+        [
+          [
+            "Trek to Ashenvale",
+            "19",
+            "Find Raene Wolfrunner in Ashenvale.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Darkshore",
+        [
+          [
+            "Bashal'Aran",
+            "12",
+            "Find the source of the strange blue aura in the ruins of Bashal'Aran.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Buzzbox 411",
+            "12",
+            "Collect 3 Thresher Eyes from Darkshore Threshers in the deep sea near Buzzbox 411.",
+            1,
+            "10s",
+            0
+          ],
+          [
+            "As Water Cascades",
+            "14",
+            "Fill the Empty Water Tube at the Auberdine moonwell, and then investigate the red crystal along Darkshore's eastern mountain wall.",
+            1,
+            "",
+            0
+          ],
+          [
+            "How Big a Threat?",
+            "14",
+            "Kill 8 Blackwood Pathfinders and 5 Windtalkers and return to Terenthis in Auberdine.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Plagued Lands",
+            "14",
+            "Capture a living Rabid Thistle Bear and bring it back to Tharnariun. Should you fail to capture a Rabid Thistle Bear and lose your trap, return to Tharnariun Treetender and request another trap.",
+            1,
+            "6s",
+            0
+          ],
+          [
+            "The Cliffspring River",
+            "15",
+            "Travel north of Auberdine to the first waterfall along the Cliffspring River and draw a sample from the pool there. Return to Thundris Windweaver in Auberdine with the Cliffspring River Sample.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Cave Mushrooms",
+            "17",
+            "Bring 5 Scaber Stalks and 1 Death Cap to Barithras Moonshade in Auberdine.",
+            1,
+            "Gustweald Cloak, Red-speckled Mushroom ×10, 9s",
+            0
+          ],
+          [
+            "Deep Ocean, Vast Sea",
+            "17",
+            "Recover the Silver Dawning's Lockbox and the Mist Veil's Lockbox for Gorbold Steelhand in Auberdine. Both items should be found aboard the wreckage of the ships to the north of the village.",
+            1,
+            "Welldrip Gloves, Noosegrip Gauntlets, Murloc-hide Gloves, 18s",
+            0
+          ],
+          [
+            "Fruit of the Sea",
+            "17",
+            "Collect 6 Fine Crab Chunks for Gubber Blump in Auberdine.",
+            1,
+            "Shucking Gloves, Crustacean Boots",
+            0
+          ],
+          [
+            "Grove of the Ancients",
+            "17",
+            "Deliver Fandral's message to Onu in the Grove of the Ancients in Darkshore, south of Auberdine.",
+            1,
+            "",
+            0
+          ],
+          [
+            "The Tower of Althalaxx",
+            "18",
+            "Find Balthule Shadowstrike near the Tower of Althalaxx in Darkshore.",
+            1,
+            "",
+            0
+          ],
+          [
+            "WANTED: Murkdeep!",
+            "18",
+            "Find and slay the murloc known as Murkdeep. The creature is thought to be defending the murloc huts south of Auberdine along the water. Report the death of Murkdeep to Sentinel Glynda Nal'Shea in Auberdine.",
+            1,
+            "Timberland Armguards, Ridgeback Bracers, Breakwater Girdle",
+            0
+          ],
+          [
+            "The Absent Minded Prospector",
+            "20",
+            "Travel south and check on Prospector Remtravel.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Stormwind City",
+        [
+          [
+            "Wine Shop Advert",
+            "2",
+            "Go to the Gallina Winery, and bring Suzetta Gallina the Wine Ticket for a free bottle of wine.",
+            1,
+            "Bottle of Pinot Noir",
+            0
+          ],
+          [
+            "Exploring the Alliance",
+            "13",
+            "Speak with Randal Emerson in Stormwind Keep to receive further instructions. Use the instructions received to locate and speak with King Magni Bronzebeard, High Tinker Mekkatorque, and Tyrande Whisperwind.",
+            1,
+            "Cloak of the Honored Guest, 6s",
+            0
+          ],
+          [
+            "Humble Beginnings",
+            "15",
+            "Go to Baros Alexston's house in Westfall and search for his compass, then return it to him in Cathedral Square of Stormwind.",
+            1,
+            "7s",
+            0
+          ],
+          [
+            "Stormpike's Delivery",
+            "15",
+            "Deliver the Package for Stormpike to Mountaineer Stormpike in Loch Modan.",
+            1,
+            "7s",
+            0
+          ],
+          [
+            "Expanding Horizons",
+            "17",
+            "Bring Thundris' Letter to Baros Alexston in Stormwind. Thundris mentioned a boat in Auberdine that can take you there.",
+            1,
+            "0s",
+            0
+          ]
+        ]
+      ],
+      [
+        "The Deadmines",
+        [
+          [
+            "Collecting Memories",
+            "18",
+            "Retrieve 4 Miners' Union Cards and return them to Wilder Thistlenettle in Stormwind.",
+            1,
+            "Tunneler's Boots, Dusty Mining Gloves, Worn Miner's Waistcord",
+            0
+          ]
+        ]
+      ],
+      [
+        "Warsong Gulch",
+        [
+          [
+            "Fight for Warsong Gulch",
+            "19",
+            "Bring 3 Warsong Gulch Marks of Honor to an Alliance Brigadier General outside the battlegrounds.",
+            1,
+            "11s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Westfall",
+        [
+          [
+            "Journey to Sentinel Hill",
+            "13",
+            "Report To Gryan Stoutmantle at Sentinel Hill in Westfall.",
+            1,
+            "3s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Camping",
+        [
+          [
+            "Camping 101: First Aid",
+            "6",
+            "Speak with Naleeia Tattermend in Shen'dar Village to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
+            1,
+            "Spell",
+            0
+          ]
+        ]
+      ],
+      [
+        "Cooking",
+        [
+          [
+            "Easy Strider Living",
+            "12",
+            "Bring back 5 Strider Meat to Alanndarian Nightsong in Auberdine.",
+            1,
+            "Recipe: Strider Stew, Strider Stew ×5",
+            0
+          ]
+        ]
+      ],
+      [
+        "Druid",
+        [
+          [
+            "Lessons Anew",
+            "14",
+            "Travel to Moonglade and speak with Dendrite Starblaze in the village of Nighthaven.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Fishing",
+        [
+          [
+            "Electropellers",
+            "12",
+            "Bring 12 Electropellers to Wizbang Cranktoggle in Auberdine.",
+            1,
+            "Aquadynamic Fish Lens ×20, 5s",
+            0
+          ]
+        ]
+      ]
+    ],
+    "murus": [
+      [
+        "Darkshore",
+        [
+          [
+            "Business in Auberdine",
+            "17",
+            "Check on Gorbold Steelhand in Auberdine in Darkshore. Borgus mentioned a boat on the southern-most dock in Stormwind Harbor that can take you there.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Deeprun Tram",
+        [
+          [
+            "Deeprun Rat Roundup",
+            "12",
+            "Capture 5 Deeprun Rats by using the Rat Catcher's Flute. Lead the rats back to Monty. Don't forget to turn in the flute when you're finished.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Dun Morogh",
+        [
+          [
+            "Ammo for Rumbleshot",
+            "6",
+            "Bring Rumbleshot's Ammo to Hegnar Rumbleshot in Dun Morogh.",
+            1,
+            "1s",
+            0
+          ],
+          [
+            "Stocking Jetsteam",
+            "6",
+            "Gather 4 Chunks of Boar Meat and 2 Thick Bear Furs, and deliver them to Pilot Bellowfiz at Steelgrill's Depot.",
+            1,
+            "2s",
+            0
+          ],
+          [
+            "Return to Marleth",
+            "7",
+            "Bring the barrel of Thunder Ale to Marleth Barleybrew at the Brewnall Village.",
+            1,
+            "1s",
+            0
+          ],
+          [
+            "The Grizzled Den",
+            "7",
+            "Gather 8 Wendigo Manes and bring them to Pilot Stonegear.",
+            1,
+            "1s",
+            0
+          ],
+          [
+            "Dawn in the Mountains",
+            "8",
+            "Bring the crate of candles to Father Gavin at Misty Pine Refuge.",
+            1,
+            "",
+            0
+          ],
+          [
+            "The Perfect Stout",
+            "9",
+            "Bring 6 Shimmerweeds to Rejold Barleybrew in the Brewnall Village.",
+            1,
+            "Goat Fur Cloak, Ivy-weave Bracers",
+            0
+          ],
+          [
+            "A Visitor to Dun Morogh",
+            "13",
+            "Investigate the campsite overlooking the Gol'Bolar Quarry.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Elwynn Forest",
+        [
+          [
+            "Cloth and Leather Armor",
+            "10",
+            "Give Sara Timberlain the Stormwind Armor Marker.",
+            1,
+            "Well-stitched Robe, Patched Pants",
+            0
+          ],
+          [
+            "Report to Gryan Stoutmantle",
+            "10",
+            "Talk to Gryan Stoutmantle. He usually can be found in the stone tower on Sentinel Hill, just off the road, in the middle of Westfall.",
+            1,
+            "2s",
+            0
+          ],
+          [
+            "Westbrook Garrison Needs Help!",
+            "10",
+            "Go to the Westbrook Garrison and speak with Deputy Rainer.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Ironforge",
+        [
+          [
+            "The Darkmoon Faire",
+            "60",
+            "Deliver the Free Ticket Voucher to Gelvas Grimgate, located inside the Darkmoon Faire carnival.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Loch Modan",
+        [
+          [
+            "Find Bingles",
+            "15",
+            "Find Bingles Blastenheimer in Loch Modan.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Stormwind City",
+        [
+          [
+            "Humble Beginnings",
+            "15",
+            "Go to Baros Alexston's house in Westfall and search for his compass, then return it to him in Cathedral Square of Stormwind.",
+            1,
+            "7s",
+            0
+          ],
+          [
+            "Stormpike's Delivery",
+            "15",
+            "Deliver the Package for Stormpike to Mountaineer Stormpike in Loch Modan.",
+            1,
+            "7s",
+            0
+          ]
+        ]
+      ],
+      [
+        "The Hall of Thanes",
+        [
+          [
+            "Important Heirlooms",
+            "15",
+            "Collect 8 Dwarven Heirlooms from the Hall of Thanes.",
+            1,
+            "Dwarven Tome, Tomb Robber's Gloves, 7s",
+            0
+          ],
+          [
+            "The Restless Dead",
+            "15",
+            "Kill 15 Enraged Apparitions, 10 Tormented Souls and put the spirit of Anvilmar to rest.",
+            1,
+            "Dusty Belt, Cryptwalker Bracers, 7s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Warsong Gulch",
+        [
+          [
+            "Fight for Warsong Gulch",
+            "19",
+            "Bring 3 Warsong Gulch Marks of Honor to an Alliance Brigadier General outside the battlegrounds.",
+            1,
+            "11s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Westfall",
+        [
+          [
+            "Furlbrow's Deed",
+            "9",
+            "Bring Furlbrow's Deed to Farmer Furlbrow.",
+            1,
+            "Ripe Watermelon ×5, Small Pumpkin ×5",
+            0
+          ]
+        ]
+      ],
+      [
+        "Blacksmithing",
+        [
+          [
+            "Supplying the Front",
+            "12",
+            "Bring 6 Copper Axes and 6 Copper Chain Belts to Thorvald in the southern guard tower of Loch Modan.",
+            1,
+            "Plans: Copper Chain Vest",
+            0
+          ],
+          [
+            "Gearing Redridge",
+            "16",
+            "Tormus Deepforge wants you to bring 4 Runed Copper Belts and 4 Heavy Copper Mauls to Verner Osgood in Redridge.",
+            1,
+            "Plans: Ironforge Breastplate",
+            0
+          ]
+        ]
+      ],
+      [
+        "Camping",
+        [
+          [
+            "Camping 101: First Aid",
+            "6",
+            "Speak with Michelle Belle in Goldshire to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
+            1,
+            "Spell",
+            0
+          ]
+        ]
+      ],
+      [
+        "Cooking",
+        [
+          [
+            "Beer Basted Boar Ribs",
+            "7",
+            "Ragnar Thunderbrew in Kharanos wants 6 Crag Boar Ribs and a mug of Rhapsody Malt.",
+            1,
+            "Beer Basted Boar Ribs ×5, Recipe: Beer Basted Boar Ribs, 1s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Paladin",
+        [
+          [
+            "The Tome of Divinity",
+            "13",
+            "Take the Symbol of Life and resurrect Henze Faulk in Elwynn.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ]
+    ],
+    "rum": [
+      [
+        "Dun Morogh",
+        [
+          [
+            "Finding Warmth",
+            "8",
+            "Collect 14 pieces of firewood.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Frosthowl",
+            "9",
+            "Slay Frosthowl and collect the Sack of Fish for Gretta Ganter in Brewnall Village.",
+            1,
+            "Frosthowl's Footwarmers",
+            0
+          ],
+          [
+            "Frostmane Hold",
+            "9",
+            "Explore Frostmane Hold, and kill 5 Frostmane Headhunters for Senir Whitebeard in Kharanos.",
+            1,
+            "Warm Winter Robe, Stone Buckler",
+            0
+          ],
+          [
+            "The Perfect Stout",
+            "9",
+            "Bring 6 Shimmerweeds to Rejold Barleybrew in the Brewnall Village.",
+            1,
+            "Goat Fur Cloak, Ivy-weave Bracers",
+            0
+          ],
+          [
+            "Data Hoarders",
+            "10",
+            "Collect 7 Gnomeregan Archival Data cards from around Gnomeregan, then deliver them to Jemma Quikswitch in Ironforge.",
+            1,
+            "",
+            0
+          ],
+          [
+            "A Visitor to Dun Morogh",
+            "13",
+            "Investigate the campsite overlooking the Gol'Bolar Quarry.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Ironforge",
+        [
+          [
+            "The Darkmoon Faire",
+            "60",
+            "Deliver the Free Ticket Voucher to Gelvas Grimgate, located inside the Darkmoon Faire carnival.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Stormwind City",
+        [
+          [
+            "Stormpike's Delivery",
+            "15",
+            "Deliver the Package for Stormpike to Mountaineer Stormpike in Loch Modan.",
+            1,
+            "7s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Camping",
+        [
+          [
+            "Camping 101: Alchemy",
+            "6",
+            "Speak with Vosur Brakthel in Ironforge to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
+            1,
+            "Spell",
+            0
+          ]
+        ]
+      ],
+      [
+        "Cooking",
+        [
+          [
+            "Beer Basted Boar Ribs",
+            "7",
+            "Ragnar Thunderbrew in Kharanos wants 6 Crag Boar Ribs and a mug of Rhapsody Malt.",
+            1,
+            "Beer Basted Boar Ribs ×5, Recipe: Beer Basted Boar Ribs, 1s",
+            0
+          ]
+        ]
+      ]
+    ],
+    "fatal": [
+      [
+        "Dun Morogh",
+        [
+          [
+            "Tools for Steelgrill",
+            "5",
+            "Deliver Steelgrill's Tools to Beldin Steelgrill.",
+            1,
+            "0s",
+            0
+          ],
+          [
+            "Flintfire's Shipment",
+            "7",
+            "Collect 8 Flintfire Shipments from the Grizzled Den for Tongus Flintfire in Kharanos.",
+            1,
+            "0s",
+            0
+          ],
+          [
+            "Dawn in the Mountains",
+            "8",
+            "Bring the crate of candles to Father Gavin at Misty Pine Refuge.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Secure the Mountain",
+            "8",
+            "Find Mountaineer Cornelius in the Grizzled Den for Mountaineer Gretchen.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Camping",
+        [
+          [
+            "The Great Outdoors",
+            "6",
+            "Sit near Eric's Basic Campfire and wait until you receive the Boosted Rest buff.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Cooking",
+        [
+          [
+            "Beer Basted Boar Ribs",
+            "7",
+            "Ragnar Thunderbrew in Kharanos wants 6 Crag Boar Ribs and a mug of Rhapsody Malt.",
+            1,
+            "Beer Basted Boar Ribs ×5, Recipe: Beer Basted Boar Ribs, 1s",
+            0
+          ]
+        ]
+      ]
+    ],
+    "libertty": [
+      [
+        "Elwynn Forest",
+        [
+          [
+            "Book Return",
+            "6",
+            "Find 6 Lost Books and \"Fun with Elementals\" and return them to Marshal Dughan.",
+            1,
+            "2s",
+            0
+          ],
+          [
+            "A Net Disaster",
+            "7",
+            "Check the fishing traps in Crystal Lake.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Bottles and Baubles",
+            "7",
+            "Collect 6 pieces of shiny junk from the nearby Murloc camp.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Gold Dust Exchange",
+            "7",
+            "Bring 10 Gold Dust to Remy \"Two Times\" in Goldshire. Gold Dust is gathered from Kobolds in Elwynn Forest.",
+            1,
+            "1s",
+            0
+          ],
+          [
+            "Kobold Candles",
+            "7",
+            "Bring 8 Large Candles to William Pestle in Goldshire.",
+            1,
+            "1s",
+            0
+          ],
+          [
+            "The Fargodeep Mine",
+            "7",
+            "Explore the Fargodeep Mine, then return to Marshal Dughan in Goldshire.",
+            1,
+            "1s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Camping",
+        [
+          [
+            "The Great Outdoors",
+            "6",
+            "Sit near Sam's Basic Campfire and wait until you receive the Boosted Rest buff.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ]
+    ],
+    "corwyn": [
+      [
+        "Dun Morogh",
+        [
+          [
+            "Ammo for Rumbleshot",
+            "6",
+            "Bring Rumbleshot's Ammo to Hegnar Rumbleshot in Dun Morogh.",
+            1,
+            "1s",
+            0
+          ],
+          [
+            "Stocking Jetsteam",
+            "6",
+            "Gather 4 Chunks of Boar Meat and 2 Thick Bear Furs, and deliver them to Pilot Bellowfiz at Steelgrill's Depot.",
+            1,
+            "2s",
+            0
+          ],
+          [
+            "Flintfire's Shipment",
+            "7",
+            "Collect 8 Flintfire Shipments from the Grizzled Den for Tongus Flintfire in Kharanos.",
+            1,
+            "0s",
+            0
+          ],
+          [
+            "The Grizzled Den",
+            "7",
+            "Gather 8 Wendigo Manes and bring them to Pilot Stonegear.",
+            1,
+            "1s",
+            0
+          ],
+          [
+            "Dawn in the Mountains",
+            "8",
+            "Bring the crate of candles to Father Gavin at Misty Pine Refuge.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Secure the Mountain",
+            "8",
+            "Check in on Mountaineer Gretchen west of Kharanos.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Camping",
+        [
+          [
+            "The Great Outdoors",
+            "6",
+            "Sit near Eric's Basic Campfire and wait until you receive the Boosted Rest buff.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ],
+      [
+        "Cooking",
+        [
+          [
+            "Beer Basted Boar Ribs",
+            "7",
+            "Ragnar Thunderbrew in Kharanos wants 6 Crag Boar Ribs and a mug of Rhapsody Malt.",
+            1,
+            "1s",
+            0
+          ]
+        ]
+      ],
+      [
+        "Priest",
+        [
+          [
+            "Garments of the Light",
+            "4",
+            "Find Mountaineer Dolf and heal his wounds using Lesser Heal (Rank 2). Afterwards, grant him Power Word: Fortitude and then return to Maxan Anvol in Kharanos.",
+            1,
+            "",
+            0
+          ]
+        ]
+      ]
+    ]
+  },
+  "gear": {
+    "leif": [
+      7.3,
+      [
+        [
+          "Shirt",
+          "Airy Windseeker's Shirt",
+          1
+        ],
+        [
+          "Chest",
+          "Skywatcher's Vestments",
+          2
+        ],
+        [
+          "Waist",
+          "Hunter's Cord",
+          2
+        ],
+        [
+          "Legs",
+          "Tracker's Pants",
+          2
+        ],
+        [
+          "Feet",
+          "Empyrean Treads",
+          2
+        ],
+        [
+          "Wrist",
+          "Defender's Bracers",
+          2
+        ],
+        [
+          "Hands",
+          "Nightclaw Gloves",
+          2
+        ],
+        [
+          "Ring",
+          "Ancient Heirloom",
+          1
+        ],
+        [
+          "Back",
+          "Forest Oracle's Cloak",
+          2
+        ],
+        [
+          "Main hand",
+          "Balanced Quarterstaff",
+          2
+        ]
+      ]
+    ],
+    "murus": [
+      6.4,
+      [
+        [
+          "Shirt",
+          "Red Linen Shirt",
+          1
+        ],
+        [
+          "Chest",
+          "Rough Copper Vest",
+          2
+        ],
+        [
+          "Waist",
+          "Copper Chain Belt",
+          2
+        ],
+        [
+          "Legs",
+          "Copper Chain Pants",
+          2
+        ],
+        [
+          "Feet",
+          "Soldier's Boots of the Whale",
+          2
+        ],
+        [
+          "Wrist",
+          "Infantry Bracers",
+          1
+        ],
+        [
+          "Hands",
+          "Runed Copper Gauntlets",
+          2
+        ],
+        [
+          "Back",
+          "Catacomb Cloak",
+          2
+        ],
+        [
+          "Main hand",
+          "Spiked Club of the Eagle",
+          2
+        ]
+      ]
+    ],
+    "rum": [
+      3.9,
+      [
+        [
+          "Shirt",
+          "Primitive Mantle",
+          1
+        ],
+        [
+          "Chest",
+          "Handstitched Leather Vest",
+          2
+        ],
+        [
+          "Waist",
+          "Cloudy Windraveled Strap",
+          2
+        ],
+        [
+          "Legs",
+          "Handstitched Leather Pants",
+          2
+        ],
+        [
+          "Feet",
+          "Handstitched Leather Boots",
+          1
+        ],
+        [
+          "Wrist",
+          "Cloudy Windraveled Armguards",
+          2
+        ],
+        [
+          "Hands",
+          "Driving Gloves",
+          1
+        ],
+        [
+          "Back",
+          "Handstitched Leather Cloak",
+          1
+        ],
+        [
+          "Main hand",
+          "Frostmane Club",
+          1
+        ],
+        [
+          "Off hand",
+          "Dwarven Kite Shield",
+          1
+        ]
+      ]
+    ],
+    "fatal": [
+      1.3,
+      [
+        [
+          "Shirt",
+          "Acolyte's Shirt",
+          1
+        ],
+        [
+          "Chest",
+          "Acolyte's Robe",
+          0
+        ],
+        [
+          "Waist",
+          "Frayed Belt",
+          0
+        ],
+        [
+          "Legs",
+          "Dwarven Cloth Britches",
+          1
+        ],
+        [
+          "Feet",
+          "Frayed Shoes",
+          0
+        ],
+        [
+          "Hands",
+          "Rabbit Handler Gloves",
+          1
+        ],
+        [
+          "Back",
+          "Bear Shawl",
+          1
+        ],
+        [
+          "Main hand",
+          "Anvilmar Knife",
+          1
+        ]
+      ]
+    ],
+    "libertty": [
+      2.2,
+      [
+        [
+          "Shirt",
+          "Rugged Trapper's Shirt",
+          1
+        ],
+        [
+          "Chest",
+          "Handstitched Leather Vest",
+          2
+        ],
+        [
+          "Waist",
+          "Handstitched Leather Belt",
+          2
+        ],
+        [
+          "Legs",
+          "Handstitched Leather Pants",
+          2
+        ],
+        [
+          "Feet",
+          "Handstitched Leather Boots",
+          1
+        ],
+        [
+          "Wrist",
+          "Handstitched Leather Bracers",
+          1
+        ],
+        [
+          "Back",
+          "Handstitched Leather Cloak",
+          1
+        ],
+        [
+          "Main hand",
+          "Militia Dagger",
+          1
+        ],
+        [
+          "Ranged",
+          "Worn Shortbow",
+          1
+        ]
+      ]
+    ],
+    "corwyn": [
+      0.9,
+      [
+        [
+          "Shirt",
+          "Neophyte's Shirt",
+          1
+        ],
+        [
+          "Chest",
+          "Neophyte's Robe",
+          0
+        ],
+        [
+          "Waist",
+          "Frayed Belt",
+          0
+        ],
+        [
+          "Legs",
+          "Dwarven Cloth Britches",
+          1
+        ],
+        [
+          "Feet",
+          "Snow Boots",
+          1
+        ],
+        [
+          "Main hand",
+          "Anvilmar Hammer",
+          1
+        ]
+      ]
+    ]
+  },
+  "rep": {
+    "leif": [
+      "",
+      [
+        [
+          "Alliance",
+          "Friendly",
+          608,
+          6000
+        ],
+        [
+          "Stormwind",
+          "Friendly",
+          502,
+          6000
+        ],
+        [
+          "Ironforge",
+          "Neutral",
+          2421,
+          3000
+        ],
+        [
+          "Darnassus",
+          "Neutral",
+          1766,
+          3000
+        ],
+        [
+          "Gnomeregan",
+          "Neutral",
+          2421,
+          3000
+        ],
+        [
+          "Faction 609",
+          "Neutral",
+          2125,
+          3000
+        ],
+        [
+          "Faction 2740",
+          "Friendly",
+          100,
+          6000
+        ],
+        [
+          "Faction 2758",
+          "Friendly",
+          2300,
+          6000
+        ],
+        [
+          "Faction 2779",
+          "Friendly",
+          2935,
+          6000
+        ]
+      ]
+    ],
+    "murus": [
+      "COSMERE",
+      [
+        [
+          "Alliance",
+          "Friendly",
+          362,
+          6000
+        ],
+        [
+          "Stormwind",
+          "Friendly",
+          4750,
+          6000
+        ],
+        [
+          "Ironforge",
+          "Friendly",
+          847,
+          6000
+        ],
+        [
+          "Darnassus",
+          "Friendly",
+          162,
+          6000
+        ],
+        [
+          "Gnomeregan",
+          "Friendly",
+          922,
+          6000
+        ],
+        [
+          "Darkmoon Faire",
+          "Neutral",
+          0,
+          3000
+        ]
+      ]
+    ],
+    "rum": [
+      "",
+      [
+        [
+          "Alliance",
+          "Friendly",
+          337,
+          6000
+        ],
+        [
+          "Stormwind",
+          "Friendly",
+          137,
+          6000
+        ],
+        [
+          "Ironforge",
+          "Friendly",
+          3428,
+          6000
+        ],
+        [
+          "Darnassus",
+          "Friendly",
+          137,
+          6000
+        ],
+        [
+          "Gnomeregan",
+          "Friendly",
+          2528,
+          6000
+        ]
+      ]
+    ],
+    "fatal": [
+      "",
+      [
+        [
+          "Alliance",
+          "Friendly",
+          337,
+          6000
+        ],
+        [
+          "Stormwind",
+          "Friendly",
+          137,
+          6000
+        ],
+        [
+          "Ironforge",
+          "Friendly",
+          1518,
+          6000
+        ],
+        [
+          "Darnassus",
+          "Friendly",
+          137,
+          6000
+        ],
+        [
+          "Gnomeregan",
+          "Friendly",
+          2518,
+          6000
+        ]
+      ]
+    ],
+    "libertty": [
+      "",
+      [
+        [
+          "Alliance",
+          "Friendly",
+          312,
+          6000
+        ],
+        [
+          "Stormwind",
+          "Friendly",
+          2340,
+          6000
+        ],
+        [
+          "Ironforge",
+          "Friendly",
+          112,
+          6000
+        ],
+        [
+          "Darnassus",
+          "Friendly",
+          112,
+          6000
+        ],
+        [
+          "Gnomeregan",
+          "Friendly",
+          112,
+          6000
+        ]
+      ]
+    ],
+    "corwyn": [
+      "",
+      [
+        [
+          "Alliance",
+          "Friendly",
+          337,
+          6000
+        ],
+        [
+          "Stormwind",
+          "Friendly",
+          137,
+          6000
+        ],
+        [
+          "Ironforge",
+          "Friendly",
+          1343,
+          6000
+        ],
+        [
+          "Darnassus",
+          "Friendly",
+          137,
+          6000
+        ],
+        [
+          "Gnomeregan",
+          "Friendly",
+          2343,
+          6000
+        ]
+      ]
+    ],
+    "redstone": [
+      "COSMERE",
+      [
+        [
+          "Alliance",
+          "Friendly",
+          300,
+          6000
+        ],
+        [
+          "Stormwind",
+          "Friendly",
+          1000,
+          6000
+        ],
+        [
+          "Ironforge",
+          "Friendly",
+          100,
+          6000
+        ],
+        [
+          "Darnassus",
+          "Friendly",
+          100,
+          6000
+        ],
+        [
+          "Gnomeregan",
+          "Friendly",
+          100,
+          6000
+        ]
+      ]
+    ]
+  },
   "chars": {
     "leif": {
       "lvl": 15,
@@ -5059,37 +6535,126 @@ function applySkills(){
   });
 }
 applySkills();
+function qRows(zones){
+  const rows=[];
+  zones.forEach(([zone,qs])=>qs.forEach(q=>{
+    const title=Array.isArray(q)?q[0]:q, level=Array.isArray(q)?String(q[1]||""):"", desc=Array.isArray(q)?q[2]||"":"", n=Array.isArray(q)?q[3]||1:1;
+    const reward=Array.isArray(q)?q[4]||"":"", ready=Array.isArray(q)&&q[5]===1;
+    const match=String(level).match(/\d+/);
+    rows.push({zone,title,level,desc,n,reward,ready,levelNum:match?Number(match[0]):0});
+  }));
+  return rows;
+}
+const byTitle=(a,b)=>a.title.localeCompare(b.title);
+const Q_VIEWS=[
+  {id:"zone",label:"Zone",showZone:false,apply(rows){
+    const map=new Map();
+    rows.forEach(r=>{if(!map.has(r.zone))map.set(r.zone,[]); map.get(r.zone).push(r)});
+    return [...map.entries()].map(([key,list])=>({key,rows:list.sort(byTitle)})).sort((a,b)=>b.rows.length-a.rows.length||a.key.localeCompare(b.key));
+  }},
+  {id:"level",label:"Level",showZone:true,apply(rows){
+    const map=new Map();
+    rows.forEach(r=>{const key=r.levelNum||0; if(!map.has(key))map.set(key,[]); map.get(key).push(r)});
+    return [...map.entries()].map(([num,list])=>({key:num?"Level "+num:"No level",num,rows:list.sort(byTitle)})).sort((a,b)=>(a.num||999)-(b.num||999));
+  }},
+  {id:"name",label:"Name",showZone:true,apply(rows){
+    return [{key:"A to Z",rows:rows.slice().sort(byTitle)}];
+  }}
+];
+const Q_SOURCES=[
+  {id:"done",label:"Done",key:"quests",empty:"Questie has no completed quests for this roster yet.",noun:"quests"},
+  {id:"log",label:"In the log",key:"log",empty:"Altoholic has no quest log for this roster yet.",noun:"in the log"}
+];
 function qRender(){
-  const data=GENERATED.quests||{};
+  const srcEl=document.getElementById("qSrc");
+  if(srcEl&&!srcEl.dataset.bound){
+    srcEl.innerHTML=Q_SOURCES.map(s=>`<option value="${s.id}">${s.label}</option>`).join("");
+    srcEl.value=Q_SOURCES.some(s=>s.id===store["q-src"])?store["q-src"]:"done";
+    srcEl.dataset.bound="1";
+    srcEl.addEventListener("change",()=>{store["q-src"]=srcEl.value; save(); qRender()});
+  }
+  const source=Q_SOURCES.find(s=>s.id===srcEl?.value)||Q_SOURCES[0];
+  const data=GENERATED[source.key]||{};
   const list=chars.filter(c=>data[c.id]);
   const tabs=document.getElementById("qTabs"), body=document.getElementById("qBody"), meta=document.getElementById("qMeta");
   if(!tabs||!body) return;
   const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-  if(!list.length){tabs.innerHTML=""; if(meta) meta.textContent="Questie has no completed quests for this roster yet."; body.innerHTML=""; return}
+  if(!list.length){tabs.innerHTML=""; if(meta) meta.textContent=source.empty; body.innerHTML=""; return}
   let tab=store["q-tab"]||list[0].id;
   if(!data[tab]) tab=list[0].id;
   tabs.innerHTML=list.map(c=>`<button type="button" role="tab" aria-selected="${c.id===tab}" data-c="${c.id}" style="--cc:var(--${c.k})"><i></i>${esc(c.short)}</button>`).join("");
   tabs.querySelectorAll("button").forEach(b=>b.onclick=()=>{store["q-tab"]=b.dataset.c; save(); qRender()});
   const find=document.getElementById("qFind");
   if(find&&!find.dataset.bound){find.dataset.bound="1"; find.addEventListener("input",qRender)}
+  const sortEl=document.getElementById("qSort");
+  if(sortEl&&!sortEl.dataset.bound){
+    sortEl.innerHTML=Q_VIEWS.map(v=>`<option value="${v.id}">${v.label}</option>`).join("");
+    sortEl.value=Q_VIEWS.some(v=>v.id===store["q-sort"])?store["q-sort"]:"zone";
+    sortEl.dataset.bound="1";
+    sortEl.addEventListener("change",()=>{store["q-sort"]=sortEl.value; save(); qRender()});
+  }
+  const view=Q_VIEWS.find(v=>v.id===sortEl?.value)||Q_VIEWS[0];
   const query=(find?.value||"").trim().toLowerCase();
-  const zones=(data[tab]||[]).map(([z,qs])=>{
-    const rows=qs.filter(q=>{
-      if(!query) return true;
-      const title=Array.isArray(q)?q[0]:q;
-      const desc=Array.isArray(q)?q[2]:"";
-      return String(title).toLowerCase().includes(query)||String(desc).toLowerCase().includes(query)||z.toLowerCase().includes(query);
-    });
-    return [z,rows];
-  }).filter(([,qs])=>qs.length);
-  const total=zones.reduce((n,z)=>n+z[1].length,0);
-  if(meta) meta.textContent=query?`${total} matching`:`${total} quests`;
-  body.innerHTML=zones.map(([z,qs])=>`<div class="card"><h3>${esc(z)} <small>${qs.length}</small></h3><ul class="qlist">${qs.map(q=>{
-    const title=Array.isArray(q)?q[0]:q, level=Array.isArray(q)?q[1]:"", desc=Array.isArray(q)?q[2]:"", n=Array.isArray(q)?q[3]:1;
-    return `<li class="qq"><span class="qn"><b>${esc(title)}</b>${n>1?`<i>×${n}</i>`:""}${level?`<em>Lv ${esc(level)}</em>`:""}</span>${desc?`<span class="qd">${esc(desc)}</span>`:""}</li>`;
-  }).join("")}</ul></div>`).join("")||`<p class="hint">No quests match that.</p>`;
+  const rows=qRows(data[tab]||[]).filter(r=>!query||[r.title,r.desc,r.zone,r.reward].some(v=>String(v).toLowerCase().includes(query)));
+  const groups=view.apply(rows);
+  const total=rows.length;
+  if(meta) meta.textContent=query?`${total} matching`:`${total} ${source.noun}`;
+  body.innerHTML=groups.map(g=>`<div class="card"><h3>${esc(g.key)} <small>${g.rows.length}</small></h3><ul class="qlist">${g.rows.map(r=>`<li class="qq"><span class="qn"><b>${esc(r.title)}</b>${r.n>1?`<i>×${r.n}</i>`:""}${r.ready?`<i class="qready">Ready</i>`:""}${r.level?`<em>Lv ${esc(r.level)}</em>`:""}</span>${view.showZone?`<span class="qz">${esc(r.zone)}</span>`:""}${r.desc?`<span class="qd">${esc(r.desc)}</span>`:""}${r.reward?`<span class="qr">${esc(r.reward)}</span>`:""}</li>`).join("")}</ul></div>`).join("")||`<p class="hint">No quests match that.</p>`;
+}
+function tabSet(hostId,data,key,render){
+  const host=document.getElementById(hostId);
+  if(!host) return null;
+  const list=chars.filter(c=>data[c.id]);
+  const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  if(!list.length){host.innerHTML=""; return null}
+  let tab=store[key]||list[0].id;
+  if(!data[tab]) tab=list[0].id;
+  host.innerHTML=list.map(c=>`<button type="button" role="tab" aria-selected="${c.id===tab}" data-c="${c.id}" style="--cc:var(--${c.k})"><i></i>${esc(c.short)}</button>`).join("");
+  host.querySelectorAll("button").forEach(b=>b.onclick=()=>{store[key]=b.dataset.c; save(); render()});
+  return tab;
+}
+function gRender(){
+  const data=GENERATED.gear||{};
+  const body=document.getElementById("gBody");
+  if(!body) return;
+  const tab=tabSet("gTabs",data,"g-tab",gRender);
+  const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  if(!tab){body.innerHTML='<p class="hint">No equipped gear in the Altoholic scan yet.</p>'; return}
+  const [ilvl,slots]=data[tab];
+  const c=chars.find(x=>x.id===tab);
+  body.innerHTML=`<div class="card" style="--cc:var(--${c.k})"><h3>${esc(c.short)} <small>ilvl ${ilvl||"—"}</small></h3><ul class="glist">${slots.map(([slot,name,q])=>`<li><span>${esc(slot)}</span><b class="iq${q}">${esc(name)}</b></li>`).join("")}</ul></div>`;
+}
+function rRender(){
+  const data=GENERATED.rep||{};
+  const body=document.getElementById("rBody");
+  if(!body) return;
+  const tab=tabSet("rTabs",data,"r-tab",rRender);
+  const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  if(!tab){body.innerHTML='<p class="hint">No reputation in the Altoholic scan yet.</p>'; return}
+  const [guild,factions]=data[tab];
+  const c=chars.find(x=>x.id===tab);
+  const met=new Set(["Honored","Revered","Exalted","Paragon"]);
+  body.innerHTML=`<div class="card"><h3>${esc(c.short)}${guild?` <small>${esc(guild)}</small>`:""}</h3><ul class="rlist">${factions.map(([name,standing,into,span])=>`<li class="${met.has(standing)?"met":""}"><span>${esc(name)}</span><em>${esc(standing)}</em><span class="mini"><i style="width:${Math.round(into/span*100)}%"></i></span><small>${into.toLocaleString()} / ${span.toLocaleString()}</small></li>`).join("")}</ul></div>`;
+}
+function standRender(){
+  const host=document.getElementById("stand");
+  if(!host||!GENERATED.scan) return;
+  const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  host.innerHTML=chars.map(c=>{
+    const s=GENERATED.scan[c.id], g=GENERATED.chars?.[c.id];
+    if(!s&&!g) return "";
+    const xp=s?s[2]:0, max=s?s[3]:0, rest=s?s[4]:0;
+    const bags=s&&s[1]?`${s[0]}/${s[1]}`:"—";
+    const done=(GENERATED.quests?.[c.id]||[]).reduce((n,z)=>n+z[1].length,0);
+    const log=(GENERATED.log?.[c.id]||[]).reduce((n,z)=>n+z[1].length,0);
+    const ilvl=GENERATED.gear?.[c.id]?.[0];
+    return `<article class="stand-card" style="--cc:var(--${c.k})"><b>${esc(c.short)}</b><span>Lv ${lvlOf(c)}</span><span class="mini"><i style="width:${max?Math.round(xp/max*100):0}%"></i></span><small>${xp.toLocaleString()} / ${(max||0).toLocaleString()} xp${rest?` · ${rest.toLocaleString()} rested`:""}</small><small>${g?fmt(g.gold):"—"} · bags ${bags}</small><small>${done} done · ${log} in log${ilvl?` · ilvl ${ilvl}`:""}</small></article>`;
+  }).join("");
 }
 qRender();
+gRender();
+rRender();
+standRender();
 const recWord={o:"Orange",y:"Yellow",gr:"Green",gy:"Grey"};
 document.getElementById("skGrid").innerHTML=SK.map(s=>{const c=chars.find(x=>x.id===s.id);
   const profs=s.profs.length?`<ul class="sk-profs">${s.profs.map(([n,v,max,est,t])=>{const num=typeof v==="number"?v:parseInt(String(v).replace("~",""),10);
@@ -5177,7 +6742,7 @@ const legacyN=()=>all.filter(isOn).length;
 const crafters=()=>chars.filter(c=>craftIdx(c)>=0);
 const daysTo=d=>Math.max(0,Math.ceil((d-new Date())/864e5));
 const current=()=>scanned().sort((a,b)=>SCAN[b.id][7]-SCAN[a.id][7])[0];
-const SHORT={roster:"Roster",next:"Next up",legacy:"Legacy",talents:"Talents",mats:"Mats",crafting:"Crafting",skills:"Skills",quests:"Quests",gold:"Gold & mail",market:"Auction House",bags:"Bags",addons:"Addons"};
+const SHORT={roster:"Roster",next:"Next up",legacy:"Legacy",talents:"Talents",mats:"Mats",crafting:"Crafting",skills:"Skills",quests:"Quests",gear:"Gear",rep:"Reputation",gold:"Gold & mail",market:"Auction House",bags:"Bags",addons:"Addons"};
 const sections=[...document.querySelectorAll("main section")].map(s=>[s.id,s.querySelector("h2").textContent,SHORT[s.id]||s.querySelector("h2").textContent]);
 let secOn=sections[0][0];
 
@@ -5247,7 +6812,7 @@ const POP={
     document.querySelectorAll("main section").forEach(s=>io.observe(s))}
   setInterval(tpClock,30000);
 })();
-function refresh(){bars();nextUp();legacy();plRender();tpUpdate()}
+function refresh(){bars();nextUp();legacy();plRender();tpUpdate();standRender()}
 refresh();
 ltRender();
 </script>

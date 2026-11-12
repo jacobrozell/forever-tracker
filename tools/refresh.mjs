@@ -468,6 +468,172 @@ function buildQuests(savedDir) {
   return byChar;
 }
 
+const REP_THRESHOLDS = [-42000, -6000, -3000, 0, 3000, 9000, 21000, 42000, 43000];
+const REP_STANDINGS = ["Hated", "Hostile", "Unfriendly", "Neutral", "Friendly", "Honored", "Revered", "Exalted", "Paragon"];
+const REP_NAMES = { 469: "Alliance", 72: "Stormwind", 47: "Ironforge", 69: "Darnassus", 54: "Gnomeregan", 909: "Darkmoon Faire" };
+const REP_ORDER = [469, 72, 47, 69, 54, 909];
+const GEAR_SLOTS = ["Head", "Neck", "Shoulder", "Shirt", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "Ring", "Ring", "Trinket", "Trinket", "Back", "Main hand", "Off hand", "Ranged", "Tabard"];
+
+function charSlots(dir) {
+  const ids = load(dir, "DataStore.lua");
+  const byName = new Map();
+  nums(ids.DataStore_CharacterIDs?.List).forEach((full, i) => byName.set(String(full).split(".").pop(), i));
+  return byName;
+}
+
+function decodeRep(packed) {
+  if (bits(packed, 0, 3) !== 0) return null;
+  const negative = bits(packed, 3, 1) === 1;
+  const standing = bits(packed, 4, 4);
+  let earned = Number(BigInt(packed) >> 8n);
+  if (negative) earned = -earned;
+  let top = REP_THRESHOLDS[REP_THRESHOLDS.length - 1] + 1000;
+  let index = REP_THRESHOLDS.length - 1;
+  while (index > 0 && earned < REP_THRESHOLDS[index]) { top = REP_THRESHOLDS[index]; index -= 1; }
+  const bottom = REP_THRESHOLDS[index];
+  const span = Math.max(1, top - bottom);
+  return [REP_STANDINGS[standing - 1] || REP_STANDINGS[index] || "Unknown", Math.max(0, earned - bottom), span];
+}
+
+function itemLookup(root, needed) {
+  const found = new Map();
+  const toc = path.join(root, "Interface", "AddOns", "QuestieDB", "QuestieDB_Forever.toc");
+  if (!needed.size || !fs.existsSync(toc)) return found;
+  const text = fs.readFileSync(toc, "utf8");
+  const re = /^## X-Item-(\d+)-S: (\S+)/gm;
+  let m;
+  while ((m = re.exec(text))) {
+    const id = Number(m[1]);
+    if (!needed.has(id) || found.has(id)) continue;
+    try {
+      const row = cbor(Buffer.from(m[2], "base64"));
+      const name = asText(row[1]);
+      if (name) found.set(id, name);
+    } catch { /* unnamed reward */ }
+    if (found.size === needed.size) break;
+  }
+  return found;
+}
+
+function rewardText(raw, names) {
+  if (!raw) return "";
+  const parts = [];
+  for (const piece of String(raw).split(",")) {
+    const [kind, id, count] = piece.split("|");
+    if (kind === "s") { parts.push("Spell"); continue; }
+    const name = names.get(Number(id));
+    if (!name) continue;
+    const n = Number(count) || 1;
+    parts.push(n > 1 ? `${name} ×${n}` : name);
+  }
+  return parts.join(", ");
+}
+
+function buildLog(dir, knownNames) {
+  const byChar = {};
+  const file = path.join(dir, "DataStore_Quests.lua");
+  if (!fs.existsSync(file)) return byChar;
+  let parsed;
+  try { parsed = load(dir, "DataStore_Quests.lua"); } catch { return byChar; }
+  const slots = charSlots(dir);
+  const rows = nums(parsed.DataStore_Quests_Characters);
+  const pending = [];
+  const questIds = new Set();
+  const itemIds = new Set();
+  for (const [id, name] of ROSTER) {
+    const index = slots.get(name);
+    const row = index == null ? null : rows[index];
+    if (!row?.Quests) continue;
+    const headers = nums(row.QuestHeaders);
+    const list = [];
+    nums(row.Quests).forEach((value, i) => {
+      if (value == null) return;
+      const questID = bits(value, 6, 18);
+      const header = headers[bits(value, 1, 5) - 1] || "Log";
+      const ready = bits(value, 0, 1) === 1;
+      const money = Number(BigInt(value) >> 24n);
+      const rewardIds = [];
+      for (const piece of String(row.Rewards?.[i + 1] || "").split(",")) {
+        const [kind, item] = piece.split("|");
+        if ((kind === "r" || kind === "c") && item) {
+          const itemID = Number(item);
+          if (!knownNames.has(itemID)) itemIds.add(itemID);
+          rewardIds.push(piece);
+        } else if (kind === "s") rewardIds.push(piece);
+      }
+      questIds.add(questID);
+      list.push({ header, questID, ready, money, rewardIds });
+    });
+    if (list.length) pending.push([id, list]);
+  }
+  const root = foreverRoot(dir);
+  const quests = questLookup(root, questIds);
+  const items = itemLookup(root, itemIds);
+  const names = new Map([...knownNames, ...items]);
+  for (const [id, list] of pending) {
+    const groups = new Map();
+    for (const q of list) {
+      const row = quests.get(q.questID);
+      const title = row?.name || `Quest ${q.questID}`;
+      const level = typeof row?.level === "number" ? String(row.level) : "";
+      const money = q.money ? `${Math.floor(q.money / 100)}s` : "";
+      const reward = [rewardText(q.rewardIds.join(","), names), money].filter(Boolean).join(", ");
+      if (!groups.has(q.header)) groups.set(q.header, []);
+      groups.get(q.header).push([title, level, row?.desc || "", 1, reward, q.ready ? 1 : 0]);
+    }
+    byChar[id] = [...groups.entries()];
+  }
+  return byChar;
+}
+
+function buildGear(dir) {
+  const byChar = {};
+  const file = path.join(dir, "DataStore_Inventory.lua");
+  if (!fs.existsSync(file)) return byChar;
+  let parsed;
+  try { parsed = load(dir, "DataStore_Inventory.lua"); } catch { return byChar; }
+  const slots = charSlots(dir);
+  const rows = nums(parsed.DataStore_Inventory_Characters);
+  for (const [id, name] of ROSTER) {
+    const row = slots.has(name) ? rows[slots.get(name)] : null;
+    if (!row?.Inventory) continue;
+    const worn = nums(row.Inventory).map((link, i) => {
+      if (typeof link !== "string") return null;
+      const label = linkName(link);
+      if (!label) return null;
+      const quality = Number((link.match(/IQ(\d)/) || [])[1] || 1);
+      return [GEAR_SLOTS[i] || "Slot", label, quality];
+    }).filter(Boolean);
+    if (!worn.length && !row.averageItemLvl) continue;
+    byChar[id] = [row.averageItemLvl ? Math.round(row.averageItemLvl * 10) / 10 : 0, worn];
+  }
+  return byChar;
+}
+
+function buildRep(dir) {
+  const byChar = {};
+  const file = path.join(dir, "DataStore_Reputations.lua");
+  if (!fs.existsSync(file)) return byChar;
+  let parsed;
+  try { parsed = load(dir, "DataStore_Reputations.lua"); } catch { return byChar; }
+  const slots = charSlots(dir);
+  const rows = nums(parsed.DataStore_Reputations_Characters);
+  for (const [id, name] of ROSTER) {
+    const row = slots.has(name) ? rows[slots.get(name)] : null;
+    if (!row?.Factions) continue;
+    const have = new Map(Object.entries(row.Factions).map(([k, v]) => [Number(k), v]));
+    const order = [...REP_ORDER.filter(fid => have.has(fid)), ...[...have.keys()].filter(fid => !REP_ORDER.includes(fid)).sort((a, b) => a - b)];
+    const factions = [];
+    for (const fid of order) {
+      const decoded = decodeRep(have.get(fid));
+      if (!decoded) continue;
+      factions.push([REP_NAMES[fid] || `Faction ${fid}`, ...decoded]);
+    }
+    if (factions.length) byChar[id] = [row.guildName || "", factions];
+  }
+  return byChar;
+}
+
 function build(dir, priceBook) {
   const characters = load(dir, "DataStore_Characters.lua");
   const ids = load(dir, "DataStore.lua");
@@ -634,6 +800,9 @@ function build(dir, priceBook) {
     missingNote: missing.length ? `${missing.join(" and ")} ${missing.length > 1 ? "haven't" : "hasn't"} been scanned yet.` : "Every roster character has been scanned.",
     prices: Object.fromEntries([...priceBook.entries()].filter(([, v]) => v.price != null).map(([n, v]) => [n, [v.price, v.listed]])),
     quests: buildQuests(dir),
+    log: buildLog(dir, idToName),
+    gear: buildGear(dir),
+    rep: buildRep(dir),
     chars, scan, gold, bags, inv,
   };
 }
@@ -735,6 +904,14 @@ if (dry) {
   }
   const leif = generated.inv.leif?.find(r => r[0] === "Light Leather");
   console.log("Leif Light Leather:", leif ? leif.join(" ") : "not found");
+  for (const [id, name] of ROSTER) {
+    const log = generated.log[id];
+    const gear = generated.gear[id];
+    const rep = generated.rep[id];
+    const logN = log ? log.reduce((n, z) => n + z[1].length, 0) : 0;
+    const repBit = rep ? rep[1].slice(0, 2).map(f => `${f[0]} ${f[1]}`).join(", ") : "no rep";
+    console.log(`extra ${name}: log ${logN}  ilvl ${gear ? gear[0] : "—"} (${gear ? gear[1].length : 0} slots)  ${repBit}`);
+  }
   process.exit(0);
 }
 
