@@ -1,0 +1,3207 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Alliance Main Roster</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: a guild ledger — header with account stats, a sticky section bar, then roster, next steps, Legacy, talents, mats, gold rules, addons */
+:root{
+  --bg:#f3efe6; --panel:#fffdf8; --ink:#2a2118; --muted:#76695a; --line:#ddd2c0; --head:#3b2a1c; --headInk:#f6e7c8; --gold:#a8730f;
+  --druid:#c45d00; --paladin:#c0507f; --shaman:#0060c0; --priest:#6b6b78; --warlock:#5a5bc4; --hunter:#5f8a2a; --mage:#1a8fb0; --warrior:#8e6436; --rogue:#8f8100;
+  --gather:#2f7d4b; --craft:#8a4fb0; --tank:#3b6fc4; --heal:#2f8a52; --dps:#b8483a; --good:#2f8a52; --bad:#b8483a;
+  --display:"Alegreya SC",Georgia,serif; --body:"Alegreya Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17120e; --panel:#211912; --ink:#efe4d2; --muted:#a8977f; --line:#3a2d21; --head:#2e2117; --headInk:#f2d99d; --gold:#e3b04b;
+  --druid:#ff7c0a; --paladin:#f48cba; --shaman:#3f9bff; --priest:#f2f2f2; --warlock:#8788ee; --hunter:#aad372; --mage:#3fc7eb; --warrior:#c69b6d; --rogue:#fff468;
+  --gather:#6fcf8f; --craft:#c79bf0; --tank:#4f86de; --heal:#3a9e60; --dps:#cc5747; --good:#6fcf8f; --bad:#e2735f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17120e; --panel:#211912; --ink:#efe4d2; --muted:#a8977f; --line:#3a2d21; --head:#2e2117; --headInk:#f2d99d; --gold:#e3b04b;
+  --druid:#ff7c0a; --paladin:#f48cba; --shaman:#3f9bff; --priest:#f2f2f2; --warlock:#8788ee; --hunter:#aad372; --mage:#3fc7eb; --warrior:#c69b6d; --rogue:#fff468;
+  --gather:#6fcf8f; --craft:#c79bf0; --tank:#4f86de; --heal:#3a9e60; --dps:#cc5747; --good:#6fcf8f; --bad:#e2735f; color-scheme:dark}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inner{max-width:1080px;margin:0 auto}
+a{color:var(--gold)}
+/* header */
+.top{padding-block:28px 18px}
+.top .inner{display:grid;gap:14px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+h1{font-family:var(--display);font-size:clamp(30px,6vw,46px);line-height:1.05;margin:4px 0 0;text-wrap:balance}
+.top p{margin:0;color:var(--muted);max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;gap:2px;min-width:0}
+.stat b{font-family:var(--display);font-size:26px;line-height:1.1;color:var(--gold);font-variant-numeric:tabular-nums}
+.stat b small{font-size:15px;color:var(--muted);font-family:var(--body)}
+.stat span{font-size:13px;color:var(--muted)}
+/* Titan-style info bar: always dark, like the game UI */
+.titan{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#120d09;border-bottom:1px solid #5c4720;font-family:var(--body)}
+.tp-row{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.tp-row::-webkit-scrollbar{display:none}
+.tp{flex:none;font:inherit;font-size:14px;display:inline-flex;align-items:center;gap:6px;padding:9px 10px;background:none;border:0;border-right:1px solid #2b2116;color:#efe4d0;cursor:pointer;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tp:first-child{border-left:1px solid #2b2116}
+.tp svg{width:15px;height:15px;flex:none;color:#ffd100}
+.tp .tl{color:#ffd100;font-weight:500}
+.tp b{font-weight:700}
+.tp .car{width:9px;height:9px;color:#8a7a60;transition:transform .15s}
+.tp[aria-expanded="true"] .car{transform:rotate(180deg)}
+.tp:hover,.tp[aria-expanded="true"]{background:#261c12}
+.tp:focus-visible{outline:2px solid #ffd100;outline-offset:-2px}
+.tp-sp{flex:1 0 0;border-right:1px solid #2b2116}
+.tp .warn2{font-size:11px;font-weight:700;color:#120d09;background:#ffd100;border-radius:8px;padding:0 6px;line-height:16px}
+.coin{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 4px 0 2px}
+.cg{background:#e8b923}.cs{background:#c4c4cc}.cc{background:#c26b2e}
+@media (max-width:1300px){.tp .tl{display:none}}
+@media (max-width:1000px){.tp{padding:9px 8px;gap:5px}}
+/* tooltip-style dropdown */
+.tp-pop{position:fixed;z-index:30;width:min(340px,calc(100vw - 16px));overflow-y:auto;overscroll-behavior:contain;background:#0b0b1a;border:1px solid #7f8aa6;box-shadow:0 0 0 1px #000,0 8px 24px rgba(0,0,0,.45);border-radius:5px;color:#fff;padding:12px 14px;font-size:14px;line-height:1.4;font-family:var(--body)}
+.tp-pop[hidden]{display:none}
+.tt-h{font-size:17px;font-weight:700;margin:0;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.tt-h small{font-size:12px;font-weight:500;color:#9d9d9d}
+.tt-sub{color:#ffd100;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin:12px 0 4px}
+.tt-l{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:2px 0}
+.tt-l em{font-style:normal;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tt-dim{color:#9d9d9d}.tt-y{color:#ffd100}.tt-g{color:#1eff00}.tt-rest{color:#4da3ff}
+.tt-bar{height:4px;background:#25253a;border-radius:2px;margin:1px 0 6px;overflow:hidden;position:relative}
+.tt-bar i{position:absolute;inset:0 auto 0 0;background:#ffd100}
+.tt-bar i.xp{background:#a335ee}.tt-bar i.rx{background:#2d6fd6}.tt-bar i.ok{background:#1eff00}
+.tt-note{color:#9d9d9d;font-size:12px;margin:10px 0 0}
+.tt-link{display:inline-block;margin-top:10px;color:#ffd100;text-decoration:none;font-weight:700;font-size:13px}
+.tt-link:hover,.tt-link:focus-visible{text-decoration:underline}
+.tt-nav{list-style:none;margin:6px 0 0;padding:0;display:grid}
+.tt-nav a{display:flex;justify-content:space-between;gap:12px;color:#fff;text-decoration:none;padding:5px 6px;border-radius:3px}
+.tt-nav a:hover,.tt-nav a:focus-visible{background:#1d1d33;outline:none}
+.tt-nav a.on{color:#ffd100}
+.tt-nav a span{color:#9d9d9d;font-size:12px}
+.tp-pop .druid{color:#ff7c0a}.tp-pop .paladin{color:#f48cba}.tp-pop .shaman{color:#3f9bff}.tp-pop .priest{color:#f2f2f2}.tp-pop .warlock{color:#8788ee}.tp-pop .hunter{color:#aad372}.tp-pop .mage{color:#3fc7eb}.tp-pop .warrior{color:#c69b6d}.tp-pop .rogue{color:#fff468}
+main{padding-block:24px 56px}
+main .inner{display:grid;gap:44px}
+section{scroll-margin-top:52px;display:grid;gap:12px;min-width:0}
+.sh{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px}
+h2{font-family:var(--display);font-size:26px;line-height:1.1;margin:0}
+.sh p{margin:0;color:var(--muted);font-size:14px;max-width:60ch}
+.hint{font-size:13px;color:var(--muted);margin:0}
+/* roster table */
+.sheet{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.roster table{min-width:980px}
+th{background:var(--head);color:var(--headInk);font-family:var(--display);font-weight:500;font-size:15px;text-align:left;padding:10px 12px;white-space:nowrap}
+td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+.roster tbody tr:hover td{background:color-mix(in srgb,var(--gold) 6%,transparent)}
+.name{font-weight:700;font-size:17px;white-space:nowrap}
+.role{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.cls{font-weight:700}
+.druid{color:var(--druid)}.paladin{color:var(--paladin)}.shaman{color:var(--shaman)}.priest{color:var(--priest)}.warlock{color:var(--warlock)}.hunter{color:var(--hunter)}.mage{color:var(--mage)}.warrior{color:var(--warrior)}.rogue{color:var(--rogue)}
+.num{width:58px;font:inherit;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:2px 6px}
+.num:focus-visible,.note:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.lvlc{display:grid;gap:5px;min-width:70px}
+.mini{display:block;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.mini i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.mini.done i{background:var(--good)}
+.prof{display:grid;gap:4px;min-width:150px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-weight:500}
+.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.g{--c:var(--gather)}.c{--c:var(--craft)}
+.prof.planned .tag{opacity:.75}
+.prof.planned .tag::before{background:transparent;border:1.5px dashed var(--c);width:6px;height:6px}
+.skill{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.skill .num{font-weight:400;width:56px}
+.repl{font-size:12px;color:var(--muted)}
+.none{color:var(--muted);font-size:14px}
+.todo{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);border:1px dashed var(--gold);border-radius:999px;padding:0 7px;line-height:18px;white-space:nowrap;justify-self:start}
+.note{min-width:180px;color:var(--muted);font-size:14px;border-radius:4px;padding:2px 4px;margin:-2px -4px}
+.note:empty::before{content:"Add a note";opacity:.5}
+.rolec{display:grid;gap:3px;min-width:170px}
+.rolec b{font-weight:700}
+.rchip{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:1px 7px;color:#fff;background:var(--rcol)}
+.rchip.tank{--rcol:var(--tank)}.rchip.heal{--rcol:var(--heal)}.rchip.dps{--rcol:var(--dps)}
+.rdesc{font-size:13px;color:var(--muted)}
+.glinks{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;margin-top:2px}
+.glinks a{font-weight:500;text-decoration:none}
+.glinks a:hover,.glinks a:focus-visible{text-decoration:underline}
+.legend{display:flex;gap:8px 16px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted)}
+/* next up */
+.next{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.nx{align-content:start;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:8px;min-width:0;border-top:3px solid var(--cc)}
+.nx header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.nx header b{font-weight:700;font-size:16px;color:var(--cc)}
+.nx header span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.nx ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.nx li{display:grid;gap:3px;font-size:14px}
+.nx li .row{display:flex;justify-content:space-between;gap:8px}
+.nx li .row span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.nx li.done{color:var(--good)}
+.nx .train{font-size:13px;color:var(--gold)}
+/* legacy */
+.lhead{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}
+.score{font-family:var(--display);font-size:38px;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.score small{font-size:16px;color:var(--muted)}
+.bar{flex:1 1 260px;min-width:0;display:grid;gap:6px}
+.track{position:relative;height:10px;border-radius:5px;background:var(--line)}
+.fill{position:absolute;inset:0 auto 0 0;border-radius:5px;background:var(--gold);width:0;transition:width .3s}
+.goal{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.5}
+.ticks{position:relative;height:30px;font-size:11px;color:var(--muted)}
+.ticks span{position:absolute;transform:translateX(-50%);text-align:center;white-space:nowrap;line-height:1.2}
+.ticks span.hit{color:var(--gold);font-weight:700}
+.ticks span::before{content:"";display:block;width:1px;height:6px;background:currentColor;margin:0 auto 2px}
+.ltables{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.ltable td,.ltable th{padding:8px 10px}
+.ltable td.ck,.ltable th.ck{text-align:center;width:52px}
+.ltable input[type=checkbox],.addon input{width:18px;height:18px;accent-color:var(--gold);cursor:pointer}
+.ltable input:disabled{cursor:default}
+.ltable input:focus-visible,.addon input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.ltable .who2{display:block;font-size:12px;color:var(--muted)}
+.ltable td.target-col{background:color-mix(in srgb,var(--gold) 12%,transparent)}
+/* talents */
+.lt-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.tabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:3px;flex-wrap:wrap}
+.tabs button{font:inherit;font-weight:500;font-size:14px;border:0;background:transparent;color:var(--muted);padding:6px 12px;border-radius:4px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--head);color:var(--headInk)}
+.tabs button:focus-visible,.node:focus-visible,.pbtn:focus-visible,.step:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.budget{font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted)}
+.budget b{font-family:var(--display);font-size:22px;color:var(--gold)}
+.presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.pbtn{font:inherit;font-size:13px;font-weight:500;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
+.pbtn:hover{border-color:var(--gold)}
+.tree{display:grid;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px}
+.tier{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start}
+.tier>span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:10px}
+.nodes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;min-width:0}
+.node{position:relative;text-align:left;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:9px 10px 10px;cursor:pointer;display:grid;gap:6px;min-width:0}
+.node:hover{border-color:var(--gold)}
+.node.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.node.has{background:color-mix(in srgb,var(--gold) 10%,var(--bg))}
+.node.locked{opacity:.6}
+.node.hidden{cursor:default;border-style:dashed;color:var(--muted)}
+.node b{font-weight:700;font-size:14px;line-height:1.25;padding-right:12px}
+.node small{font-size:11px;color:var(--muted)}
+.pips{display:flex;gap:3px}
+.pips i{width:10px;height:10px;border-radius:2px;border:1px solid var(--gold)}
+.pips i.on{background:var(--gold)}
+.rec{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--rc)}
+.r-top{--rc:var(--good)}.r-role{--rc:var(--tank)}.r-ok{--rc:var(--muted)}.r-skip{--rc:var(--bad)}
+.reclegend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.reclegend span{display:inline-flex;align-items:center;gap:5px}
+.reclegend span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rc)}
+.detail{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--rc,var(--gold));border-radius:6px;padding:12px 14px;display:grid;gap:6px;min-width:0}
+.detail h3{font-family:var(--display);font-weight:500;font-size:20px;margin:0}
+.detail .meta{font-size:13px;color:var(--muted)}
+.detail p{margin:0;max-width:65ch}
+.detail .why{font-size:14px;color:var(--muted)}
+.steps{display:flex;align-items:center;gap:10px;margin-top:4px;flex-wrap:wrap}
+.step{font:inherit;font-size:18px;font-weight:700;width:36px;height:36px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.step:disabled{opacity:.4;cursor:default}
+.steps output{font-variant-numeric:tabular-nums;min-width:48px;text-align:center}
+.warn{font-size:13px;color:var(--gold)}
+/* mats */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.flow div{border-left:3px solid var(--c);padding:6px 12px;background:var(--panel);min-width:0;border-radius:0 6px 6px 0}
+.flow b{display:block}
+.flow span{color:var(--muted);font-size:14px}
+.mats{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;min-width:0}
+.card h3{font-family:var(--display);font-weight:500;font-size:18px;margin:0;padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.card h3 small{font-family:var(--body);font-size:13px;font-weight:700}
+.card h3 .own{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.card ul{list-style:none;margin:0;padding:4px 0}
+.card li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:8px 14px;border-top:1px solid var(--line)}
+.card li:first-child{border-top:0}
+.card li b{font-weight:500}
+.card li .src{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.card .foot{padding:0 14px 10px;margin:0}
+.who{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;align-self:center;white-space:nowrap}
+.who.vendor{color:var(--gold)}.who.any{color:var(--muted)}
+.soon{text-decoration:underline dotted;text-underline-offset:3px;opacity:.8}
+/* gold */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rules ol,.rules ul{margin:0;padding:6px 14px 12px 34px;display:grid;gap:8px}
+.rules li{padding-left:2px}
+.rules li b{font-weight:700}
+.rules li span{display:block;font-size:14px;color:var(--muted)}
+.costs{list-style:none!important;padding:6px 14px 12px!important}
+.costs li{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:8px}
+.costs li:first-child{border-top:0;padding-top:0}
+.costs li em{font-style:normal;font-weight:700;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+/* addons */
+.addons{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.addon{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:9px 14px;border-top:1px solid var(--line);align-items:start}
+.addon:first-of-type{border-top:0}
+.addon input{margin-top:3px}
+.addon label{font-weight:700;cursor:pointer}
+.addon .st{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-left:6px}
+.st.ok{color:var(--good)}.st.chk{color:var(--gold)}.st.no{color:var(--bad)}
+.addon p{grid-column:2;margin:0;font-size:14px;color:var(--muted)}
+.addon.noinput{grid-template-columns:1fr}
+.addon.noinput p{grid-column:1}
+footer{border-top:1px solid var(--line);padding-block:18px 32px;font-size:13px;color:var(--muted)}
+footer .inner{display:grid;gap:6px}
+footer ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px}
+/*pl*/
+/* profession leveling */
+.pl-tabs{display:flex;gap:4px;flex-wrap:wrap}
+.pl-tabs button{font:inherit;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.pl-tabs button[aria-selected="true"]{background:var(--head);color:var(--headInk);border-color:var(--head)}
+.pl-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pl-tabs i{width:8px;height:8px;border-radius:50%;background:var(--cc)}
+.pl{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:760px){.pl{grid-template-columns:1fr}}
+.pl-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 14px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.pl-head b{font-family:var(--display);font-weight:500;font-size:20px}
+.pl-head span{font-size:13px;color:var(--muted)}
+.pl-steps{list-style:none;margin:0;padding:0}
+.pl-steps li{display:grid;grid-template-columns:76px 1fr;gap:2px 12px;padding:9px 14px;border-top:1px solid var(--line)}
+.pl-steps li:first-child{border-top:0}
+.pl-steps .rng{font-variant-numeric:tabular-nums;font-weight:700;font-size:14px;color:var(--muted);grid-row:span 2}
+.pl-steps .rcp{font-weight:700}
+.pl-steps .rcp small{font-weight:500;color:var(--muted);font-size:13px;margin-left:6px}
+.pl-steps .mt{font-size:13px;color:var(--muted)}
+.pl-steps li.done{opacity:.55}
+.pl-steps li.done .rng::after{content:" ✓";color:var(--good)}
+.pl-steps li.here{background:color-mix(in srgb,var(--gold) 12%,transparent);box-shadow:inset 3px 0 0 var(--gold)}
+.pl-steps li.here .rng{color:var(--gold)}
+.herelbl{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--gold);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px}
+.pl-side{display:grid;gap:14px}
+.shop{list-style:none;margin:0;padding:6px 14px 12px;display:grid;gap:4px;font-size:14px}
+.shop li{display:flex;justify-content:space-between;gap:10px}
+.shop li em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.shop li.mid{color:var(--muted)}
+.shop li.mid em{color:var(--muted);font-weight:500}
+.tips{margin:0;padding:6px 14px 12px 32px;display:grid;gap:6px;font-size:14px}
+.pl-link{padding:0 14px 12px;font-size:14px;margin:0}
+
+/* scan: skills */
+.scanbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13px;color:var(--muted)}
+.scanbar button{font:inherit;font-size:13px;font-weight:500;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
+.scanbar button:hover{border-color:var(--gold)}
+.scanbar button:focus-visible,.inv-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.skgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.sk{border-top:3px solid var(--cc)}
+.sk h3 b{color:var(--cc);font-family:var(--display);font-weight:500}
+.sk h3 small{color:var(--muted);font-weight:500}
+.sk-profs{list-style:none;margin:0;padding:8px 14px;display:grid;gap:8px}
+.sk-profs li{display:grid;grid-template-columns:1fr auto;gap:3px 10px;align-items:baseline;font-size:14px}
+.sk-profs li em{font-style:normal;font-variant-numeric:tabular-nums;font-weight:700}
+.sk-profs li em.est{color:var(--muted);font-weight:500}
+.sk-profs .mini{grid-column:1/-1}
+.sk-profs .sec{color:var(--muted)}
+.sk-rec{padding:4px 14px 12px;display:grid;gap:6px;border-top:1px solid var(--line)}
+.sk-rec h4{margin:6px 0 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:13px;border-radius:4px;padding:1px 7px;border:1px solid var(--line);background:var(--bg)}
+.chip.o{border-color:#d9822b;color:#c0651a}.chip.y{border-color:#c9a400;color:#8f7600}.chip.gr{border-color:#3f9a4b;color:#2f7d3b}.chip.gy{color:var(--muted)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip.o{color:#ff9f4a}:root:not([data-theme="light"]) .chip.y{color:#ffe04a}:root:not([data-theme="light"]) .chip.gr{color:#6fdc7f}}
+:root[data-theme="dark"] .chip.o{color:#ff9f4a}:root[data-theme="dark"] .chip.y{color:#ffe04a}:root[data-theme="dark"] .chip.gr{color:#6fdc7f}
+.sk-empty{padding:10px 14px;color:var(--muted);font-size:14px;margin:0}
+.sk-flag{padding:8px 14px;font-size:13px;color:var(--gold);border-top:1px solid var(--line);margin:0}
+/* scan: market */
+.callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:6px;padding:12px 14px;max-width:none}
+.callout p{margin:0}
+.callout p+p{margin-top:6px;color:var(--muted);font-size:14px}
+.sell{list-style:none;margin:0;padding:4px 0}
+.sell li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:8px 14px;border-top:1px solid var(--line)}
+.sell li:first-child{border-top:0}
+.sell li b{font-weight:500}
+.sell li em{font-style:normal;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.sell li .src{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.h3x{font-family:var(--display);font-weight:500;font-size:20px;margin:8px 0 0}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.ptab td,.ptab th{padding:6px 12px;font-size:14px}
+.ptab th{font-size:14px}
+.ptab td.r,.ptab th.r{text-align:right;white-space:nowrap}
+.ptab td.mut{color:var(--muted)}
+.ptab tr.mine td:first-child::after{content:" ●";color:var(--gold);font-size:10px;vertical-align:2px}
+.ptip{padding:8px 12px;margin:0;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+.inv-tabs{display:flex;gap:4px;flex-wrap:wrap}
+.inv-tabs button{font:inherit;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.inv-tabs button[aria-selected="true"]{background:var(--head);color:var(--headInk);border-color:var(--head)}
+.inv-tabs i{width:8px;height:8px;border-radius:50%;background:var(--cc)}
+.invt{min-width:520px}
+.invt td.r,.invt th.r{text-align:right}
+.invt tr.np td{color:var(--muted)}
+.invt .loc{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.invt tfoot td{font-weight:700;border-top:2px solid var(--line)}
+
+/* bags */
+.bgrid{display:grid;gap:0;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.brow{display:grid;grid-template-columns:150px minmax(0,1fr) 72px;gap:10px 14px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+.brow:first-child{border-top:0}
+.brow .who3 b{display:block;font-weight:700}
+.brow .who3 span{font-size:12px;color:var(--muted)}
+.slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.85fr);gap:6px}
+.slot{border:1px solid var(--line);background:var(--bg);border-radius:5px;padding:5px 8px;font-size:13px;line-height:1.25;min-height:40px;min-width:0}
+.slot small{display:block;font-size:11px;color:var(--muted)}
+.slot.empty{border:1px dashed var(--gold);background:color-mix(in srgb,var(--gold) 10%,transparent);color:var(--gold);font-weight:700}
+.slot.empty small{color:var(--gold);font-weight:500}
+.slot.prof{border-color:color-mix(in srgb,var(--gather) 45%,transparent);background:color-mix(in srgb,var(--gather) 10%,transparent)}
+.bneed{text-align:right;font-weight:700;font-size:14px;white-space:nowrap}
+.bneed.send{color:var(--gold)}.bneed.full{color:var(--good)}.bneed.unk{color:var(--muted);font-weight:500}
+.blegend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted);align-items:center}
+.blegend i{display:inline-block;width:18px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+@media (max-width:640px){.brow{grid-template-columns:1fr auto}.slots{grid-column:1/-1;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr))}.bneed{grid-row:1;grid-column:2}}
+@media (max-width:480px){.tier{grid-template-columns:1fr}.tier>span{padding-top:0}h2{font-size:23px}}
+</style>
+
+<div class="top gut">
+  <div class="inner">
+    <div>
+      <span class="eyebrow">Alliance · WoW: Forever</span>
+      <h1>Main Roster &amp; Professions</h1>
+    </div>
+    <p>One character per class, every crafting profession covered, aiming for the first 15 Legacy points. The bar up top works like Titan Panel: tap any readout for details. Levels, skills, notes and checkboxes save in this browser.</p>
+  </div>
+</div>
+
+<header class="titan gut" id="titan">
+  <nav class="tp-row" aria-label="Quick info">
+    <button class="tp" data-pop="menu" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12"/></svg><b id="tpMenu">Roster</b><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+    <button class="tp" data-pop="bags" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.5h10l-.8 8.5H3.8z"/><path d="M5.5 5.5V4a2.5 2.5 0 0 1 5 0v1.5"/></svg><span class="tl">Bags</span><b id="tpBags"></b><span class="warn2" id="tpBagsNeed"></span><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+    <button class="tp" data-pop="gold" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><span class="tl">Gold</span><b id="tpGold"></b><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+    <button class="tp" data-pop="xp" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg><span class="tl">XP</span><b id="tpXp"></b><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+    <button class="tp" data-pop="legacy" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 12.5h12M2.5 12.5 2 5l3.2 2.6L8 3l2.8 4.6L14 5l-.5 7.5"/></svg><span class="tl">Legacy</span><b id="tpLegacy"></b><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+    <button class="tp" data-pop="crafts" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9.5 2.5l4 4-2 2-4-4zM7.5 4.5 2 10l4 4 5.5-5.5"/></svg><span class="tl">Crafts</span><b id="tpCrafts"></b><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+    <button class="tp" data-pop="alts" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="6" cy="5.5" r="2.3"/><path d="M1.8 13.5c.4-2.4 2.1-3.8 4.2-3.8s3.8 1.4 4.2 3.8"/><path d="M10.5 3.4a2.3 2.3 0 0 1 0 4.4M12 9.9c1.3.5 2 1.8 2.2 3.6"/></svg><span class="tl">Alts</span><b id="tpAlts"></b><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+    <span class="tp-sp" aria-hidden="true"></span>
+    <button class="tp" data-pop="clock" aria-expanded="false" aria-haspopup="true" aria-controls="tpPop"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.5V8l2.4 1.6"/></svg><b id="tpClock"></b><span class="tl" id="tpRaid"></span><svg class="car" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 3h8L5 8z"/></svg></button>
+  </nav>
+</header>
+<div class="tp-pop" id="tpPop" role="dialog" aria-label="Details" hidden></div>
+
+<main class="gut">
+<div class="inner">
+
+  <section id="roster">
+    <div class="sh"><h2>Roster</h2><p>Update levels and skills as you play. Everything else on the page follows along.</p></div>
+    <div class="legend"><span class="tag g">Gathering</span><span class="tag c">Crafting</span><span><span class="todo">Not learned</span> planned, not trained yet</span><span><span class="rchip tank">2 Tanks</span> <span class="rchip heal">2 Healers</span> <span class="rchip dps">5 DPS</span></span></div>
+    <div class="sheet roster">
+      <table>
+        <thead><tr><th>Character</th><th>Level</th><th>Role</th><th>Last seen</th><th>Gathering</th><th>Crafting</th><th>Notes</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="scanbar"><span>Levels, zones and skills were last filled in from the addon scan on Nov 12. Anything you type here overrides them.</span><button type="button" id="useScan">Reset to scan values</button></div>
+    <p class="hint">The bar under each level fills toward 25, and under each crafting skill toward 150. Guide links open Warcraft Tavern. Keg Kenobi can tank in a pinch, and Leif can go bear. Respecs cost gold (about 1g for the first, then more), so each character plans at most one.</p>
+  </section>
+
+  <section id="next">
+    <div class="sh"><h2>Next up</h2><p>What each character still needs for the 15-point goal, closest first.</p></div>
+    <div class="next" id="nextUp"></div>
+  </section>
+
+  <section id="legacy">
+    <div class="sh"><h2>Legacy points</h2><p>Milestones tick themselves off from the roster. You can also check them by hand.</p></div>
+    <div class="lhead">
+      <div class="score" id="score">0<small> / 15 goal</small></div>
+      <div class="bar">
+        <div class="track"><div class="fill" id="fill"></div><div class="goal" id="goalMark" title="15-point goal"></div></div>
+        <div class="ticks" id="ticks"></div>
+      </div>
+    </div>
+    <div class="ltables">
+      <div class="sheet ltable">
+        <table>
+          <thead><tr><th>Class</th><th class="ck">25</th><th class="ck">45</th><th class="ck">60</th></tr></thead>
+          <tbody id="lclass"></tbody>
+        </table>
+      </div>
+      <div class="sheet ltable">
+        <table>
+          <thead><tr><th>Crafting</th><th class="ck">150</th><th class="ck">225</th><th class="ck">300</th></tr></thead>
+          <tbody id="lcraft"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="hint">Each milestone counts once per class or profession, account-wide. The highlighted column is the 15-point goal. Gathering professions don't earn points. Rewards come from Innkeeper Wiley in Ratchet.</p>
+  </section>
+
+  <section id="talents">
+    <div class="sh"><h2>Legacy talents</h2><p>Plan where each character spends its 16 points. Respec any time at a class trainer.</p></div>
+    <div class="lt-bar">
+      <div class="tabs" role="tablist" id="ltTabs"></div>
+      <div class="budget"><b id="ltSpent">0</b> / 16 spent</div>
+    </div>
+    <div class="presets">Try a build:
+      <button class="pbtn" data-preset="crafter">Crafter</button>
+      <button class="pbtn" data-preset="gatherer">Gatherer</button>
+      <button class="pbtn" data-preset="redstone">Redstone</button>
+      <button class="pbtn" data-preset="clear">Clear</button>
+    </div>
+    <div class="reclegend"><span class="r-top">Take first</span><span class="r-role">For certain characters</span><span class="r-ok">Situational</span><span class="r-skip">Skip for now</span></div>
+    <div class="tree" id="ltTree" role="tabpanel"></div>
+    <div class="detail" id="ltDetail" aria-live="polite"></div>
+    <p class="hint">Tap a talent to read it, then use + and − to plan ranks. A talent that needs another one unlocks once that one is maxed. Rank counts differ a little between guides, so check the tree in game.</p>
+  </section>
+
+  <section id="mats">
+    <div class="sh"><h2>Materials</h2><p>Who gathers what, and where the basics come from. <span class="soon">Dotted names</span> haven't learned that gathering skill yet.</p></div>
+    <div class="flow">
+      <div style="--c:var(--druid)"><b class="druid">Leif → Leatherworking</b><span>Skins his own, plus Fatal, Keg Kenobi and Sneaky Gnomes.</span></div>
+      <div style="--c:var(--paladin)"><b class="paladin">Murus → Blacksmithing</b><span>Mines his own, plus Corwyn and Keg Kenobi.</span></div>
+      <div style="--c:var(--shaman)"><b class="shaman">Rum → Alchemy</b><span>Picks his own, plus Sneaky Gnomes and Redstone.</span></div>
+      <div style="--c:var(--warlock)"><b class="warlock">Fatal → Enchanting</b><span>Disenchants everyone's spare greens.</span></div>
+      <div style="--c:var(--priest)"><b class="priest">Corwyn → Tailoring</b><span>Cloth from mobs. His ore goes to Murus.</span></div>
+      <div style="--c:var(--hunter)"><b class="hunter">Libertty → Engineering</b><span>Mines his own and makes his own guns.</span></div>
+    </div>
+    <div class="mats">
+      <div class="card">
+        <h3>Leatherworking <span class="own"><small class="druid">Leif</small></span></h3>
+        <ul>
+          <li><b>Ruined Leather Scraps</b><span class="who"><span class="druid">Leif</span> +3</span><span class="src">Skinning low-level beasts. 3 scraps make 1 Light Leather.</span></li>
+          <li><b>Light Leather</b><span class="who"><span class="druid">Leif</span> +3</span><span class="src">Skinning wolves, boars and cats in the starter zones.</span></li>
+          <li><b>Light Hide</b><span class="who"><span class="druid">Leif</span> +3</span><span class="src">Rarer skinning drop. Cure it with Salt.</span></li>
+          <li><b>Medium Leather / Hide</b><span class="who"><span class="druid">Leif</span> +3</span><span class="src">Skinning level 20+ beasts (Wetlands, Redridge, Ashenvale).</span></li>
+          <li><b>Coarse Thread, Salt, Gray Dye</b><span class="who vendor">Vendor</span><span class="src">Trade Supplies vendor in any city.</span></li>
+        </ul>
+        <p class="hint foot">+3 = <span class="warlock soon">Fatal</span>, <span class="warrior soon">Keg Kenobi</span>, <span class="rogue soon">Sneaky Gnomes</span></p>
+      </div>
+      <div class="card">
+        <h3>Blacksmithing <span class="own"><small class="paladin">Murus</small></span></h3>
+        <ul>
+          <li><b>Copper Ore → Copper Bar</b><span class="who"><span class="paladin">Murus</span> +3</span><span class="src">Copper veins in Dun Morogh, Elwynn, Loch Modan. Smelt at a forge.</span></li>
+          <li><b>Rough Stone</b><span class="who"><span class="paladin">Murus</span> +3</span><span class="src">Comes out of copper veins.</span></li>
+          <li><b>Tin Ore → Tin Bar</b><span class="who"><span class="paladin">Murus</span> +3</span><span class="src">Tin veins in Loch Modan, Wetlands, Redridge.</span></li>
+          <li><b>Bronze Bar</b><span class="who paladin">Murus</span><span class="src">Smelt 1 Copper Bar + 1 Tin Bar.</span></li>
+          <li><b>Coarse Stone</b><span class="who"><span class="paladin">Murus</span> +3</span><span class="src">Comes out of tin veins.</span></li>
+          <li><b>Weak Flux</b><span class="who vendor">Vendor</span><span class="src">Blacksmithing and engineering supply vendors.</span></li>
+        </ul>
+        <p class="hint foot">+3 = <span class="priest soon">Corwyn</span>, <span class="hunter soon">Libertty</span>, <span class="warrior soon">Keg Kenobi</span></p>
+      </div>
+      <div class="card">
+        <h3>Alchemy <span class="own"><small class="shaman">Rum</small></span></h3>
+        <ul>
+          <li><b>Peacebloom, Silverleaf</b><span class="who"><span class="shaman">Rum</span> +2</span><span class="src">All over the starter zones. Used in Minor Healing Potions.</span></li>
+          <li><b>Earthroot</b><span class="who"><span class="shaman">Rum</span> +2</span><span class="src">Near hills and cliffs in starter zones.</span></li>
+          <li><b>Mageroyal, Briarthorn</b><span class="who"><span class="shaman">Rum</span> +2</span><span class="src">Level 10–20 zones like Loch Modan and Darkshore.</span></li>
+          <li><b>Vials</b><span class="who vendor">Vendor</span><span class="src">Trade Supplies or alchemy supply vendors.</span></li>
+        </ul>
+        <p class="hint foot">+2 = <span class="rogue soon">Sneaky Gnomes</span>, <span class="mage soon">Redstone</span></p>
+      </div>
+      <div class="card">
+        <h3>Engineering <span class="own"><small class="hunter">Libertty</small><span class="todo">Not learned</span></span></h3>
+        <ul>
+          <li><b>Rough Blasting Powder</b><span class="who hunter soon">Libertty</span><span class="src">Made from Rough Stone out of his own copper veins.</span></li>
+          <li><b>Copper Bolts, Copper Tube</b><span class="who hunter soon">Libertty</span><span class="src">Made from his own Copper Bars. The tube also takes Weak Flux.</span></li>
+          <li><b>Linen Cloth</b><span class="who any">Everyone</span><span class="src">Used in a few early recipes.</span></li>
+          <li><b>Wooden Stock, Weak Flux</b><span class="who vendor">Vendor</span><span class="src">Engineering supply vendors. The stock goes into his first gun.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Enchanting <span class="own"><small class="warlock">Fatal</small><span class="todo">Not learned</span></span></h3>
+        <ul>
+          <li><b>Strange Dust</b><span class="who warlock soon">Fatal</span><span class="src">Disenchant low-level green gear. Everyone can mail him their spare greens.</span></li>
+          <li><b>Lesser Magic Essence</b><span class="who warlock soon">Fatal</span><span class="src">Disenchant low-level greens.</span></li>
+          <li><b>Small Glimmering Shard</b><span class="who warlock soon">Fatal</span><span class="src">Rarer disenchant result from blues and some greens.</span></li>
+          <li><b>Copper Rod</b><span class="who paladin">Murus</span><span class="src">Murus crafts it. Fatal needs it, plus a Mote of Magic, for the Runed Copper Rod that starts Enchanting.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Tailoring <span class="own"><small class="priest">Corwyn</small><span class="todo">Not learned</span></span></h3>
+        <ul>
+          <li><b>Linen Cloth</b><span class="who any">Everyone</span><span class="src">Drops from humanoids around level 5–15. Mail full stacks only.</span></li>
+          <li><b>Wool Cloth</b><span class="who any">Everyone</span><span class="src">Drops from humanoids around level 15–25.</span></li>
+          <li><b>Coarse &amp; Fine Thread, dyes</b><span class="who vendor">Vendor</span><span class="src">Trade Supplies vendor.</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="hint">Starter materials for the zones you're leveling in now. WoW: Forever adds new mats and recipes on top of these, so treat this as the basics.</p>
+  </section>
+
+
+  <section id="crafting">
+    <div class="sh"><h2>Leveling crafts to 150</h2><p>Recipe routes for each crafting profession. Your current step lights up from the skill you enter in the roster.</p></div>
+    <div class="pl-tabs" role="tablist" id="plTabs"></div>
+    <div class="pl" id="plBody"></div>
+    <p class="hint">Craft counts are averages from Wowhead's routes, so expect to need a few more or a few less. Working Overtime in the Legacy tree cuts the number of crafts. Rows that end past 150 are shown in full.</p>
+  </section>
+
+  <section id="skills">
+    <div class="sh"><h2>Skills &amp; recipes</h2><p>Read from the Altoholic scan on Nov 12. Keg Kenobi and Sneaky Gnomes haven't been scanned yet.</p></div>
+    <div class="skgrid" id="skGrid"></div>
+    <p class="hint">Recipe colors are what the game reported at scan time. Orange and yellow still give skill-ups, green sometimes, grey never. DataStore didn't save the Blacksmithing or Leatherworking numbers, so those two are estimated from recipe colors. A profession's recipes only show up after you open its window once with the addon on.</p>
+  </section>
+
+  <section id="gold">
+    <div class="sh"><h2>Gold &amp; mail</h2><p>House rules for making money while everyone is broke.</p></div>
+    <div class="rules">
+      <div class="card">
+        <h3>Rules</h3>
+        <ol>
+          <li><b>Mail full stacks only.</b><span>Postage is 30 copper per attached stack, however many items are in it.</span></li>
+          <li><b>Mail straight to the crafter.</b><span>Stopping at Redstone first doubles the postage.</span></li>
+          <li><b>Sell from the gatherer.</b><span>Post raw mats on the Auction House from whoever picked them. No postage at all.</span></li>
+          <li><b>Never vendor crafted gear.</b><span>Vendor prices were cut in October. Sell to players or disenchant with Fatal.</span></li>
+          <li><b>Sell common mats early, hold Scarce ones.</b><span>Linen, copper and peacebloom flood the market. Pristine Leather and other Scarce mats climb.</span></li>
+          <li><b>Craft what players buy.</b><span>Rum's dyes and Sulfuric Acid go into lots of recipes. Corwyn's bags always sell.</span></li>
+          <li><b>Turn in Waylaid Crates.</b><span>Fill them with spare mats for Merchant's Favor, or sell them empty.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Costs ahead</h3>
+        <ul class="costs">
+          <li><span>Apprentice Riding at 40</span><em>100g</em></li>
+          <li><span>…at Honored with your home faction</span><em>90g</em></li>
+          <li><span>Murus and Fatal's level 40 mounts</span><em>Free</em></li>
+          <li><span>Extra mount color</span><em>20g</em></li>
+          <li><span>Journeyman Riding at 60</span><em>1,000g</em></li>
+        </ul>
+        <h3 style="border-top:1px solid var(--line)">Dates</h3>
+        <ul class="costs">
+          <li><span>First raids open</span><em>Dec 9</em></li>
+          <li><span>Post potions and food</span><em>Before raid nights</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="market">
+    <div class="sh"><h2>Auction House</h2><p>Auctionator full scan on Nov 12 at 10:53 AM. Prices are the lowest buyout for each item.</p></div>
+    <div class="stats">
+      <div class="stat"><b>5,412</b><span>Items priced</span></div>
+      <div class="stat"><b>3.6g</b><span>Everything you hold, at AH prices</span></div>
+      <div class="stat"><b>1g 74s</b><span>Gold on hand</span></div>
+      <div class="stat"><b id="mkScanned">7<small> / 9</small></b><span>Characters scanned</span></div>
+    </div>
+    <div class="callout"><p><b>Sell very little, and buy mats to level.</b> Common mats go for coppers here: Linen 27c with about 23,000 listed, Light Leather 26c, Copper Bar 72c.</p><p>Selling your stock would barely move your gold, while the same mats get your crafts to 150. Buying more at these prices costs almost nothing.</p></div>
+    <div class="rules">
+      <div class="card"><h3>Worth listing</h3><ul class="sell" id="mkSell"></ul></div>
+      <div class="card"><h3>Keep for crafting</h3><ul class="sell" id="mkKeep"></ul></div>
+      <div class="card"><h3>Don't bother listing</h3><ul class="sell" id="mkSkip"></ul>
+        <h3 style="border-top:1px solid var(--line)">Gold on hand</h3><ul class="costs" id="mkGold"></ul></div>
+    </div>
+    <h3 class="h3x">Material prices</h3>
+    <div class="pgrid" id="mkPrices"></div>
+    <p class="hint">● marks things you have in bags or bank right now. Listed counts are how many were up for sale during the scan.</p>
+    <h3 class="h3x">Bags &amp; banks</h3>
+    <div class="inv-tabs" role="tablist" id="invTabs"></div>
+    <div class="sheet"><table class="invt"><thead><tr><th>Item</th><th class="r">Qty</th><th>Where</th><th class="r">Each</th><th class="r">Total</th></tr></thead><tbody id="invBody"></tbody><tfoot id="invFoot"></tfoot></table></div>
+    <p class="hint">Leif's bank, Keg Kenobi and Sneaky Gnomes aren't in the scan yet. Open the bank on Leif and log in once on the other two. Quest and bound items show no price.</p>
+  </section>
+
+  <section id="bags">
+    <div class="sh"><h2>Bags</h2><p>Who has an empty bag slot, from the Bagnon save file on Nov 12. Send new bags to the gold rows first.</p></div>
+    <div class="stats" id="bagStats"></div>
+    <div class="blegend"><span><i style="border:1px dashed var(--gold);background:color-mix(in srgb,var(--gold) 10%,transparent)"></i>Empty slot</span><span><i style="border:1px solid var(--line);background:var(--bg)"></i>Bag equipped</span><span><i style="border:1px solid color-mix(in srgb,var(--gather) 45%,transparent);background:color-mix(in srgb,var(--gather) 10%,transparent)"></i>Profession bag slot (5th)</span></div>
+    <div class="bgrid" id="bagRows"></div>
+    <div class="callout"><p><b>Two free fixes first.</b> Libertty has a Book Bag sitting in his backpack, so equip it. Corwyn is wearing the Skinning Satchel, but he's going Mining and has an Apprentice's Mining Pack in his backpack, so swap them.</p><p>Once Corwyn hits Tailoring 50, Red Linen Bags (8 slots) are the cheapest way to fill every empty slot here.</p></div>
+    <p class="hint">Profession bags only hold their own profession's mats and tools. The quiver only holds arrows. Keg Kenobi and Sneaky Gnomes show up after you log into each once with Bagnon on.</p>
+  </section>
+
+  <section id="addons">
+    <div class="sh"><h2>Addons</h2><p>Tick them off as you install them in CurseForge.</p></div>
+    <div class="addons">
+      <div class="card" id="addonGet"><h3>Get these</h3></div>
+      <div class="card" id="addonHave"><h3>Already installed</h3></div>
+      <div class="card" id="addonSkip"><h3>Avoid for now</h3></div>
+    </div>
+    <p class="hint">If something acts up after installing, log in with addons off at character select, then turn them on and type /reload.</p>
+  </section>
+
+</div>
+</main>
+
+<footer class="gut">
+  <div class="inner">
+    <span>Sources</span>
+    <ul>
+      <li><a href="https://www.warcrafttavern.com/forever/guides/legacy/" target="_blank" rel="noopener">Legacy System – Warcraft Tavern</a></li>
+      <li><a href="https://warcraft.wiki.gg/wiki/Legacy_System" target="_blank" rel="noopener">Legacy System – Warcraft Wiki</a></li>
+      <li><a href="https://conquestcapped.com/guides/wow-forever/wow-forever-gold-making/" target="_blank" rel="noopener">Gold making – Conquest Capped</a></li>
+      <li><a href="https://conquestcapped.com/guides/wow-forever/wow-forever-addons/" target="_blank" rel="noopener">Addons – Conquest Capped</a></li>
+      <li><a href="https://www.warcrafttavern.com/forever/guides/classes/" target="_blank" rel="noopener">Class guides – Warcraft Tavern</a></li>
+      <li><a href="https://www.wowhead.com/forever/profession-leveling-guides/leatherworking" target="_blank" rel="noopener">Profession leveling – Wowhead</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+/* BEGIN GENERATED SCAN */
+const GENERATED = {
+  "label": "Nov 12, 1:13 PM",
+  "latestLogout": 1794510799,
+  "scannedCount": 7,
+  "missingNote": "Keg Kenobi and Sneaky Gnomes haven't been scanned yet.",
+  "prices": {
+    "Peacebloom": [
+      30,
+      3094
+    ],
+    "Silverleaf": [
+      15,
+      6493
+    ],
+    "Earthroot": [
+      37,
+      2081
+    ],
+    "Mageroyal": [
+      50,
+      7323
+    ],
+    "Bruiseweed": [
+      70,
+      2306
+    ],
+    "Briarthorn": [
+      153,
+      2714
+    ],
+    "Stranglekelp": [
+      224,
+      2118
+    ],
+    "Swiftthistle": [
+      299,
+      1400
+    ],
+    "Frilled Lichen": [
+      2237,
+      694
+    ],
+    "Empty Vial": [
+      6,
+      6084
+    ],
+    "Leaded Vial": [
+      59,
+      2634
+    ],
+    "Copper Ore": [
+      69,
+      14855
+    ],
+    "Copper Bar": [
+      72,
+      7097
+    ],
+    "Tin Ore": [
+      200,
+      2360
+    ],
+    "Tin Bar": [
+      203,
+      2404
+    ],
+    "Bronze Bar": [
+      175,
+      4191
+    ],
+    "Silver Ore": [
+      564,
+      1266
+    ],
+    "Silver Bar": [
+      405,
+      1220
+    ],
+    "Rough Stone": [
+      9,
+      7409
+    ],
+    "Coarse Stone": [
+      89,
+      4259
+    ],
+    "Pyrite": [
+      195,
+      2314
+    ],
+    "Ruined Leather Scraps": [
+      12,
+      3650
+    ],
+    "Light Leather": [
+      26,
+      8526
+    ],
+    "Light Hide": [
+      150,
+      596
+    ],
+    "Medium Leather": [
+      97,
+      6983
+    ],
+    "Medium Hide": [
+      330,
+      423
+    ],
+    "Pristine Leather": [
+      723,
+      1774
+    ],
+    "Salt": [
+      58,
+      778
+    ],
+    "Coarse Thread": [
+      10,
+      6120
+    ],
+    "Fine Thread": [
+      103,
+      3093
+    ],
+    "Linen Cloth": [
+      27,
+      22974
+    ],
+    "Bolt of Linen": [
+      54,
+      1598
+    ],
+    "Wool Cloth": [
+      122,
+      3351
+    ],
+    "Bolt of Woolen Cloth": [
+      396,
+      726
+    ],
+    "Strange Dust": [
+      80,
+      5023
+    ],
+    "Lesser Magic Essence": [
+      114,
+      2697
+    ],
+    "Small Glimmering Shard": [
+      372,
+      908
+    ],
+    "Minor Healing Potion": [
+      8,
+      959
+    ],
+    "Elixir of Minor Defense": [
+      5,
+      1158
+    ],
+    "Lesser Healing Potion": [
+      28,
+      635
+    ],
+    "Minor Mana Potion": [
+      29,
+      1169
+    ],
+    "Elixir of Lion's Strength": [
+      58,
+      539
+    ],
+    "Elixir of Minor Agility": [
+      389,
+      594
+    ],
+    "Shadowgem": [
+      267,
+      402
+    ],
+    "Coarse Blasting Powder": [
+      349,
+      538
+    ],
+    "Crawler Meat": [
+      97,
+      826
+    ],
+    "Copper Chain Pants": [
+      104,
+      615
+    ],
+    "Tigerseye": [
+      150,
+      229
+    ],
+    "Severing Axe of Magic": [
+      298,
+      210
+    ],
+    "Clam Meat": [
+      30,
+      1360
+    ],
+    "Schematic: EZ-Thro Dynamite": [
+      200,
+      106
+    ],
+    "Crawler Claw": [
+      22,
+      1158
+    ],
+    "Light Armor Kit": [
+      15,
+      2733
+    ],
+    "Light Feather": [
+      19,
+      2657
+    ],
+    "Malachite": [
+      16,
+      620
+    ],
+    "Small Spider Leg": [
+      5,
+      911
+    ],
+    "Stringy Wolf Meat": [
+      59,
+      912
+    ],
+    "Hunting Buckler": [
+      364,
+      173
+    ],
+    "Copper Chain Boots": [
+      300,
+      25
+    ],
+    "Chunk of Boar Meat": [
+      30,
+      1539
+    ],
+    "Refreshing Spring Water": [
+      11,
+      3873
+    ],
+    "Cheap Blunderbuss": [
+      168,
+      57
+    ],
+    "Rough Sharpening Stone": [
+      15,
+      65
+    ],
+    "Rough Grinding Stone": [
+      7,
+      538
+    ],
+    "Embossed Leather Cloak": [
+      118,
+      312
+    ],
+    "Calico Shoes": [
+      100,
+      20
+    ],
+    "Fishing Pole": [
+      100,
+      42
+    ],
+    "Mining Pick": [
+      100,
+      74
+    ],
+    "Warped Leather Vest": [
+      100,
+      16
+    ],
+    "Fractured Canine": [
+      48,
+      90
+    ],
+    "Longjaw Mud Snapper": [
+      5,
+      1398
+    ],
+    "Rough Weightstone": [
+      6,
+      1145
+    ],
+    "Boar Intestines": [
+      18,
+      4163
+    ],
+    "Skinning Knife": [
+      100,
+      47
+    ],
+    "Ruined Pelt": [
+      20,
+      90
+    ],
+    "Small Leather Collar": [
+      33,
+      17
+    ],
+    "Tough Jerky": [
+      7,
+      420
+    ],
+    "Tough Hunk of Bread": [
+      5,
+      52
+    ],
+    "Discolored Fang": [
+      6,
+      13
+    ],
+    "Healing Herb": [
+      4,
+      53
+    ],
+    "Ragged Leather Bracers": [
+      4400,
+      6
+    ],
+    "Flimsy Chain Pants": [
+      100,
+      1
+    ],
+    "Rusty Hatchet": [
+      100,
+      23
+    ],
+    "Worn Hide Cloak": [
+      100,
+      23
+    ],
+    "Crag Boar Rib": [
+      11,
+      1761
+    ],
+    "Gustberry Juice": [
+      20,
+      622
+    ],
+    "Oily Blackmouth": [
+      35,
+      2712
+    ],
+    "Linen Bandage": [
+      10,
+      7108
+    ],
+    "Camp Tent": [
+      198,
+      295
+    ],
+    "Brilliant Smallfish": [
+      6,
+      702
+    ],
+    "Raw Rainbow Fin Albacore": [
+      6,
+      3338
+    ],
+    "Slitherskin Mackerel": [
+      7,
+      313
+    ],
+    "Rumsey Rum Light": [
+      50,
+      275
+    ],
+    "Darkshore Grouper": [
+      5,
+      1872
+    ],
+    "Rough Arrow": [
+      1,
+      76170
+    ],
+    "Minor Troll's Blood Elixir": [
+      25,
+      106
+    ],
+    "Scroll: LOWER PING WHOMEVER": [
+      100,
+      1135
+    ],
+    "Elixir of Minor Force": [
+      26,
+      467
+    ],
+    "Roasted Boar Meat": [
+      9,
+      2217
+    ],
+    "Shiny Bauble": [
+      50,
+      233
+    ]
+  },
+  "chars": {
+    "leif": {
+      "lvl": 15,
+      "zone": "Darkshore",
+      "sub": "Auberdine",
+      "xp": 12438,
+      "maxXP": 14400,
+      "rest": 1508,
+      "logout": 1794502063,
+      "gold": 9926,
+      "sk": [
+        90,
+        null
+      ],
+      "repl": {
+        "Skinning": ""
+      },
+      "flag": "",
+      "profs": [
+        [
+          "Skinning",
+          90,
+          150,
+          "",
+          "g"
+        ],
+        [
+          "Cooking",
+          61,
+          75,
+          "",
+          "s"
+        ],
+        [
+          "Fishing",
+          107,
+          150,
+          "",
+          "s"
+        ],
+        [
+          "First Aid",
+          34,
+          75,
+          "",
+          "s"
+        ]
+      ]
+    },
+    "murus": {
+      "lvl": 13,
+      "zone": "Ironforge",
+      "sub": "",
+      "xp": 6068,
+      "maxXP": 11400,
+      "rest": 10976,
+      "logout": 1794502504,
+      "gold": 918,
+      "sk": [
+        78,
+        null
+      ],
+      "repl": {
+        "Mining": ""
+      },
+      "flag": "",
+      "profs": [
+        [
+          "Mining",
+          78,
+          150,
+          "",
+          "g"
+        ],
+        [
+          "Cooking",
+          99,
+          150,
+          "",
+          "s"
+        ],
+        [
+          "Fishing",
+          76,
+          150,
+          "",
+          "s"
+        ],
+        [
+          "First Aid",
+          1,
+          75,
+          "",
+          "s"
+        ]
+      ]
+    },
+    "rum": {
+      "lvl": 9,
+      "zone": "Stormwind City",
+      "sub": "Mage Quarter",
+      "xp": 3486,
+      "maxXP": 6500,
+      "rest": 64,
+      "logout": 1794503156,
+      "gold": 127,
+      "sk": [
+        75,
+        75
+      ],
+      "repl": {
+        "Herbalism": "",
+        "Alchemy": ""
+      },
+      "flag": "",
+      "profs": [
+        [
+          "Alchemy",
+          75,
+          75,
+          "",
+          "c"
+        ],
+        [
+          "Herbalism",
+          75,
+          150,
+          "",
+          "g"
+        ],
+        [
+          "Cooking",
+          7,
+          75,
+          "",
+          "s"
+        ],
+        [
+          "Fishing",
+          1,
+          75,
+          "",
+          "s"
+        ]
+      ]
+    },
+    "fatal": {
+      "lvl": 6,
+      "zone": "Dun Morogh",
+      "sub": "Kharanos",
+      "xp": 2287,
+      "maxXP": 3600,
+      "rest": 1760,
+      "logout": 1794501318,
+      "gold": 267,
+      "sk": [
+        73,
+        null
+      ],
+      "repl": {
+        "Skinning": ""
+      },
+      "flag": "",
+      "profs": [
+        [
+          "Skinning",
+          73,
+          75,
+          "",
+          "g"
+        ]
+      ]
+    },
+    "libertty": {
+      "lvl": 6,
+      "zone": "Elwynn Forest",
+      "sub": "Goldshire",
+      "xp": 461,
+      "maxXP": 3600,
+      "rest": 6,
+      "logout": 1794503399,
+      "gold": 1131,
+      "sk": [
+        4,
+        null
+      ],
+      "repl": {
+        "Mining": ""
+      },
+      "flag": "",
+      "profs": [
+        [
+          "Mining",
+          4,
+          75,
+          "",
+          "g"
+        ],
+        [
+          "Cooking",
+          19,
+          75,
+          "",
+          "s"
+        ],
+        [
+          "Fishing",
+          28,
+          75,
+          "",
+          "s"
+        ]
+      ]
+    },
+    "corwyn": {
+      "lvl": 6,
+      "zone": "Ironforge",
+      "sub": "",
+      "xp": 904,
+      "maxXP": 3600,
+      "rest": 36,
+      "logout": 1794510799,
+      "gold": 4,
+      "sk": [
+        null,
+        24
+      ],
+      "repl": {
+        "Tailoring": "",
+        "Mining": "Has Skinning 23 instead"
+      },
+      "flag": "Tailoring is trained. He still has Skinning instead of Mining, so swap Skinning for Mining when you can.",
+      "profs": [
+        [
+          "Tailoring",
+          24,
+          75,
+          "",
+          "c"
+        ],
+        [
+          "Skinning",
+          23,
+          75,
+          "",
+          "g"
+        ]
+      ]
+    },
+    "redstone": {
+      "lvl": 1,
+      "zone": "Stormwind City",
+      "sub": "Trade District",
+      "xp": 55,
+      "maxXP": 400,
+      "rest": 444,
+      "logout": 1794502212,
+      "gold": 5029,
+      "sk": [
+        null,
+        null
+      ],
+      "repl": {},
+      "flag": "",
+      "profs": []
+    }
+  },
+  "scan": {
+    "leif": [
+      28,
+      44,
+      12438,
+      14400,
+      1508,
+      "Darkshore",
+      "Auberdine",
+      1794502063
+    ],
+    "murus": [
+      27,
+      44,
+      6068,
+      11400,
+      10976,
+      "Ironforge",
+      "",
+      1794502504
+    ],
+    "rum": [
+      18,
+      34,
+      3486,
+      6500,
+      64,
+      "Stormwind City",
+      "Mage Quarter",
+      1794503156
+    ],
+    "fatal": [
+      13,
+      38,
+      2287,
+      3600,
+      1760,
+      "Dun Morogh",
+      "Kharanos",
+      1794501318
+    ],
+    "libertty": [
+      9,
+      26,
+      461,
+      3600,
+      6,
+      "Elwynn Forest",
+      "Goldshire",
+      1794503399
+    ],
+    "corwyn": [
+      9,
+      44,
+      904,
+      3600,
+      36,
+      "Ironforge",
+      "",
+      1794510799
+    ],
+    "redstone": [
+      2,
+      20,
+      55,
+      400,
+      444,
+      "Stormwind City",
+      "Trade District",
+      1794502212
+    ]
+  },
+  "gold": [
+    [
+      "leif",
+      9926
+    ],
+    [
+      "redstone",
+      5029
+    ],
+    [
+      "libertty",
+      1131
+    ],
+    [
+      "murus",
+      918
+    ],
+    [
+      "fatal",
+      267
+    ],
+    [
+      "rum",
+      127
+    ],
+    [
+      "corwyn",
+      4
+    ]
+  ],
+  "bags": [
+    [
+      "leif",
+      [
+        [
+          "Simple Leather Satchel",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ]
+      ],
+      [
+        "Apprentice's Skinning Satchel",
+        4
+      ]
+    ],
+    [
+      "murus",
+      [
+        [
+          "Small Red Pouch",
+          6
+        ],
+        [
+          "Book Bag",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ]
+      ],
+      [
+        "Apprentice's Mining Pack",
+        4
+      ]
+    ],
+    [
+      "rum",
+      [
+        [
+          "Canvas Latchbag",
+          6
+        ],
+        [
+          "Apprentice's Herb Pouch",
+          4
+        ],
+        [
+          "Apprentice's Herb Pouch",
+          4
+        ],
+        null
+      ],
+      [
+        "Apprentice's Skinning Satchel",
+        4
+      ]
+    ],
+    [
+      "fatal",
+      [
+        [
+          "Canvas Latchbag",
+          6
+        ],
+        [
+          "Small Brown Pouch",
+          6
+        ],
+        [
+          "Small Red Pouch",
+          6
+        ],
+        null
+      ],
+      [
+        "Apprentice's Skinning Satchel",
+        4
+      ]
+    ],
+    [
+      "libertty",
+      [
+        [
+          "Light Leather Quiver",
+          8
+        ],
+        [
+          "Small Green Pouch",
+          6
+        ],
+        [
+          null,
+          0,
+          "Equip Book Bag"
+        ],
+        null
+      ],
+      [
+        "Apprentice's Mining Pack",
+        4
+      ]
+    ],
+    [
+      "corwyn",
+      [
+        [
+          "Canvas Latchbag",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ],
+        [
+          "Linen Bag",
+          6
+        ]
+      ],
+      [
+        "Apprentice's Skinning Satchel",
+        4,
+        "swap for Mining Pack"
+      ]
+    ],
+    [
+      "redstone",
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      null
+    ],
+    [
+      "warrior",
+      null,
+      null
+    ],
+    [
+      "rogue",
+      null,
+      null
+    ]
+  ],
+  "inv": {
+    "leif": [
+      [
+        "Pristine Leather",
+        3,
+        "bags",
+        723,
+        1774
+      ],
+      [
+        "Light Leather",
+        80,
+        "bags",
+        26,
+        8526
+      ],
+      [
+        "Gustberry Juice",
+        20,
+        "bags",
+        20,
+        622
+      ],
+      [
+        "Light Armor Kit",
+        20,
+        "bags",
+        15,
+        2733
+      ],
+      [
+        "Light Hide",
+        2,
+        "bags",
+        150,
+        596
+      ],
+      [
+        "Linen Cloth",
+        11,
+        "bags",
+        27,
+        22974
+      ],
+      [
+        "Oily Blackmouth",
+        6,
+        "bags",
+        35,
+        2712
+      ],
+      [
+        "Coarse Thread",
+        20,
+        "bags",
+        10,
+        6120
+      ],
+      [
+        "Linen Bandage",
+        20,
+        "bags",
+        10,
+        7108
+      ],
+      [
+        "Camp Tent",
+        1,
+        "bags",
+        198,
+        295
+      ],
+      [
+        "Minor Mana Potion",
+        5,
+        "bags",
+        29,
+        1169
+      ],
+      [
+        "Brilliant Smallfish",
+        20,
+        "bags",
+        6,
+        702
+      ],
+      [
+        "Raw Rainbow Fin Albacore",
+        20,
+        "bags",
+        6,
+        3338
+      ],
+      [
+        "Skinning Knife",
+        1,
+        "bags",
+        100,
+        47
+      ],
+      [
+        "Slitherskin Mackerel",
+        14,
+        "bags",
+        7,
+        313
+      ],
+      [
+        "Rumsey Rum Light",
+        1,
+        "bags",
+        50,
+        275
+      ],
+      [
+        "Darkshore Grouper",
+        7,
+        "bags",
+        5,
+        1872
+      ],
+      [
+        "Thresher Eye",
+        3,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Advisor Emerson's Instructions",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Blump Family Fishing Pole",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Empty Sampling Tube",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Fandral's Message",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Hearthstone",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Moonwell Water Tube",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Package for Stormpike",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Tharnariun's Hope",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Thundris' Letter",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Wine Ticket",
+        1,
+        "bags",
+        null,
+        0
+      ]
+    ],
+    "murus": [
+      [
+        "Copper Bar",
+        60,
+        "bank",
+        72,
+        7097
+      ],
+      [
+        "Copper Bar",
+        16,
+        "bags",
+        72,
+        7097
+      ],
+      [
+        "Stringy Wolf Meat",
+        11,
+        "bank",
+        59,
+        912
+      ],
+      [
+        "Tigerseye",
+        3,
+        "bank",
+        150,
+        229
+      ],
+      [
+        "Pyrite",
+        2,
+        "bank",
+        195,
+        2314
+      ],
+      [
+        "Hunting Buckler",
+        1,
+        "bags",
+        364,
+        173
+      ],
+      [
+        "Copper Chain Boots",
+        1,
+        "bags",
+        300,
+        25
+      ],
+      [
+        "Chunk of Boar Meat",
+        8,
+        "bank",
+        30,
+        1539
+      ],
+      [
+        "Refreshing Spring Water",
+        19,
+        "bags",
+        11,
+        3873
+      ],
+      [
+        "Linen Cloth",
+        7,
+        "bank",
+        27,
+        22974
+      ],
+      [
+        "Rough Stone",
+        20,
+        "bank",
+        9,
+        7409
+      ],
+      [
+        "Cheap Blunderbuss",
+        1,
+        "bags",
+        168,
+        57
+      ],
+      [
+        "Rough Sharpening Stone",
+        11,
+        "bags",
+        15,
+        65
+      ],
+      [
+        "Rough Grinding Stone",
+        23,
+        "bank",
+        7,
+        538
+      ],
+      [
+        "Embossed Leather Cloak",
+        1,
+        "bags",
+        118,
+        312
+      ],
+      [
+        "Calico Shoes",
+        1,
+        "bags",
+        100,
+        20
+      ],
+      [
+        "Fishing Pole",
+        1,
+        "bags",
+        100,
+        42
+      ],
+      [
+        "Mining Pick",
+        1,
+        "bags",
+        100,
+        74
+      ],
+      [
+        "Warped Leather Vest",
+        1,
+        "bags",
+        100,
+        16
+      ],
+      [
+        "Fractured Canine",
+        2,
+        "bags",
+        48,
+        90
+      ],
+      [
+        "Longjaw Mud Snapper",
+        16,
+        "bags",
+        5,
+        1398
+      ],
+      [
+        "Light Leather",
+        2,
+        "bank",
+        26,
+        8526
+      ],
+      [
+        "Minor Healing Potion",
+        6,
+        "bags",
+        8,
+        959
+      ],
+      [
+        "Malachite",
+        2,
+        "bank",
+        16,
+        620
+      ],
+      [
+        "Rough Weightstone",
+        4,
+        "bags",
+        6,
+        1145
+      ],
+      [
+        "Boar Intestines",
+        1,
+        "bank",
+        18,
+        4163
+      ],
+      [
+        "Explosive Rocket",
+        10,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Dwarven Heirloom",
+        4,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Thick Bear Fur",
+        2,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Barrel of Thunder Ale",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Crate of Candles",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Free Ticket Voucher",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Furlbrow's Deed",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Hearthstone",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Package for Stormpike",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Rat Catcher's Flute",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Stormwind Armor Marker",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Symbol of Life",
+        1,
+        "bags",
+        null,
+        0
+      ]
+    ],
+    "rum": [
+      [
+        "Frilled Lichen",
+        1,
+        "bags",
+        2237,
+        694
+      ],
+      [
+        "Peacebloom",
+        23,
+        "bags",
+        30,
+        3094
+      ],
+      [
+        "Linen Cloth",
+        20,
+        "bank",
+        27,
+        22974
+      ],
+      [
+        "Minor Troll's Blood Elixir",
+        14,
+        "bags",
+        25,
+        106
+      ],
+      [
+        "Silverleaf",
+        23,
+        "bags",
+        15,
+        6493
+      ],
+      [
+        "Light Leather",
+        12,
+        "bags",
+        26,
+        8526
+      ],
+      [
+        "Ruined Leather Scraps",
+        24,
+        "bags",
+        12,
+        3650
+      ],
+      [
+        "Elixir of Minor Defense",
+        54,
+        "bags",
+        5,
+        1158
+      ],
+      [
+        "Boar Intestines",
+        7,
+        "bank",
+        18,
+        4163
+      ],
+      [
+        "Fishing Pole",
+        1,
+        "bank",
+        100,
+        42
+      ],
+      [
+        "Scroll: LOWER PING WHOMEVER",
+        1,
+        "bank",
+        100,
+        1135
+      ],
+      [
+        "Skinning Knife",
+        1,
+        "bags",
+        100,
+        47
+      ],
+      [
+        "Elixir of Minor Force",
+        3,
+        "bags",
+        26,
+        467
+      ],
+      [
+        "Crag Boar Rib",
+        7,
+        "bank",
+        11,
+        1761
+      ],
+      [
+        "Roasted Boar Meat",
+        6,
+        "bank",
+        9,
+        2217
+      ],
+      [
+        "Elixir of Minor Force",
+        2,
+        "bank",
+        26,
+        467
+      ],
+      [
+        "Shiny Bauble",
+        1,
+        "bank",
+        50,
+        233
+      ],
+      [
+        "Elixir of Minor Defense",
+        8,
+        "bank",
+        5,
+        1158
+      ],
+      [
+        "Empty Vial",
+        4,
+        "bags",
+        6,
+        6084
+      ],
+      [
+        "Refreshing Spring Water",
+        2,
+        "bags",
+        11,
+        3873
+      ],
+      [
+        "Slitherskin Mackerel",
+        3,
+        "bank",
+        7,
+        313
+      ],
+      [
+        "Earth Totem",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Free Ticket Voucher",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Gnarled Short Staff",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Hearthstone",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Mostly Dry Firewood",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Package for Stormpike",
+        1,
+        "bags",
+        null,
+        0
+      ]
+    ],
+    "fatal": [
+      [
+        "Ragged Leather Bracers",
+        1,
+        "bags",
+        4400,
+        6
+      ],
+      [
+        "Linen Cloth",
+        6,
+        "bags",
+        27,
+        22974
+      ],
+      [
+        "Ruined Leather Scraps",
+        12,
+        "bags",
+        12,
+        3650
+      ],
+      [
+        "Refreshing Spring Water",
+        10,
+        "bags",
+        11,
+        3873
+      ],
+      [
+        "Light Leather",
+        4,
+        "bags",
+        26,
+        8526
+      ],
+      [
+        "Flimsy Chain Pants",
+        1,
+        "bags",
+        100,
+        1
+      ],
+      [
+        "Rusty Hatchet",
+        1,
+        "bags",
+        100,
+        23
+      ],
+      [
+        "Skinning Knife",
+        1,
+        "bags",
+        100,
+        47
+      ],
+      [
+        "Worn Hide Cloak",
+        1,
+        "bags",
+        100,
+        23
+      ],
+      [
+        "Chunk of Boar Meat",
+        3,
+        "bags",
+        30,
+        1539
+      ],
+      [
+        "Crag Boar Rib",
+        3,
+        "bags",
+        11,
+        1761
+      ],
+      [
+        "Tough Jerky",
+        4,
+        "bags",
+        7,
+        420
+      ],
+      [
+        "Flintfire's Shipment",
+        2,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Crate of Candles",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Hearthstone",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Steelgrill's Tools",
+        1,
+        "bags",
+        null,
+        0
+      ]
+    ],
+    "libertty": [
+      [
+        "Rough Arrow",
+        621,
+        "bags",
+        1,
+        76170
+      ],
+      [
+        "Linen Cloth",
+        13,
+        "bags",
+        27,
+        22974
+      ],
+      [
+        "Stringy Wolf Meat",
+        3,
+        "bags",
+        59,
+        912
+      ],
+      [
+        "Copper Ore",
+        2,
+        "bags",
+        69,
+        14855
+      ],
+      [
+        "Refreshing Spring Water",
+        10,
+        "bags",
+        11,
+        3873
+      ],
+      [
+        "Brilliant Smallfish",
+        18,
+        "bags",
+        6,
+        702
+      ],
+      [
+        "Fishing Pole",
+        1,
+        "bags",
+        100,
+        42
+      ],
+      [
+        "Mining Pick",
+        1,
+        "bags",
+        100,
+        74
+      ],
+      [
+        "Rough Stone",
+        2,
+        "bags",
+        9,
+        7409
+      ],
+      [
+        "Light Armor Kit",
+        1,
+        "bags",
+        15,
+        2733
+      ],
+      [
+        "Half-Eaten Fish",
+        3,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Book Bag",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Hearthstone",
+        1,
+        "bags",
+        null,
+        0
+      ]
+    ],
+    "corwyn": [
+      [
+        "Ruined Leather Scraps",
+        15,
+        "bags",
+        12,
+        3650
+      ],
+      [
+        "Light Leather",
+        5,
+        "bags",
+        26,
+        8526
+      ],
+      [
+        "Mining Pick",
+        1,
+        "bags",
+        100,
+        74
+      ],
+      [
+        "Skinning Knife",
+        1,
+        "bags",
+        100,
+        47
+      ],
+      [
+        "Refreshing Spring Water",
+        3,
+        "bags",
+        11,
+        3873
+      ],
+      [
+        "Linen Cloth",
+        1,
+        "bags",
+        27,
+        22974
+      ],
+      [
+        "Tough Hunk of Bread",
+        4,
+        "bags",
+        5,
+        52
+      ],
+      [
+        "Bolt of Linen Cloth",
+        11,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Apprentice's Mining Pack",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Apprentice's Skinning Satchel",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Crate of Candles",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Hearthstone",
+        1,
+        "bags",
+        null,
+        0
+      ]
+    ],
+    "redstone": [
+      [
+        "Shadowgem",
+        3,
+        "bank",
+        267,
+        402
+      ],
+      [
+        "Coarse Blasting Powder",
+        2,
+        "bank",
+        349,
+        538
+      ],
+      [
+        "Crawler Meat",
+        6,
+        "bank",
+        97,
+        826
+      ],
+      [
+        "Copper Chain Pants",
+        5,
+        "bank",
+        104,
+        615
+      ],
+      [
+        "Tigerseye",
+        3,
+        "bank",
+        150,
+        229
+      ],
+      [
+        "Severing Axe of Magic",
+        1,
+        "bank",
+        298,
+        210
+      ],
+      [
+        "Clam Meat",
+        8,
+        "bank",
+        30,
+        1360
+      ],
+      [
+        "Schematic: EZ-Thro Dynamite",
+        1,
+        "bags",
+        200,
+        106
+      ],
+      [
+        "Pyrite",
+        1,
+        "bank",
+        195,
+        2314
+      ],
+      [
+        "Crawler Claw",
+        8,
+        "bank",
+        22,
+        1158
+      ],
+      [
+        "Light Armor Kit",
+        10,
+        "bank",
+        15,
+        2733
+      ],
+      [
+        "Rough Stone",
+        13,
+        "bank",
+        9,
+        7409
+      ],
+      [
+        "Light Feather",
+        6,
+        "bank",
+        19,
+        2657
+      ],
+      [
+        "Silverleaf",
+        4,
+        "bags",
+        15,
+        6493
+      ],
+      [
+        "Malachite",
+        2,
+        "bank",
+        16,
+        620
+      ],
+      [
+        "Small Spider Leg",
+        3,
+        "bank",
+        5,
+        911
+      ],
+      [
+        "Hearthstone",
+        1,
+        "bank",
+        null,
+        0
+      ]
+    ]
+  }
+};
+/* END GENERATED SCAN */
+const T="https://www.warcrafttavern.com/forever/guides/";
+const chars=[
+  {id:"leif",sk:[90,65],name:"Leif Ericsky",short:"Leif",lvl:15,cls:"Druid",k:"druid",zone:"Darkshore",rl:["heal","Restoration","Second healer, bear if needed","Feral, then one respec for dungeons","restoration-druid","druid-leveling"],p:[["Skinning","g"],["Leatherworking","c"]]},
+  {id:"murus",sk:[78,65],name:"Murus Ularis",short:"Murus",lvl:13,cls:"Paladin",k:"paladin",zone:"Ironforge",rl:["tank","Protection","Main tank","Protection, or Retribution for speed","protection-paladin","paladin-leveling"],p:[["Mining","g"],["Blacksmithing","c"]]},
+  {id:"rum",sk:[75,75],name:"Rum Weasley",short:"Rum",lvl:9,cls:"Shaman",k:"shaman",zone:"Stormwind City",rl:["tank","Enhancement","Second tank: shield + Rockbiter","Enhancement, no respec needed","enhancement-shaman","shaman-leveling"],p:[["Herbalism","g"],["Alchemy","c",false,"Learned · replaced Skinning"]]},
+  {id:"fatal",sk:[73,0],name:"Fatal Segfault",short:"Fatal",lvl:6,cls:"Warlock",k:"warlock",zone:"Dun Morogh",rl:["dps","Affliction","Ranged DPS","Affliction","affliction-warlock","warlock-leveling"],p:[["Skinning","g"],["Enchanting","c",true]]},
+  {id:"libertty",sk:[4,0],name:"Libertty Bibertty",short:"Libertty",lvl:6,cls:"Hunter",k:"hunter",zone:"Elwynn Forest",rl:["dps","Beast Mastery","Ranged DPS","Beast Mastery","beast-mastery-hunter","hunter-leveling"],p:[["Mining","g"],["Engineering","c",true]]},
+  {id:"corwyn",name:"Corwyn Shadowalker",short:"Corwyn",lvl:6,cls:"Priest",k:"priest",zone:"Ironforge",rl:["heal","Holy","Main healer","Shadow, then one respec for dungeons","holy-priest","priest-leveling"],p:[["Mining","g",true,"Has Skinning 15 instead"],["Tailoring","c",true]]},
+  {id:"redstone",name:"Redstone Creditunion",short:"Redstone",sub:"Bank alt",lvl:1,cls:"Mage",k:"mage",zone:"Stormwind City",rl:["dps","Frost","Ranged DPS and portals","Frost","frost-mage","mage-leveling"],p:[["Herbalism","g",true,"Optional"],null]},
+  {id:"warrior",name:"Keg Kenobi",short:"Keg Kenobi",lvl:1,cls:"Warrior",k:"warrior",zone:"",rl:["dps","Fury","Melee DPS, backup tank","Arms, then one respec at 60","fury-warrior","warrior-leveling"],p:[["Mining","g",true],["Skinning","g",true]]},
+  {id:"rogue",name:"Sneaky Gnomes",short:"Sneaky Gnomes",lvl:1,cls:"Rogue",k:"rogue",zone:"",rl:["dps","Combat","Melee DPS","Combat","combat-rogue","rogue-leveling"],p:[["Herbalism","g",true],["Skinning","g",true]]}
+];
+let store={};
+try{store=JSON.parse(localStorage.getItem("roster")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("roster",JSON.stringify(store))}catch(e){}};
+const lvlOf=c=>{const v=parseInt(store[c.id+"-lvl"],10);return Number.isFinite(v)?v:c.lvl};
+const skillOf=(c,i)=>{const v=parseInt(store[c.id+"-p"+i],10);return Number.isFinite(v)?v:(c.sk&&c.sk[i])||0};
+const craftIdx=c=>c.p.findIndex(p=>p&&p[1]==="c");
+const pct=(v,max)=>Math.max(0,Math.min(100,v/max*100));
+const roleName={tank:"Tank",heal:"Healer",dps:"DPS"};
+function applyRoster(){
+  if(!GENERATED.chars) return;
+  chars.forEach(c=>{
+    const s=GENERATED.chars[c.id]; if(!s) return;
+    if(s.lvl!=null) c.lvl=s.lvl;
+    if(s.zone!=null) c.zone=s.zone;
+    if(s.sk){c.sk=(c.sk||[0,0]).slice(); s.sk.forEach((v,i)=>{if(v!=null) c.sk[i]=v})}
+    if(s.repl) c.p.forEach(p=>{if(!p||s.repl[p[0]]==null) return; p[2]=s.repl[p[0]]?p[2]:false; p[3]=s.repl[p[0]]||""});
+  });
+  const bar=document.querySelector(".scanbar span");
+  if(bar&&GENERATED.label) bar.textContent="Levels, zones and skills were last filled in from the addon scan on "+GENERATED.label+". Anything you type here overrides them.";
+  const sk=document.querySelector("#skills .sh p");
+  if(sk&&GENERATED.label) sk.textContent="Read from the Altoholic scan on "+GENERATED.label+". "+(GENERATED.missingNote||"");
+  const bagsP=document.querySelector("#bags .sh p");
+  if(bagsP&&GENERATED.label) bagsP.textContent="Who has an empty bag slot, from the Bagnon save on "+GENERATED.label+". Send new bags to the gold rows first.";
+  const scanned=document.getElementById("mkScanned");
+  if(scanned&&GENERATED.scannedCount!=null) scanned.innerHTML=GENERATED.scannedCount+"<small> / "+chars.length+"</small>";
+  const learned=new Set(Object.values(GENERATED.chars).flatMap(c=>(c.profs||[]).map(p=>p[0])));
+  document.querySelectorAll("#mats h3").forEach(h=>{
+    const name=h.childNodes[0]&&h.childNodes[0].textContent.trim();
+    if(learned.has(name)) h.querySelector(".todo")?.remove();
+  });
+}
+applyRoster();
+
+/* Roster */
+const tb=document.getElementById("rows");
+chars.forEach(c=>{
+  const tr=document.createElement("tr");
+  const [r,spec,desc,lev,g1,g2]=c.rl;
+  const prof=i=>{const p=c.p[i]; if(!p) return '<td><span class="none">None planned</span></td>';
+    const [n,t,planned,repl]=p;const key=c.id+"-p"+i;
+    const bar=t==="c"?`<span class="mini" data-bar="${key}"><i></i></span>`:"";
+    return `<td><div class="prof${planned?" planned":""}"><span class="tag ${t}">${n}</span>${planned?'<span class="todo">Not learned</span>':''}${repl?`<span class="repl">${repl}</span>`:''}<label class="skill">Skill <input class="num" id="${key}" type="number" min="0" max="300" inputmode="numeric" value="${skillOf(c,i)}"></label>${bar}</div></td>`};
+  tr.innerHTML=`<td><span class="name ${c.k}">${c.name}</span><span class="role"><span class="${c.k}">${c.cls}</span>${c.sub?` · ${c.sub}`:""}</span></td>
+    <td><div class="lvlc"><input class="num" id="${c.id}-lvl" type="number" min="1" max="60" inputmode="numeric" aria-label="${c.name} level" value="${lvlOf(c)}"><span class="mini" data-bar="${c.id}-lvl"><i></i></span></div></td>
+    <td><div class="rolec"><span class="rchip ${r}">${roleName[r]}</span><b>${spec}</b><span class="rdesc">${desc}</span><span class="rdesc">Level as ${lev}</span><span class="glinks"><a href="${T}${g1}/" target="_blank" rel="noopener">${spec} guide ↗</a><a href="${T}${g2}/" target="_blank" rel="noopener">Leveling ↗</a></span></div></td>
+    <td>${c.zone||'<span class="none">—</span>'}</td>${prof(0)}${prof(1)}
+    <td><div class="note" id="${c.id}-note" contenteditable="true" spellcheck="true" role="textbox" aria-label="${c.name} notes"></div></td>`;
+  tb.appendChild(tr);
+  const note=tr.querySelector(".note"); note.textContent=store[c.id+"-note"]||"";
+  note.addEventListener("input",()=>{store[c.id+"-note"]=note.textContent;save()});
+  tr.querySelectorAll("input").forEach(inp=>inp.addEventListener("input",()=>{store[inp.id]=inp.value;save();refresh()}));
+});
+function bars(){
+  chars.forEach(c=>{
+    const lb=document.querySelector(`[data-bar="${c.id}-lvl"]`); const l=lvlOf(c);
+    lb.firstElementChild.style.width=pct(l,25)+"%"; lb.classList.toggle("done",l>=25);
+    const ci=craftIdx(c); if(ci>=0){const cb=document.querySelector(`[data-bar="${c.id}-p${ci}"]`);const s=skillOf(c,ci);cb.firstElementChild.style.width=pct(s,150)+"%";cb.classList.toggle("done",s>=150)}
+  });
+}
+
+/* Next up */
+function nextUp(){
+  const list=[...chars].sort((a,b)=>lvlOf(b)-lvlOf(a));
+  document.getElementById("nextUp").innerHTML=list.map(c=>{
+    const l=lvlOf(c), ci=craftIdx(c);
+    const items=[];
+    items.push(l>=25?`<li class="done"><div class="row"><span>Level 25 done</span><span>✓</span></div></li>`
+      :`<li><div class="row"><span>Reach level 25</span><span>${25-l} to go</span></div><span class="mini"><i style="width:${pct(l,25)}%"></i></span></li>`);
+    if(ci>=0){const s=skillOf(c,ci), n=c.p[ci][0];
+      items.push(s>=150?`<li class="done"><div class="row"><span>${n} 150 done</span><span>✓</span></div></li>`
+        :`<li><div class="row"><span>${n} to 150</span><span>${s} / 150</span></div><span class="mini"><i style="width:${pct(s,150)}%"></i></span></li>`)}
+    const train=c.p.filter(p=>p&&p[2]&&p[3]!=="Optional").map(p=>p[0]);
+    return `<div class="nx" style="--cc:var(--${c.k})"><header><b>${c.short}</b><span>Lv ${l} ${c.cls}</span></header><ul>${items.join("")}</ul>${train.length?`<span class="train">Train ${train.join(" and ")}</span>`:""}</div>`}).join("");
+}
+
+/* Legacy tracker */
+const classSteps=[25,45,60], craftSteps=[150,225,300];
+const all=[];
+function derived(key){
+  const [, kind, name, step]=key.split("|");
+  if(kind==="c"){const c=chars.find(x=>x.cls===name);return c&&lvlOf(c)>=+step}
+  const c=chars.find(x=>x.p.some(p=>p&&p[1]==="c"&&p[0]===name)); if(!c) return false;
+  return skillOf(c,craftIdx(c))>=+step;
+}
+function buildLegacy(id,list,steps,kind){
+  const body=document.getElementById(id);
+  list.forEach(c=>{
+    const n=kind==="c"?c.cls:c.p[craftIdx(c)][0];
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td><span class="${c.k}" style="font-weight:700">${n}</span><span class="who2">${c.short}</span></td>`+
+      steps.map((s,i)=>{const key=`lg|${kind}|${n}|${s}`;all.push(key);
+        return `<td class="ck${i===0?" target-col":""}"><input type="checkbox" id="${key}" aria-label="${n} ${s}"></td>`}).join("");
+    body.appendChild(tr);
+  });
+  body.querySelectorAll("input").forEach(cb=>cb.addEventListener("change",()=>{store[cb.id]=cb.checked;save();refresh()}));
+}
+buildLegacy("lclass",chars,classSteps,"c");
+buildLegacy("lcraft",chars.filter(c=>craftIdx(c)>=0),craftSteps,"p");
+const MAX=65, rewards=[[15,"Toy"],[25,"Pet"],[40,"Tabard"],[55,"Mount"]];
+const ticks=document.getElementById("ticks");
+rewards.forEach(([n,label])=>{const s=document.createElement("span");s.style.left=(n/MAX*100)+"%";s.dataset.n=n;s.innerHTML=`${n}<br>${label}`;ticks.appendChild(s)});
+document.getElementById("goalMark").style.left=(15/MAX*100)+"%";
+const isOn=k=>!!store[k]||derived(k);
+function legacy(){
+  all.forEach(k=>{const cb=document.getElementById(k);const d=derived(k);cb.checked=isOn(k);cb.disabled=d;cb.title=d?"Ticked from the roster":""});
+  const n=all.filter(isOn).length;
+  document.getElementById("score").innerHTML=`${n}<small> / 15 goal</small>`;
+  document.getElementById("fill").style.width=Math.min(100,n/MAX*100)+"%";
+  ticks.querySelectorAll("span").forEach(s=>s.classList.toggle("hit",n>=+s.dataset.n));
+}
+
+/* Legacy talents */
+const LT={
+ Professions:[
+  [["wo","Working Overtime",5,"+4% chance per rank to get a skill-up from any tradeskill, gathering included.","top","Cuts the mats you burn getting crafts to 150. Take it first on every crafter."],
+   ["bh","Bountiful Harvest",5,"20% more Scarce materials from Mining, Herbalism and Skinning.","top","Scarce mats are what sell. Your best gold talent."]],
+  [["bart","Bartering",2,"Vendor item prices are 5% lower.","skip","No longer discounts training or repairs, so it saves very little."],
+   ["pb","Performance Bonus",3,"5% chance for double Merchant's Favor when you turn in a crate.","ok","Only worth it once you're turning in Waylaid Crates often.","bh"]],
+  [["mc","Master Chef",5,"10% chance for cooking recipes to make an extra result.","skip","Only if cooking becomes your thing."],
+   ["ds","Dedicated Study",1,"+1 skill in your lowest tradeskill. At 300 in everything, gives 2–4 random Elemental Essence.","ok","Cheap, but you need Bartering first.","bart"],
+   ["lure","Luremaster",2,"25% chance for an extra fish while a Lure is active.","skip","Only for fishing."]],
+  [["h1","Hidden perk",0,"","hidden",""]]
+ ],
+ Adventure:[
+  [["wr","Well Rested",5,"Rested XP builds 4% faster and the rested cap is 4% higher.","ok","Nice with lots of alts that sit at inns between sessions."],
+   ["thrill","Thrill of Adventure",5,"Each kill restores 1% max health and mana over 10 sec. Not in dungeons, raids or battlegrounds.","top","Less eating and drinking between pulls while leveling."]],
+  [["ha","High Alert",2,"Detect stealth as if you were 1 level higher. Not in battlegrounds.","skip","Rarely matters while leveling."],
+   ["tal","Talented",5,"Talent points start at level 9 instead of 10.","ok","Small boost. Needs Well Rested maxed.","wr"],
+   ["fg","Field Guide",3,"Camp cooldown is 8% shorter.","top","Mostly here to unlock Frequent Flier."],
+   ["fm","Field Medicine",2,"Recently Bandaged lasts 5 sec less. Not in dungeons, raids or battlegrounds.","ok","Handy if you bandage a lot."]],
+  [["ff","Frequent Flier",1,"Flight paths cost 50% less and fly 20% faster.","top","Big savings while gold is tight. Needs Field Guide maxed.","fg"]],
+  [["h2","Hidden perk",0,"","hidden",""]]
+ ],
+ Resourcefulness:[
+  [["gour","Gourmand",3,"Food buffs last 33% longer.","ok","Fine filler later on."],
+   ["qd","The Quick and the Dead",2,"+5% speed while dead, and helpful spells are free for 1 min after you resurrect.","role","Needed to reach Reagent Economy."],
+   ["rein","Reinforce",5,"8% less durability loss when you die.","ok","Saves a little on repairs."]],
+  [["fgh","For Great Honor",5,"+2% Honor gained.","skip","PvP only."],
+   ["perm","Permanence",2,"Long class buffs and camp rest bonuses last 50% longer.","ok","Good for groups. Needs Gourmand maxed.","gour"],
+   ["dip","Diplomat",5,"+2% Reputation gained.","skip","Worth it later when grinding reputation."]],
+  [["re","Reagent Economy",1,"Class abilities no longer need vendor reagents.","role","Free teleports and portals for Redstone. Needs The Quick and the Dead maxed.","qd"]],
+  [["h3","Hidden perk",0,"","hidden",""]]
+ ]
+};
+const LT_MAX=16;
+const ltNodes={}; Object.entries(LT).forEach(([tree,tiers])=>tiers.forEach((row,ti)=>row.forEach(n=>{ltNodes[n[0]]={id:n[0],name:n[1],max:n[2],fx:n[3],rec:n[4],why:n[5],req:n[6]||"",tree,tier:ti+1}})));
+const PRESETS={crafter:{wo:5,bh:5,fg:3,ff:1,thrill:2},gatherer:{bh:5,wo:2,thrill:5,fg:3,ff:1},redstone:{qd:2,re:1,fg:3,ff:1,thrill:5,wr:4},clear:{}};
+let ltBuild={}; try{ltBuild=JSON.parse(JSON.stringify(store["lt-build"]||{}))}catch(e){}
+let ltTab=store["lt-tab"]||"Professions", ltSel=store["lt-sel"]||"wo";
+const ltSpent=()=>Object.values(ltBuild).reduce((a,b)=>a+b,0);
+const ltUnlocked=n=>!n.req||(ltBuild[n.req]||0)>=ltNodes[n.req].max;
+const recLabel={top:"Take first",role:"For certain characters",ok:"Situational",skip:"Skip for now"};
+function ltSave(){store["lt-build"]=ltBuild;store["lt-tab"]=ltTab;store["lt-sel"]=ltSel;save()}
+function ltRender(){
+  const tabs=document.getElementById("ltTabs");
+  tabs.innerHTML=Object.keys(LT).map(t=>{const pts=Object.values(ltNodes).filter(n=>n.tree===t).reduce((a,n)=>a+(ltBuild[n.id]||0),0);
+    return `<button role="tab" aria-selected="${t===ltTab}" data-t="${t}">${t}${pts?` · ${pts}`:""}</button>`}).join("");
+  tabs.querySelectorAll("button").forEach(b=>b.onclick=()=>{ltTab=b.dataset.t;ltSel=LT[ltTab][0][0][0];ltSave();ltRender()});
+  const tree=document.getElementById("ltTree");
+  tree.innerHTML=LT[ltTab].map((row,i)=>`<div class="tier"><span>Tier ${i+1}</span><div class="nodes">${row.map(raw=>{const n=ltNodes[raw[0]];
+    if(n.rec==="hidden") return `<div class="node hidden"><b>Hidden perk</b><small>Not revealed yet</small></div>`;
+    const r=ltBuild[n.id]||0;const cls=["node","r-"+n.rec];if(r)cls.push("has");if(n.id===ltSel)cls.push("sel");if(!ltUnlocked(n))cls.push("locked");
+    return `<button class="${cls.join(" ")}" data-id="${n.id}" aria-pressed="${n.id===ltSel}"><span class="rec"></span><b>${n.name}</b><span class="pips">${Array.from({length:n.max},(_,k)=>`<i class="${k<r?"on":""}"></i>`).join("")}</span>${n.req?`<small>Needs ${ltNodes[n.req].name}</small>`:""}</button>`}).join("")}</div></div>`).join("");
+  tree.querySelectorAll(".node[data-id]").forEach(b=>b.onclick=()=>{ltSel=b.dataset.id;ltSave();ltRender()});
+  document.getElementById("ltSpent").textContent=ltSpent();
+  const n=ltNodes[ltSel]; const d=document.getElementById("ltDetail");
+  if(!n||n.tree!==ltTab||n.rec==="hidden"){d.hidden=true;return} d.hidden=false;
+  const r=ltBuild[n.id]||0, left=LT_MAX-ltSpent(), un=ltUnlocked(n);
+  d.className="detail r-"+n.rec;
+  d.innerHTML=`<h3>${n.name}</h3><div class="meta">${n.tree} · Tier ${n.tier} · ${n.max} rank${n.max>1?"s":""} · ${recLabel[n.rec]}</div><p>${n.fx}</p><p class="why">${n.why}</p>
+    ${un?"":`<div class="warn">Max ${ltNodes[n.req].name} first.</div>`}
+    <div class="steps"><button class="step" id="ltMinus" aria-label="Remove a rank"${r?"":" disabled"}>−</button><output>${r} / ${n.max}</output><button class="step" id="ltPlus" aria-label="Add a rank"${r<n.max&&left>0&&un?"":" disabled"}>+</button>${left<=0&&r<n.max?'<span class="warn">All 16 points spent.</span>':""}</div>`;
+  document.getElementById("ltPlus").onclick=()=>{ltBuild[n.id]=r+1;ltSave();ltRender()};
+  document.getElementById("ltMinus").onclick=()=>{
+    ltBuild[n.id]=r-1; if(!ltBuild[n.id]) delete ltBuild[n.id];
+    Object.values(ltNodes).forEach(m=>{if(m.req===n.id&&ltBuild[m.id]&&(ltBuild[n.id]||0)<n.max) delete ltBuild[m.id]});
+    ltSave();ltRender()};
+}
+document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{ltBuild={...PRESETS[b.dataset.preset]};ltSave();ltRender()});
+
+/* Addons */
+const ADDONS={
+ addonGet:[
+  ["auctionator","Auctionator","ok","Prices in every tooltip and one-click posting. Tells you if a stack is worth the postage."],
+  ["baganator","Baganator","ok","Better bags, plus item counts across all nine characters."],
+  ["questie","Questie","ok","Quest givers, objectives and turn-ins on your map."],
+  ["leatrix","Leatrix Plus + Leatrix Maps","ok","Quality-of-life toggles, revealed maps and flight points."],
+  ["restedxp","RestedXP Guide","ok","Step-by-step leveling route, free to about level 20 for Alliance."],
+  ["pawn","Pawn","ok","Flags upgrades so you don't compare stats on nine characters by hand."],
+  ["artisan","ForeverArtisan","chk","Profession shopping lists for getting crafts to 150. Forever support less proven."]
+ ],
+ addonHave:[
+  ["att","ALL THE THINGS",null,"Collection tracker. Keep it."],
+  ["titan","Titan Panel",null,"Info bar. Keep it."],
+  ["rpj","RP Journal",null,"Keep it."],
+  ["healbot","HealBot Continued","chk","Has a Forever file, but some features are reported broken. Watch it on Corwyn and Leif."],
+  ["rare","RareScanner","chk","The warning icon likely means a non-Forever version. Look for a Forever build in its Files tab."]
+ ],
+ addonSkip:[
+  [null,"TradeSkillMaster","no","No Forever version. Don't install the Classic file. Auctionator covers it."],
+  [null,"WeakAuras","no","No official Forever version yet."],
+  [null,"GatherMate2","no","Beta file only. Use the built-in minimap tracking for now."],
+  [null,"AdiBags","no","No Forever version. Baganator replaces it."]
+ ]
+};
+const stLabel={ok:"Ready",chk:"Check",no:"Not working"};
+Object.entries(ADDONS).forEach(([box,list])=>{
+  const el=document.getElementById(box);
+  list.forEach(([id,name,st,desc])=>{
+    const row=document.createElement("div");
+    const tag=st?`<span class="st ${st}">${stLabel[st]}</span>`:"";
+    if(id&&box==="addonGet"){
+      const key="ad-"+id;
+      row.className="addon";
+      row.innerHTML=`<input type="checkbox" id="${key}"${store[key]?" checked":""}><label for="${key}">${name}${tag}</label><p>${desc}</p>`;
+      row.querySelector("input").addEventListener("change",e=>{store[key]=e.target.checked;save()});
+    }else{
+      row.className="addon noinput";
+      row.innerHTML=`<b>${name}${tag}</b><p>${desc}</p>`;
+    }
+    el.appendChild(row);
+  });
+});
+
+
+
+/* Profession leveling */
+const WH="https://www.wowhead.com/forever/profession-leveling-guides/";
+const PL={
+ Leatherworking:{who:"leif",k:"druid",slug:"leatherworking",steps:[
+  [1,30,"Light Leather",32,[[96,"Ruined Leather Scraps"]]],
+  [30,45,"Light Armor Kit",20,[[20,"Light Leather"]]],
+  [45,55,"Cured Light Hide",10,[[10,"Light Hide"],[10,"Salt"]]],
+  [55,85,"Embossed Leather Gloves",35,[[105,"Light Leather"],[70,"Coarse Thread"]]],
+  [85,100,"Fine Leather Belt",20,[[120,"Light Leather"],[40,"Coarse Thread"]]],
+  [100,115,"Dark Leather Pants",15,[[180,"Medium Leather"],[15,"Gray Dye"],[15,"Fine Thread"]]],
+  [115,118,"Gray Leather Boots",7,[[28,"Medium Leather"],[14,"Fine Thread"],[7,"Gray Dye"]]],
+  [118,125,"Dark Leather Belt",7,[[7,"Fine Leather Belt"],[7,"Cured Medium Hide"],[14,"Fine Thread"],[7,"Gray Dye"]]],
+  [125,135,"Cured Heavy Hide",10,[[10,"Heavy Hide"],[30,"Salt"]]],
+  [135,143,"Dark Leather Belt",18,[[18,"Fine Leather Belt"],[18,"Cured Medium Hide"],[36,"Fine Thread"],[18,"Gray Dye"]]],
+  [143,145,"Cured Heavy Hide",12,[[12,"Heavy Hide"],[36,"Salt"]]],
+  [145,155,"Toughened Leather Gloves",25,[[100,"Medium Leather"],[50,"Cured Medium Hide"],[50,"Elixir of Lesser Defense"],[50,"Spider's Silk"],[50,"Fine Thread"]]]
+ ],mid:["Fine Leather Belt","Cured Medium Hide"],tips:[
+  "Leif skins as he levels. Fatal, Keg Kenobi and Sneaky Gnomes send spare leather.",
+  "Make extra Fine Leather Belts in the 85–100 step. Dark Leather Belt needs 25 of them later.",
+  "Medium Leather and Heavy Hide come from level 20–35 beasts.",
+  "The last step needs 50 Elixirs of Lesser Defense. Check whether Rum can brew them before buying.",
+  "Thread, Salt and Gray Dye are vendor items."]},
+ Blacksmithing:{who:"murus",k:"paladin",slug:"blacksmithing",steps:[
+  [1,30,"Rough Sharpening Stone",32,[[32,"Rough Stone"]]],
+  [30,65,"Rough Grinding Stone",42,[[84,"Rough Stone"]]],
+  [65,75,"Copper Chain Belt",10,[[60,"Copper Bar"]]],
+  [75,80,"Silver Skeleton Key",5,[[5,"Silver Bar"],[5,"Rough Grinding Stone"]]],
+  [80,90,"Rough Bronze Leggings",10,[[60,"Bronze Bar"]]],
+  [90,100,"Runed Copper Belt",13,[[130,"Copper Bar"]]],
+  [100,105,"Heavy Sharpening Stone",5,[[5,"Heavy Stone"]]],
+  [105,110,"Runed Copper Belt",10,[[100,"Copper Bar"]]],
+  [110,125,"Rough Bronze Leggings",15,[[90,"Bronze Bar"]]],
+  [125,129,"Iron Buckle",6,[[6,"Iron Bar"]]],
+  [129,140,"Bronze Warhammer",11,[[88,"Bronze Bar"],[11,"Strong Flux"],[11,"Medium Leather"]]],
+  [140,147,"Patterned Bronze Bracers",17,[[85,"Bronze Bar"],[34,"Coarse Grinding Stone"]]],
+  [147,155,"Green Iron Bracers",8,[[48,"Iron Bar"],[8,"Green Dye"]]]
+ ],mid:["Rough Grinding Stone"],tips:[
+  "Ore-hungry. Murus mines, and Corwyn, Libertty and Keg Kenobi send ore.",
+  "Keep 5 Rough Grinding Stones from the 30–65 step for the Silver Skeleton Key.",
+  "Bronze Bar = 1 Copper Bar + 1 Tin Bar at a forge. You need over 320 for this route.",
+  "Silver comes rarely from copper and tin veins. Iron needs level 30+ zones.",
+  "Leif can send the Medium Leather for the warhammers."]},
+ Alchemy:{who:"rum",k:"shaman",slug:"alchemy",steps:[
+  [1,12,"Elixir of Minor Force",11,[[11,"Silverleaf"],[11,"Empty Vial"]]],
+  [12,55,"Elixir of Minor Defense",43,[[43,"Silverleaf"],[43,"Peacebloom"],[43,"Empty Vial"]]],
+  [55,65,"Minor Mana Potion",10,[[10,"Mageroyal"],[10,"Peacebloom"],[10,"Empty Vial"]]],
+  [65,90,"Elixir of Minor Fortitude",26,[[52,"Earthroot"],[26,"Peacebloom"],[26,"Empty Vial"]]],
+  [90,120,"Elixir of Wisdom",30,[[30,"Mageroyal"],[60,"Briarthorn"],[30,"Empty Vial"]]],
+  [120,160,"Lesser Mana Potion",43,[[43,"Mageroyal"],[43,"Stranglekelp"],[43,"Empty Vial"]]]
+ ],mid:[],tips:[
+  "The cheapest route of the six. Rum picks every herb himself.",
+  "Stranglekelp grows underwater along coasts and lakes.",
+  "Empty Vials are a vendor item. Buy them in bulk.",
+  "Sell or use the potions. Minor Mana and Lesser Mana sell to healers and casters."]},
+ Tailoring:{who:"corwyn",k:"priest",slug:"tailoring",steps:[
+  [1,43,"Bolt of Linen Cloth",54,[[108,"Linen Cloth"]]],
+  [43,45,"Brown Linen Vest",2,[[2,"Bolt of Linen Cloth"],[2,"Coarse Thread"]]],
+  [45,70,"Linen Belt",33,[[33,"Bolt of Linen Cloth"],[33,"Coarse Thread"]]],
+  [70,75,"Reinforced Linen Cape",7,[[14,"Bolt of Linen Cloth"],[21,"Coarse Thread"]]],
+  [75,81,"Bolt of Woolen Cloth",12,[[36,"Wool Cloth"]]],
+  [81,100,"Woolen Cape",28,[[28,"Bolt of Woolen Cloth"],[28,"Fine Thread"]]],
+  [100,110,"Bolt of Silk Cloth",10,[[40,"Silk Cloth"]]],
+  [110,125,"Double-stitched Woolen Shoulders",19,[[57,"Bolt of Woolen Cloth"],[38,"Fine Thread"]]],
+  [125,132,"Azure Silk Hood",7,[[14,"Bolt of Silk Cloth"],[14,"Blue Dye"],[7,"Fine Thread"]]],
+  [132,139,"Lesser Wizard's Robe",8,[[16,"Bolt of Silk Cloth"],[16,"Fine Thread"],[16,"Spider's Silk"]]],
+  [139,140,"Formal White Shirt",1,[[3,"Bolt of Silk Cloth"],[2,"Bleach"],[1,"Fine Thread"]]],
+  [140,149,"Bolt of Mageweave",11,[[55,"Mageweave Cloth"]]]
+ ],mid:["Bolt of Linen Cloth","Bolt of Woolen Cloth","Bolt of Silk Cloth"],tips:[
+  "Bags first: Linen Bag is known from skill 1 (3 Bolts of Linen + 3 Coarse Thread).",
+  "Red Linen Bag (8 slots) unlocks at 50: 4 Bolts of Linen, Fine Thread and Red Dye. The pattern sells in Darkshore and Westfall, so Leif can buy it and mail it over.",
+  "Linen Reagent Bag (skill 5, pattern) fills the new reagent slot: 6 Bolts of Linen + 6 Coarse Thread.",
+  "Every character can send cloth. Mail it in full stacks.",
+  "You'll run short of Woolen bolts. The route needs 85 but only makes 12, so turn extra Wool into bolts.",
+  "Silk drops around level 25–35 and Mageweave around 35–45, so higher alts supply the end of the route.",
+  "Thread, Blue Dye and Bleach are vendor items."]},
+ Enchanting:{who:"fatal",k:"warlock",slug:"enchanting",steps:[
+  [1,2,"Runed Copper Rod",1,[[1,"Copper Rod"],[1,"Mote of Magic"]]],
+  [2,20,"Disenchant greens",0,[]],
+  [20,79,"Lesser Magic Wand",59,[[59,"Simple Wood"],[59,"Lesser Magic Essence"]]],
+  [79,90,"Enchant Chest - Minor Absorption",11,[[11,"Lesser Magic Essence"]]],
+  [90,100,"Enchant Bracer - Minor Stamina",10,[[20,"Strange Dust"]]],
+  [100,101,"Runed Silver Rod",1,[[1,"Silver Rod"],[3,"Strange Dust"],[4,"Lesser Magic Essence"],[1,"Shadowgem"]]],
+  [101,110,"Greater Magic Wand",9,[[9,"Simple Wood"],[18,"Lesser Magic Essence"]]],
+  [110,135,"Enchant Cloak - Minor Agility",25,[[25,"Lesser Astral Essence"]]],
+  [135,155,"Enchant Bracer - Lesser Stamina",20,[[20,"Soul Dust"]]]
+ ],mid:[],tips:[
+  "Murus makes the Copper Rod and later the Silver Rod.",
+  "Everyone mails Fatal their unwanted greens to disenchant.",
+  "Lesser Magic Wands are useful. Give them to Corwyn and Redstone for leveling.",
+  "Lesser Astral Essence and Soul Dust come from level 20–30 greens, so your higher characters supply those.",
+  "Simple Wood is a vendor item."]},
+ Engineering:{who:"libertty",k:"hunter",slug:"engineering",steps:[
+  [1,30,"Rough Blasting Powder",32,[[32,"Rough Stone"]]],
+  [30,50,"Handful of Copper Bolts",20,[[20,"Copper Bar"]]],
+  [50,51,"Arclight Spanner",1,[[6,"Copper Bar"]]],
+  [51,75,"Rough Copper Bomb",29,[[29,"Copper Bar"],[29,"Handful of Copper Bolts"],[58,"Rough Blasting Powder"],[29,"Linen Cloth"]]],
+  [75,90,"Coarse Blasting Powder",16,[[16,"Coarse Stone"]]],
+  [90,100,"Coarse Dynamite",15,[[45,"Coarse Blasting Powder"],[15,"Linen Cloth"]]],
+  [100,105,"Silver Contact",5,[[5,"Silver Bar"]]],
+  [105,125,"Bronze Tube",25,[[50,"Bronze Bar"],[25,"Weak Flux"]]],
+  [125,135,"Standard Scope",10,[[10,"Bronze Tube"],[10,"Moss Agate"]]],
+  [135,150,"Whirring Bronze Gizmo",23,[[46,"Bronze Bar"],[23,"Wool Cloth"]]]
+ ],mid:["Rough Blasting Powder","Handful of Copper Bolts","Coarse Blasting Powder","Bronze Tube"],tips:[
+  "Make extra Rough Blasting Powder and Copper Bolts early. The bomb step eats 58 powder and 29 bolts.",
+  "Libertty mines his own ore. He'll share copper and tin with Murus, so plan who gets what.",
+  "Moss Agate is a gem from tin veins.",
+  "Corwyn's spare Linen and Wool cover the cloth."]}
+};
+let plTab=store["pl-tab"]||"Leatherworking";
+function plRender(){
+  const tabs=document.getElementById("plTabs");
+  tabs.innerHTML=Object.entries(PL).map(([n,d])=>`<button role="tab" aria-selected="${n===plTab}" data-p="${n}" style="--cc:var(--${d.k})"><i></i>${n}</button>`).join("");
+  tabs.querySelectorAll("button").forEach(b=>b.onclick=()=>{plTab=b.dataset.p;store["pl-tab"]=plTab;save();plRender()});
+  const d=PL[plTab], c=chars.find(x=>x.id===d.who), ci=craftIdx(c), skill=skillOf(c,ci), learned=!c.p[ci][2];
+  const hereIdx=d.steps.findIndex(s=>skill<s[1]);
+  const steps=d.steps.map((s,i)=>{const [a,b,rcp,n,m]=s;
+    const cls=i<hereIdx||hereIdx<0?"done":i===hereIdx?"here":"";
+    const mats=m.length?m.map(([q,it])=>`${q} ${it}`).join(", "):"Disenchant any green or better item";
+    return `<li class="${cls}"><span class="rng">${a}–${b}</span><span class="rcp">${rcp}${n?`<small>×${n}</small>`:""}${i===hereIdx?'<span class="herelbl">You are here</span>':""}</span><span class="mt">${mats}</span></li>`}).join("");
+  const tot={}; d.steps.filter(s=>s[0]<150).forEach(s=>s[4].forEach(([q,it])=>{tot[it]=(tot[it]||0)+q}));
+  const remaining={}; d.steps.forEach((s,i)=>{if(i>=hereIdx&&hereIdx>=0)s[4].forEach(([q,it])=>{remaining[it]=(remaining[it]||0)+q})});
+  const list=hereIdx<0?{}:hereIdx>0?remaining:tot;
+  const shop=Object.entries(list).sort((a,b)=>d.mid.includes(a[0])-d.mid.includes(b[0])||b[1]-a[1]).map(([it,q])=>`<li class="${d.mid.includes(it)?"mid":""}"><span>${it}${d.mid.includes(it)?" (you make these)":""}</span><em>${q}</em></li>`).join("");
+  document.getElementById("plBody").innerHTML=`
+    <div class="card"><div class="pl-head"><b class="${d.k}">${plTab}</b><span>${c.short} · skill ${skill}${learned?"":" · not learned yet"}</span></div><ol class="pl-steps">${steps}</ol></div>
+    <div class="pl-side">
+      <div class="card"><h3>${hereIdx>0?"Still to gather":"Shopping list to 150"}</h3><ul class="shop">${shop||'<li><span>Nothing left. Nice.</span></li>'}</ul></div>
+      <div class="card"><h3>Tips</h3><ul class="tips">${d.tips.map(t=>`<li>${t}</li>`).join("")}</ul><p class="pl-link"><a href="${WH}${d.slug}" target="_blank" rel="noopener">Full guide on Wowhead ↗</a></p></div>
+    </div>`;
+}
+
+const INV=GENERATED.inv;
+
+/* ===== Addon scan (Nov 12) ===== */
+const fmt=c=>{if(c==null)return"—";c=Math.round(c);const g=Math.floor(c/10000),s=Math.floor(c%10000/100),cp=c%100;
+  return g?`${g}g${s?` ${s}s`:""}`:s?`${s}s${cp?` ${cp}c`:""}`:`${cp}c`};
+document.getElementById("useScan").onclick=()=>{
+  chars.forEach(c=>{delete store[c.id+"-lvl"];delete store[c.id+"-p0"];delete store[c.id+"-p1"];
+    const l=document.getElementById(c.id+"-lvl");if(l)l.value=c.lvl;
+    [0,1].forEach(i=>{const e=document.getElementById(c.id+"-p"+i);if(e)e.value=skillOf(c,i)})});
+  save();refresh()};
+
+const SK=[
+ {id:"murus",profs:[["Blacksmithing","~65",150,"est","c"],["Mining",78,150,"","g"],["Cooking",99,150,"","s"],["Fishing",76,150,"","s"],["First Aid",1,75,"","s"]],
+  rec:[["Blacksmithing",{o:["Copper Chain Belt","Runed Copper Gauntlets","Runed Copper Pants","Gemmed Copper Gauntlets","Heavy Copper Maul"],y:["Copper Chain Pants","Copper Chain Boots","Copper Shortsword"],gr:["Rough Grinding Stone"],gy:["Rough Sharpening Stone","Rough Weightstone","Copper Bracers","Rough Copper Vest"]},4]],
+  flag:"Open the Mining and Cooking windows once so their recipes get recorded."},
+ {id:"leif",profs:[["Leatherworking","~65",150,"est","c"],["Skinning",90,150,"","g"],["Fishing",107,150,"","s"],["Cooking",61,75,"","s"],["First Aid",34,75,"","s"]],
+  rec:[["Leatherworking",{y:["Handstitched Leather Belt","Light Leather Quiver","Small Brown Pouch"],gr:["Handstitched Leather Boots","Handstitched Leather Pants","Handstitched Leather Vest","Handstitched Leather Cloak","Handstitched Leather Bracers","Cured Light Hide"],gy:["Light Armor Kit","Light Leather"]},3]],
+  flag:"No orange recipes left. Visit the trainer for Embossed Leather Gloves and the next tier."},
+ {id:"rum",profs:[["Alchemy",75,75,"","c"],["Herbalism",75,150,"","g"],["Cooking",7,75,"","s"],["Fishing",1,75,"","s"]],
+  rec:[["Alchemy",{o:["Elixir of Lion's Strength","Minor Mana Potion","Minor Troll's Blood Elixir","Elixir of Minor Defense"]},3]],
+  flag:"Alchemy is capped at 75. Train Journeyman Alchemy to keep going."},
+ {id:"fatal",profs:[["Skinning",73,75,"","g"]],rec:[],flag:"Skinning is about to cap at 75, so train Journeyman Skinning. Enchanting isn't learned yet."},
+ {id:"libertty",profs:[["Mining",4,75,"","g"],["Cooking",19,75,"","s"],["Fishing",28,75,"","s"]],
+  rec:[["Mining",{o:["Smelt Copper"]},0],["Cooking",{o:["Charred Wolf Meat","Roasted Boar Meat","Brilliant Smallfish","Herb Baked Egg"]},1]],flag:"Engineering isn't learned yet."},
+ {id:"corwyn",profs:[["Skinning",15,75,"","g"]],rec:[],flag:"The plan is Mining + Tailoring, but he has Skinning. Swap it for Mining when you train Tailoring."},
+ {id:"redstone",profs:[],rec:[],flag:""}
+];
+function applySkills(){
+  if(!GENERATED.chars) return;
+  SK.forEach(s=>{
+    const g=GENERATED.chars[s.id]; if(!g||!g.profs) return;
+    g.profs.forEach(p=>{
+      let row=s.profs.find(x=>x[0]===p[0]);
+      if(!row){s.profs.push(p.slice()); return}
+      if(p[1]){row[1]=p[1]; row[2]=p[2]; row[3]=""; row[4]=p[4]}
+    });
+    if(g.flag) s.flag=g.flag;
+  });
+}
+applySkills();
+const recWord={o:"Orange",y:"Yellow",gr:"Green",gy:"Grey"};
+document.getElementById("skGrid").innerHTML=SK.map(s=>{const c=chars.find(x=>x.id===s.id);
+  const profs=s.profs.length?`<ul class="sk-profs">${s.profs.map(([n,v,max,est,t])=>{const num=typeof v==="number"?v:parseInt(String(v).replace("~",""),10);
+    return `<li><span class="${t==="s"?"sec":""}">${t==="s"?n:`<span class="tag ${t}">${n}</span>`}</span><em class="${est?"est":""}">${v}${est?"":` / ${max}`}${est?" (est.)":""}</em><span class="mini${num>=max?" done":""}"><i style="width:${pct(num,max)}%"></i></span></li>`}).join("")}</ul>`
+    :`<p class="sk-empty">No professions yet.</p>`;
+  const rec=s.rec.map(([n,g,extra])=>`<div class="sk-rec"><h4>${n} recipes</h4>${Object.entries(g).map(([k,list])=>`<div class="chips">${list.map(r=>`<span class="chip ${k}" title="${recWord[k]}">${r}</span>`).join("")}</div>`).join("")}${extra?`<span class="hint">+${extra} WoW: Forever recipe${extra>1?"s":""} the addon can't name</span>`:""}</div>`).join("");
+  return `<div class="card sk" style="--cc:var(--${c.k})"><h3><b>${c.short}</b><small>Lv ${c.lvl} ${c.cls}</small></h3>${profs}${rec}${s.flag?`<p class="sk-flag">${s.flag}</p>`:""}</div>`}).join("");
+
+/* Market */
+const SELL=[
+ ["Pristine Leather",3,"leif",723,1774,"Scarce mat. About 22s for the stack of 3."],
+ ["Frilled Lichen",1,"rum",2237,694,"Unless an alchemy recipe calls for it."],
+ ["Shadowgem",3,"redstone",267,402,""],
+ ["Coarse Blasting Powder",2,"redstone",349,538,""],
+ ["Hunting Buckler",1,"murus",364,173,""],
+ ["Copper Chain Boots",1,"murus",300,25,"Only 25 listed."],
+ ["Severing Axe of Magic",1,"redstone",298,210,""],
+ ["Tigerseye",6,"murus",150,229,"3 each on Murus and Redstone. Hold if Murus's recipes need them."],
+ ["Pyrite",3,"murus",195,2314,"2 on Murus, 1 on Redstone."]];
+const KEEP=[
+ ["Copper Bar",76,"murus",72,"Blacksmithing skill-ups. 76 bars is worth about 55s on the AH."],
+ ["Light Leather",102,"leif",26,"Leatherworking. 80 on Leif, the rest spread across Rum, Corwyn, Fatal and Murus."],
+ ["Linen Cloth",95,"corwyn",27,"Tailoring and First Aid. 34 are waiting in Corwyn's mailbox."],
+ ["Peacebloom & Silverleaf",50,"rum",null,"Rum's herbs, for alchemy once he trains Journeyman."]];
+const SKIP=[
+ ["Elixir of Minor Defense",62,"rum",5,"5c each with 1,158 listed. Vendor them or keep a few."],
+ ["Copper Chain Pants",5,"redstone",104,"About 1s each against 615 listed."],
+ ["Light Armor Kit",31,"leif",15,"15c each."],
+ ["Rough Arrow",621,"libertty",1,"Keep them for Libertty."]];
+const who=id=>{const c=chars.find(x=>x.id===id);return `<span class="${c.k}">${c.short}</span>`};
+document.getElementById("mkSell").innerHTML=SELL.map(([n,q,w,p,l,why])=>`<li><b>${n} ×${q}</b><em>${fmt(p*q)}</em><span class="src">${who(w)} · ${fmt(p)} each · ${l.toLocaleString()} listed${why?`. ${why}`:""}</span></li>`).join("");
+document.getElementById("mkKeep").innerHTML=KEEP.map(([n,q,w,p,why])=>`<li><b>${n} ×${q}</b><em>${p?fmt(p)+" ea":""}</em><span class="src">${who(w)} · ${why}</span></li>`).join("");
+document.getElementById("mkSkip").innerHTML=SKIP.map(([n,q,w,p,why])=>`<li><b>${n} ×${q}</b><em>${fmt(p)} ea</em><span class="src">${who(w)} · ${why}</span></li>`).join("");
+const GOLD=GENERATED.gold;
+document.getElementById("mkGold").innerHTML=GOLD.map(([id,c])=>`<li><span>${who(id)}</span><em>${fmt(c)}</em></li>`).join("");
+const PRICES=[
+ ["Herbs & vials",[["Peacebloom",30,3094],["Silverleaf",15,6493],["Earthroot",37,2081],["Mageroyal",50,7323],["Bruiseweed",70,2306],["Briarthorn",153,2714],["Stranglekelp",224,2118],["Swiftthistle",299,1400],["Frilled Lichen",2237,694],["Empty Vial",6,6084],["Leaded Vial",59,2634]],"Every herb Rum's route to 150 needs costs under 2s 25c."],
+ ["Ore, bars & stone",[["Copper Ore",69,14855],["Copper Bar",72,7097],["Tin Ore",200,2360],["Tin Bar",203,2404],["Bronze Bar",175,4191],["Silver Ore",564,1266],["Silver Bar",405,1220],["Rough Stone",9,7409],["Coarse Stone",89,4259],["Pyrite",195,2314]],"Bronze Bars cost less than Tin Bars. Buy Bronze outright for Murus's 320+ bar route."],
+ ["Leather & thread",[["Ruined Leather Scraps",12,3650],["Light Leather",26,8526],["Light Hide",150,596],["Medium Leather",97,6983],["Medium Hide",330,423],["Pristine Leather",723,1774],["Salt",58,778],["Coarse Thread",10,6120],["Fine Thread",103,3093]],"Leif's route to 100 uses about 245 Light Leather, roughly 64s at these prices."],
+ ["Cloth",[["Linen Cloth",27,22974],["Bolt of Linen",54,1598],["Wool Cloth",122,3351],["Bolt of Woolen Cloth",396,726]],"A Bolt of Linen sells for exactly 2 Linen, so bolting doesn't add value. Bolting Wool does."],
+ ["Enchanting",[["Strange Dust",80,5023],["Lesser Magic Essence",114,2697],["Small Glimmering Shard",372,908]],"Fatal's 20–79 step needs 59 Lesser Magic Essence, about 67s if bought."],
+ ["Potions & elixirs",[["Minor Healing Potion",8,959],["Elixir of Minor Defense",5,1158],["Lesser Healing Potion",28,635],["Minor Mana Potion",29,1169],["Elixir of Lion's Strength",58,539],["Elixir of Minor Agility",389,594]],"Most sell for less than their herbs. Elixir of Minor Agility is the exception."]];
+const MINE=new Set(Object.values(INV).flat().map(r=>r[0]));
+document.getElementById("mkPrices").innerHTML=PRICES.map(([g,list,tip])=>`<div class="sheet ptab"><table><thead><tr><th>${g}</th><th class="r">Lowest</th><th class="r">Listed</th></tr></thead><tbody>${list.map(([n,p,a])=>`<tr class="${MINE.has(n)?"mine":""}"><td>${n}</td><td class="r">${fmt(p)}</td><td class="r mut">${a.toLocaleString()}</td></tr>`).join("")}</tbody></table><p class="ptip">${tip}</p></div>`).join("");
+let invTab=store["inv-tab"]||"leif";
+function invRender(){
+  const ids=Object.keys(INV);
+  if(!INV[invTab])invTab=ids[0];
+  document.getElementById("invTabs").innerHTML=chars.filter(c=>INV[c.id]).map(c=>`<button role="tab" aria-selected="${c.id===invTab}" data-c="${c.id}" style="--cc:var(--${c.k})"><i></i>${c.short}</button>`).join("");
+  document.querySelectorAll("#invTabs button").forEach(b=>b.onclick=()=>{invTab=b.dataset.c;store["inv-tab"]=invTab;save();invRender()});
+  const rows=INV[invTab];let tot=0;
+  document.getElementById("invBody").innerHTML=rows.map(([n,q,loc,p])=>{const t=p==null?null:p*q;if(t)tot+=t;
+    return `<tr class="${p==null?"np":""}"><td>${n}</td><td class="r">${q}</td><td><span class="loc">${loc}</span></td><td class="r">${fmt(p)}</td><td class="r">${fmt(t)}</td></tr>`}).join("");
+  document.getElementById("invFoot").innerHTML=`<tr><td colspan="4">Total at AH prices</td><td class="r">${fmt(tot)}</td></tr>`;
+}
+invRender();
+
+/* Bags (Bagnon scan, Nov 12) */
+const BAGS=GENERATED.bags;
+(function(){
+  const slot=(b,prof)=>{if(!b||!b[0])return `<div class="slot empty">Empty${b&&b[2]?`<small>${b[2]}</small>`:""}</div>`;
+    return `<div class="slot${prof?" prof":""}">${b[0]}<small>${b[1]} slots${b[2]?` · ${b[2]}`:""}</small></div>`};
+  let send=0,full=0,unk=0;
+  document.getElementById("bagRows").innerHTML=BAGS.map(([id,reg,pr])=>{const c=chars.find(x=>x.id===id);
+    const head=`<div class="who3"><b class="${c.k}">${c.short}</b><span>Lv ${lvlOf(c)} ${c.cls}${c.sub?` · ${c.sub}`:""}</span></div>`;
+    if(!reg){unk++;return `<div class="brow">${head}<div class="hint">Not in the scan yet</div><div class="bneed unk">?</div></div>`}
+    const emp=reg.filter(b=>!b||!b[0]).length, owned=reg.filter(b=>b&&!b[0]&&b[2]).length, need=emp-owned;
+    send+=need; if(!emp)full++;
+    return `<div class="brow">${head}<div class="slots">${reg.map(b=>slot(b)).join("")}${pr?slot(pr,true):`<div class="slot empty">Empty<small>profession slot</small></div>`}</div><div class="bneed ${need?"send":"full"}">${need?`Send ${need}`:emp?"Equip 1":"Full"}</div></div>`}).join("");
+  document.getElementById("bagStats").innerHTML=`<div class="stat"><b>${send}</b><span>Bags to send</span></div><div class="stat"><b>${full}</b><span>Characters with every slot full</span></div><div class="stat"><b>2</b><span>Unequipped bags already owned</span></div><div class="stat"><b>${unk}</b><span>Not scanned yet</span></div>`;
+})();
+
+/* ===== Titan bar (Altoholic + Bagnon scan, Nov 12) ===== */
+const SCAN=GENERATED.scan;
+const RAIDS=new Date(2026,11,9);
+const coins=c=>{c=Math.round(c);const g=Math.floor(c/10000),s=Math.floor(c%10000/100),cp=c%100,o=[];
+  if(g)o.push(`${g}<i class="coin cg"></i>`);if(g||s)o.push(`${s}<i class="coin cs"></i>`);o.push(`${cp}<i class="coin cc"></i>`);return o.join(" ")};
+const ago=t=>{const m=Math.max(0,Math.round((Date.now()/1000-t)/60));return m<60?`${m}m ago`:m<1440?`${Math.round(m/60)}h ago`:`${Math.round(m/1440)}d ago`};
+const pctw=(a,b)=>`${Math.max(0,Math.min(100,Math.round(a/b*100)))}%`;
+const bagNeed=id=>{const r=BAGS.find(b=>b[0]===id);if(!r||!r[1])return 0;return r[1].filter(b=>!b||!b[0]).length-r[1].filter(b=>b&&!b[0]&&b[2]).length};
+const nm=c=>`<span class="${c.k}">${c.short}</span>`;
+const scanned=()=>chars.filter(c=>SCAN[c.id]);
+const goldTotal=()=>GOLD.reduce((a,g)=>a+g[1],0);
+const legacyN=()=>all.filter(isOn).length;
+const crafters=()=>chars.filter(c=>craftIdx(c)>=0);
+const daysTo=d=>Math.max(0,Math.ceil((d-new Date())/864e5));
+const current=()=>scanned().sort((a,b)=>SCAN[b.id][7]-SCAN[a.id][7])[0];
+const SHORT={roster:"Roster",next:"Next up",legacy:"Legacy",talents:"Talents",mats:"Mats",crafting:"Crafting",skills:"Skills",gold:"Gold & mail",market:"Auction House",bags:"Bags",addons:"Addons"};
+const sections=[...document.querySelectorAll("main section")].map(s=>[s.id,s.querySelector("h2").textContent,SHORT[s.id]||s.querySelector("h2").textContent]);
+let secOn=sections[0][0];
+
+function tpUpdate(){
+  const sc=scanned(),u=sc.reduce((a,c)=>a+SCAN[c.id][0],0),t=sc.reduce((a,c)=>a+SCAN[c.id][1],0),need=chars.reduce((a,c)=>a+bagNeed(c.id),0);
+  document.getElementById("tpBags").textContent=`${u}/${t}`;
+  document.getElementById("tpBagsNeed").textContent=need?`send ${need}`:"";
+  document.getElementById("tpGold").innerHTML=coins(goldTotal());
+  const cur=current(),x=SCAN[cur.id];
+  document.getElementById("tpXp").textContent=`${cur.short} ${lvlOf(cur)} · ${pctw(x[2],x[3])}`;
+  document.getElementById("tpLegacy").textContent=`${legacyN()}/15`;
+  const cr=crafters();document.getElementById("tpCrafts").textContent=`${cr.filter(c=>skillOf(c,craftIdx(c))>=150).length}/${cr.length}`;
+  document.getElementById("tpAlts").textContent=`${chars.length}`;
+  document.getElementById("tpMenu").textContent=(sections.find(s=>s[0]===secOn)||sections[0])[2];
+  tpClock();
+}
+function tpClock(){
+  document.getElementById("tpClock").textContent=new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
+  const d=daysTo(RAIDS);document.getElementById("tpRaid").textContent=d?`· Raids in ${d}d`:"· Raids open";
+}
+const line=(l,r,cls="")=>`<div class="tt-l"><span>${l}</span><em class="${cls}">${r}</em></div>`;
+const bar=(w,cls="")=>`<div class="tt-bar"><i class="${cls}" style="width:${w}"></i></div>`;
+const link=(id,txt)=>`<a class="tt-link" href="#${id}">${txt} →</a>`;
+const POP={
+ menu:()=>`<p class="tt-h">Jump to</p><ul class="tt-nav">${sections.map(([id,h],i)=>`<li><a href="#${id}" class="${id===secOn?"on":""}">${h}<span>${i+1}</span></a></li>`).join("")}</ul>`,
+ bags:()=>{const sc=scanned();const u=sc.reduce((a,c)=>a+SCAN[c.id][0],0),t=sc.reduce((a,c)=>a+SCAN[c.id][1],0);
+  return `<p class="tt-h">Bags <small>${t-u} free of ${t}</small></p><div class="tt-sub">Slots used</div>`+
+  sc.sort((a,b)=>SCAN[b.id][0]/SCAN[b.id][1]-SCAN[a.id][0]/SCAN[a.id][1]).map(c=>{const s=SCAN[c.id],n=bagNeed(c.id);
+   return line(`${nm(c)}${n?` <span class="tt-y">· send ${n}</span>`:""}`,`${s[0]}/${s[1]}`)+bar(pctw(s[0],s[1]),s[0]/s[1]>.8?"":"ok")}).join("")+
+  `<p class="tt-note">Bags to send: ${chars.reduce((a,c)=>a+bagNeed(c.id),0)}. Doesn't count the quiver or profession bags. Keg Kenobi and Sneaky Gnomes aren't scanned yet.</p>${link("bags","Bag slots")}`},
+ gold:()=>`<p class="tt-h">Gold <small>${GOLD.length} characters</small></p><div class="tt-sub">On hand</div>`+
+  [...GOLD].sort((a,b)=>b[1]-a[1]).map(([id,c])=>line(nm(chars.find(x=>x.id===id)),coins(c))).join("")+
+  `<div class="tt-sub">Total</div>${line("Account",coins(goldTotal()))}<p class="tt-note">Apprentice Riding at 40 costs 100g, so every copper counts.</p>${link("market","Auction House")}`,
+ xp:()=>`<p class="tt-h">Experience <small>purple XP · blue rested</small></p>`+
+  scanned().sort((a,b)=>lvlOf(b)-lvlOf(a)).map(c=>{const s=SCAN[c.id],rest=Math.min(s[3],s[2]+s[4]);
+   return line(`${nm(c)} <span class="tt-dim">${lvlOf(c)}</span>`,`${pctw(s[2],s[3])}${s[4]/s[3]>=.01?` <span class="tt-rest">+${pctw(s[4],s[3])}</span>`:""}`)+
+   `<div class="tt-bar"><i class="rx" style="width:${pctw(rest,s[3])}"></i><i class="xp" style="width:${pctw(s[2],s[3])}"></i></div>`}).join("")+
+  `<p class="tt-note">From the Nov 12 scan. Murus is sitting on most of a level of rested XP.</p>`,
+ legacy:()=>{const n=legacyN(),nxt=rewards.find(r=>n<r[0]);
+  return `<p class="tt-h">Legacy <small>${n} of 15 goal</small></p>${bar(pctw(n,15))}${nxt?line("Next reward",`${nxt[1]} at ${nxt[0]}`,"tt-y"):""}`+
+  `<div class="tt-sub">Closest to level 25</div>`+[...chars].sort((a,b)=>lvlOf(b)-lvlOf(a)).slice(0,4).map(c=>line(nm(c),lvlOf(c)>=25?"done":`${25-lvlOf(c)} to go`,lvlOf(c)>=25?"tt-g":"")).join("")+
+  `<div class="tt-sub">Closest to 150</div>`+crafters().sort((a,b)=>skillOf(b,craftIdx(b))-skillOf(a,craftIdx(a))).slice(0,3).map(c=>line(`${nm(c)} <span class="tt-dim">${c.p[craftIdx(c)][0]}</span>`,`${150-skillOf(c,craftIdx(c))} to go`)).join("")+link("legacy","Legacy tracker")},
+ crafts:()=>`<p class="tt-h">Crafting <small>toward 150</small></p>`+
+  crafters().map(c=>{const i=craftIdx(c),s=skillOf(c,i),p=c.p[i];
+   return line(`${nm(c)} <span class="tt-dim">${p[0]}</span>`,p[2]&&!s?`<span class="tt-dim">not learned</span>`:`${s}/150`)+bar(pctw(s,150),s>=150?"ok":"")}).join("")+
+  `<p class="tt-note">Rum's Alchemy is capped at 75 until he trains Journeyman.</p>${link("crafting","Leveling routes")}`,
+ alts:()=>`<p class="tt-h">Alts <small>${chars.length} characters</small></p>`+
+  [...chars].sort((a,b)=>lvlOf(b)-lvlOf(a)).map(c=>{const s=SCAN[c.id];
+   return line(`${nm(c)} <span class="tt-dim">${lvlOf(c)} ${c.cls}</span>`,s?`<span class="tt-dim">${s[6]||s[5]} · ${ago(s[7])}</span>`:`<span class="tt-dim">not scanned</span>`)}).join("")+link("roster","Roster"),
+ clock:()=>{const d=daysTo(RAIDS);return `<p class="tt-h">${new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})} <small>${new Date().toLocaleDateString([],{weekday:"long",month:"short",day:"numeric"})}</small></p>`+
+  line("First raids open",`Dec 9 · ${d?`${d} days`:"now"}`,"tt-y")+line("Last addon scan",`<span class="tt-dim">${new Date((GENERATED.latestLogout||0)*1000).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}</span>`)+
+  `<p class="tt-note">Log out or /reload in game, run tools/refresh.bat, then click Reset to scan values.</p>${link("gold","Costs and dates")}`}
+};
+(function(){
+  const pop=document.getElementById("tpPop"),titan=document.getElementById("titan"),btns=[...titan.querySelectorAll(".tp")];let openBtn=null;
+  const place=()=>{if(!openBtn)return;const r=openBtn.getBoundingClientRect(),top=titan.getBoundingClientRect().bottom+4;
+    pop.style.top=top+"px";pop.style.left=Math.max(8,Math.min(r.left,innerWidth-pop.offsetWidth-8))+"px";pop.style.maxHeight=(innerHeight-top-12)+"px"};
+  const close=(refocus)=>{if(!openBtn)return;openBtn.setAttribute("aria-expanded","false");pop.hidden=true;if(refocus)openBtn.focus();openBtn=null};
+  const open=b=>{close();openBtn=b;b.setAttribute("aria-expanded","true");pop.innerHTML=POP[b.dataset.pop]();pop.setAttribute("aria-label",b.textContent.trim());pop.hidden=false;pop.scrollTop=0;place()};
+  btns.forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();openBtn===b?close():open(b)}));
+  pop.addEventListener("click",e=>{if(e.target.closest("a"))close()});
+  document.addEventListener("click",e=>{if(openBtn&&!pop.contains(e.target))close()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")close(true)});
+  addEventListener("resize",place);addEventListener("scroll",place,{passive:true});titan.querySelector(".tp-row").addEventListener("scroll",place,{passive:true});
+  if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){secOn=e.target.id;
+    document.getElementById("tpMenu").textContent=(sections.find(s=>s[0]===secOn)||sections[0])[2]}}),{rootMargin:"-40% 0px -55% 0px"});
+    document.querySelectorAll("main section").forEach(s=>io.observe(s))}
+  setInterval(tpClock,30000);
+})();
+function refresh(){bars();nextUp();legacy();plRender();tpUpdate()}
+refresh();
+ltRender();
+</script>
+
+</body></html>
