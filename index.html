@@ -138,10 +138,10 @@ td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
 .repl{font-size:12px;color:var(--muted)}
 .none{color:var(--muted);font-size:14px}
 .todo{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);border:1px dashed var(--gold);border-radius:999px;padding:0 7px;line-height:18px;white-space:nowrap;justify-self:start}
-.note{min-width:160px;min-height:28px;color:var(--ink);font-size:14px;border-radius:4px;padding:4px 8px;background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px dashed var(--line)}
+.note{min-width:160px;min-height:36px;color:var(--ink);font-size:14px;border-radius:4px;padding:8px 10px;background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px dashed var(--line)}
 .note:hover,.note:focus{border-color:var(--gold);background:var(--bg)}
 .note:empty::before{content:"Add a note";color:var(--muted)}
-.rolec{display:grid;gap:3px;min-width:148px}
+.rolec{display:grid;gap:6px;min-width:148px}
 .rolec b{font-weight:700}
 .rchip{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:1px 7px;color:#fff;background:var(--rcol)}
 .rchip.tank{--rcol:var(--tank)}.rchip.heal{--rcol:var(--heal)}.rchip.dps{--rcol:var(--dps)}
@@ -152,7 +152,7 @@ td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
 .legend{display:flex;gap:8px 16px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted)}
 /* next up */
 .next{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.nx{align-content:start;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:8px;min-width:0;border-top:3px solid var(--cc)}
+.nx{align-content:start;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:10px;min-width:0;border-top:3px solid var(--cc)}
 .nx header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .nx header b{font-weight:700;font-size:16px;color:var(--cc)}
 .nx header span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -223,6 +223,24 @@ td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
 .step:disabled{opacity:.4;cursor:default}
 .steps output{font-variant-numeric:tabular-nums;min-width:48px;text-align:center}
 .warn{font-size:13px;color:var(--gold)}
+#talents{gap:22px}
+#talents .lt-bar{gap:14px 20px;padding:8px 0}
+#talents .tabs{padding:10px;gap:8px}
+#talents .tabs button{padding:12px 20px}
+#talents .presets{gap:10px 12px}
+#talents .pbtn{padding:7px 14px}
+#talents .pbtn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+#talents .reclegend{gap:10px 20px}
+#talents .tree{gap:22px;padding:28px}
+#talents .tier{grid-template-columns:72px 1fr;gap:20px}
+#talents .tier>span{padding-top:22px}
+#talents .nodes{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+#talents .node{padding:22px 22px 24px;gap:16px}
+#talents .node b{font-size:15px}
+#talents .pips{gap:5px}
+#talents .pips i{width:12px;height:12px}
+#talents .detail{padding:20px 22px;gap:12px}
+#talents .steps{margin-top:8px;gap:14px}
 /* mats */
 .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
 .flow div{border-left:3px solid var(--c);padding:6px 12px;background:var(--panel);min-width:0;border-radius:0 6px 6px 0}
@@ -346,7 +364,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
 .qready{font-style:normal;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
 .qr{font-size:12px;color:var(--gold)}
 .stand{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:14px}
-.stand-card{display:grid;gap:3px;padding:10px 12px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--cc);border-radius:6px}
+.stand-card{display:grid;gap:5px;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--cc);border-radius:6px}
 .stand-card b{font-family:var(--display);font-weight:500;color:var(--cc)}
 .stand-card small{color:var(--muted);font-size:13px}
 .glist,.rlist{list-style:none;margin:0;padding:0 0 8px}
@@ -410,7 +428,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
   .roster table{min-width:0}
   .roster thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .roster tbody{display:grid}
-  .roster tr{display:grid;grid-template-columns:88px minmax(0,1fr);gap:10px 16px;padding:14px;border-top:1px solid var(--line)}
+  .roster tr{display:grid;grid-template-columns:88px minmax(0,1fr);gap:14px 18px;padding:18px 16px;border-top:1px solid var(--line)}
   .roster tr:first-child{border-top:0}
   .roster td{display:block;border:0;padding:0}
   .roster td:nth-child(1),.roster td:nth-child(4),.roster td:nth-child(7){grid-column:1/-1}
@@ -424,6 +442,74 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
   .roster td{grid-column:1/-1}
 }
 @media (max-width:480px){.tier{grid-template-columns:1fr}.tier>span{padding-top:0}h2{font-size:23px}.mast-tools{width:100%;justify-content:space-between}}
+[data-char]{display:none}
+#charShell{display:none}
+body[data-view="char"] [data-home]{display:none}
+body[data-view="char"] [data-char]{display:none}
+body[data-view="char"] [data-char].show{display:block}
+body[data-view="char"] #charShell{display:block}
+body[data-view="char"] #qTabs,body[data-view="char"] #gTabs,body[data-view="char"] #rTabs,body[data-view="char"] #plTabs,body[data-view="char"] #mats .flow{display:none}
+body[data-view="char"] #mats .card,body[data-view="char"] #skGrid .sk{display:none}
+body[data-view="char"] #mats .card.match,body[data-view="char"] #skGrid .sk.match{display:block}
+.openchar{font:inherit;font-weight:700;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.openchar:hover{text-decoration:underline}
+.char-top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.char-back{font:inherit;font-size:14px;font-weight:500;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.char-back:hover{border-color:var(--gold)}
+.char-nav{margin:14px 0 18px}
+.doll{background:#140e0a;color:#f6e7c8;border:1px solid #8d6b34;border-radius:8px;padding:18px 18px 16px;box-shadow:inset 0 0 0 1px #3a2a16,0 10px 28px rgba(0,0,0,.22);display:grid;gap:16px}
+.doll-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;padding:0 4px 14px;border-bottom:1px solid #3a2a16}
+.doll-top h2{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(26px,4vw,34px);line-height:1;color:#f3d48a}
+.doll-top p{margin:6px 0 0;color:#cbb892}
+.doll-top .lvl{text-align:right;font-variant-numeric:tabular-nums}
+.doll-top .lvl b{display:block;font-family:var(--display);font-size:28px;line-height:1;color:#fff}
+.doll-top .lvl span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#e3b04b}
+.doll-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(168px,230px) minmax(0,1fr);gap:14px 16px;align-items:start}
+.doll-col,.doll-weapons{display:grid;gap:8px}
+.doll-mid{display:grid;justify-items:center;gap:8px;padding:8px 6px 4px;text-align:center}
+.portrait{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;align-content:center;background:radial-gradient(circle at 38% 32%, color-mix(in srgb,var(--cc) 55%, #fff), var(--cc));border:3px solid #e3b04b;box-shadow:0 0 0 5px #2a1c10;color:#1a120c}
+.portrait b{font-family:var(--display);font-size:30px;line-height:1}
+.portrait span{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.xbar{width:100%;height:10px;border-radius:2px;background:#2a2118;position:relative;overflow:hidden;border:1px solid #3a2a16}
+.xbar i{position:absolute;inset:0 auto 0 0}
+.xbar .rx{background:#2d6fd6}.xbar .xp{background:#a335ee}
+.xbar+small{color:#cbb892;font-size:12px}
+.sheet-stats{width:100%;margin:6px 0 0;display:grid;gap:0}
+.sheet-stats div{display:flex;justify-content:space-between;gap:12px;padding:7px 2px;border-top:1px solid #3a2a16}
+.sheet-stats dt{color:#e3b04b;font-size:13px}
+.sheet-stats dd{margin:0;font-variant-numeric:tabular-nums;text-align:right}
+.doll-note{margin:0;color:#cbb892;font-size:13px;max-width:28ch}
+.doll-account{margin:0;padding:0 4px;color:#cbb892;font-size:13px}
+.doll-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;margin:0}
+.doll-links a{color:#e3b04b;font-weight:700;font-size:13px;text-decoration:none}
+.doll-links a:hover,.doll-links a:focus-visible{text-decoration:underline}
+.build-links{display:flex;flex-wrap:wrap;gap:8px 16px}
+.build-links a{font-weight:700;text-decoration:none}
+.build-links a:hover,.build-links a:focus-visible{text-decoration:underline}
+.torder,.tsteps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.torder li,.tsteps li{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:8px 14px;align-items:center;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.tsteps li{grid-template-columns:32px minmax(0,1fr)}
+.torder .n,.tsteps .n{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700}
+.torder li.now,.tsteps li.now{border-color:var(--gold);box-shadow:inset 3px 0 0 var(--gold)}
+.torder li.done{opacity:.7}
+.torder .pips i{width:12px;height:12px}
+.torder .pips small{margin-left:6px;color:var(--muted);font-size:12px}
+#buildBody{display:grid;gap:14px}
+#routeBody{display:grid;gap:12px}
+.route-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:baseline}
+.route-top p{margin:0;color:var(--muted)}
+.route-top a{font-weight:700;text-decoration:none}
+.route-top a:hover,.route-top a:focus-visible{text-decoration:underline}
+.route li{align-items:start;padding:16px 18px}
+.route .src{display:block;margin-top:4px;color:var(--muted);font-size:14px;line-height:1.45}
+.eq{display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px;align-items:center;min-height:48px;padding:6px 8px;background:#0e0a08;border:1px solid #5c4720;border-radius:4px}
+.eq i{width:36px;height:36px;border-radius:3px;border:2px solid var(--iq,#6b6258);background:#1c140e;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6)}
+.eq small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#a8977f}
+.eq b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;font-weight:500;line-height:1.25}
+.eq.empty b{color:#6e624f;font-weight:500}
+.doll .iq0{--iq:#9d9d9d;color:#9d9d9d}.doll .iq1{--iq:#fff;color:#fff}.doll .iq2{--iq:#1eff00;color:#1eff00}.doll .iq3{--iq:#4d9bff;color:#4d9bff}.doll .iq4{--iq:#c47bff;color:#c47bff}
+.doll-weapons{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){.doll{padding:16px 14px}.doll-grid{grid-template-columns:1fr 1fr}.doll-mid{grid-column:1/-1}.doll-weapons{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -433,7 +519,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     <div class="mast-copy">
       <span class="eyebrow">Alliance · WoW: Forever</span>
       <h1>Main Roster &amp; Professions</h1>
-      <p>One character per class, every crafting profession covered, aiming for the first 15 Legacy points. The bar up top works like Titan Panel: tap any readout for details. Levels, skills, notes and checkboxes save in this browser.</p>
+      <p>Open a character for their build, materials, and gear. Account gold, bags, and addons stay on this page. Legacy points are at the bottom.</p>
     </div>
     <div class="mast-tools">
       <p class="fresh" id="fresh"></p>
@@ -460,7 +546,16 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
 <main class="gut">
 <div class="inner">
 
-  <section id="roster">
+  <div id="charShell">
+    <div class="char-top">
+      <button type="button" class="char-back" id="charBack">All characters</button>
+      <div class="inv-tabs" role="tablist" id="charSwitch" aria-label="Characters"></div>
+    </div>
+    <div id="charStats"></div>
+    <div class="inv-tabs char-nav" role="tablist" id="charNav" aria-label="Character sections"></div>
+  </div>
+
+  <section id="roster" data-home>
     <div class="sh"><h2>Roster</h2><p>Update levels and skills as you play. Everything else on the page follows along.</p></div>
     <div class="legend"><span class="tag g">Gathering</span><span class="tag c">Crafting</span><span><span class="todo">Not learned</span> planned, not trained yet</span><span><span class="rchip tank">2 Tanks</span> <span class="rchip heal">2 Healers</span> <span class="rchip dps">5 DPS</span></span></div>
     <div class="sheet roster">
@@ -474,56 +569,38 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     <div class="stand" id="stand"></div>
   </section>
 
-  <section id="next">
+  <section id="next" data-home>
     <div class="sh"><h2>Next up</h2><p>What each character still needs for the 15-point goal, closest first.</p></div>
     <div class="next" id="nextUp"></div>
   </section>
 
-  <section id="legacy">
-    <div class="sh"><h2>Legacy points</h2><p>Milestones tick themselves off from the roster. You can also check them by hand.</p></div>
-    <div class="lhead">
-      <div class="score" id="score">0<small> / 15 goal</small></div>
-      <div class="bar">
-        <div class="track"><div class="fill" id="fill"></div><div class="goal" id="goalMark" title="15-point goal"></div></div>
-        <div class="ticks" id="ticks"></div>
-      </div>
-    </div>
-    <div class="ltables">
-      <div class="sheet ltable">
-        <table>
-          <thead><tr><th>Class</th><th class="ck">25</th><th class="ck">45</th><th class="ck">60</th></tr></thead>
-          <tbody id="lclass"></tbody>
-        </table>
-      </div>
-      <div class="sheet ltable">
-        <table>
-          <thead><tr><th>Crafting</th><th class="ck">150</th><th class="ck">225</th><th class="ck">300</th></tr></thead>
-          <tbody id="lcraft"></tbody>
-        </table>
-      </div>
-    </div>
-    <p class="hint">Each milestone counts once per class or profession, account-wide. The highlighted column is the 15-point goal. Gathering professions don't earn points. Rewards come from Innkeeper Wiley in Ratchet.</p>
+  <section id="builds" data-char>
+    <div class="sh"><h2>Talent build</h2><p>Points to spend while leveling. The links open the Warcraft Tavern guide for the full tree.</p></div>
+    <div class="build-links" id="buildLinks"></div>
+    <p class="hint" id="buildMeta"></p>
+    <div id="buildBody"></div>
   </section>
 
-  <section id="talents">
+  <section id="talents" data-char>
     <div class="sh"><h2>Legacy talents</h2><p>Plan where each character spends its 16 points. Respec any time at a class trainer.</p></div>
     <div class="lt-bar">
       <div class="tabs" role="tablist" id="ltTabs"></div>
       <div class="budget"><b id="ltSpent">0</b> / 16 spent</div>
     </div>
     <div class="presets">Try a build:
-      <button class="pbtn" data-preset="crafter">Crafter</button>
-      <button class="pbtn" data-preset="gatherer">Gatherer</button>
-      <button class="pbtn" data-preset="redstone">Redstone</button>
-      <button class="pbtn" data-preset="clear">Clear</button>
+      <button class="pbtn" data-preset="crafter" title="Working Overtime and Bountiful Harvest">Crafter</button>
+      <button class="pbtn" data-preset="gatherer" title="Bountiful Harvest, then speed and flight">Gatherer</button>
+      <button class="pbtn" data-preset="redstone" title="Free teleports and portals">Redstone</button>
+      <button class="pbtn" data-preset="clear" title="Empty plan">Clear</button>
     </div>
+    <p class="hint" id="presetNote"></p>
     <div class="reclegend"><span class="r-top">Take first</span><span class="r-role">For certain characters</span><span class="r-ok">Situational</span><span class="r-skip">Skip for now</span></div>
     <div class="tree" id="ltTree" role="tabpanel"></div>
     <div class="detail" id="ltDetail" aria-live="polite"></div>
     <p class="hint">Tap a talent to read it, then use + and − to plan ranks. A talent that needs another one unlocks once that one is maxed. Rank counts differ a little between guides, so check the tree in game.</p>
   </section>
 
-  <section id="mats">
+  <section id="mats" data-char>
     <div class="sh"><h2>Materials</h2><p>Who gathers what, and where the basics come from. <span class="soon">Dotted names</span> haven't learned that gathering skill yet.</p></div>
     <div class="flow">
       <div style="--c:var(--druid)"><b class="druid">Leif → Leatherworking</b><span>Skins his own, plus Fatal, Keg Kenobi and Sneaky Gnomes.</span></div>
@@ -535,7 +612,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     </div>
     <div class="mats">
       <div class="card">
-        <h3>Leatherworking <span class="own"><small class="druid">Leif</small></span></h3>
+        <h3 data-id="leif">Leatherworking <span class="own"><small class="druid">Leif</small></span></h3>
         <ul>
           <li><b>Ruined Leather Scraps</b><span class="who"><span class="druid">Leif</span> +3</span><span class="src">Skinning low-level beasts. 3 scraps make 1 Light Leather.</span></li>
           <li><b>Light Leather</b><span class="who"><span class="druid">Leif</span> +3</span><span class="src">Skinning wolves, boars and cats in the starter zones.</span></li>
@@ -546,7 +623,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
         <p class="hint foot">+3 = <span class="warlock soon">Fatal</span>, <span class="warrior soon">Keg Kenobi</span>, <span class="rogue soon">Sneaky Gnomes</span></p>
       </div>
       <div class="card">
-        <h3>Blacksmithing <span class="own"><small class="paladin">Murus</small></span></h3>
+        <h3 data-id="murus">Blacksmithing <span class="own"><small class="paladin">Murus</small></span></h3>
         <ul>
           <li><b>Copper Ore → Copper Bar</b><span class="who"><span class="paladin">Murus</span> +3</span><span class="src">Copper veins in Dun Morogh, Elwynn, Loch Modan. Smelt at a forge.</span></li>
           <li><b>Rough Stone</b><span class="who"><span class="paladin">Murus</span> +3</span><span class="src">Comes out of copper veins.</span></li>
@@ -558,7 +635,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
         <p class="hint foot">+3 = <span class="priest soon">Corwyn</span>, <span class="hunter soon">Libertty</span>, <span class="warrior soon">Keg Kenobi</span></p>
       </div>
       <div class="card">
-        <h3>Alchemy <span class="own"><small class="shaman">Rum</small></span></h3>
+        <h3 data-id="rum">Alchemy <span class="own"><small class="shaman">Rum</small></span></h3>
         <ul>
           <li><b>Peacebloom, Silverleaf</b><span class="who"><span class="shaman">Rum</span> +2</span><span class="src">All over the starter zones. Used in Minor Healing Potions.</span></li>
           <li><b>Earthroot</b><span class="who"><span class="shaman">Rum</span> +2</span><span class="src">Near hills and cliffs in starter zones.</span></li>
@@ -568,7 +645,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
         <p class="hint foot">+2 = <span class="rogue soon">Sneaky Gnomes</span>, <span class="mage soon">Redstone</span></p>
       </div>
       <div class="card">
-        <h3>Engineering <span class="own"><small class="hunter">Libertty</small><span class="todo">Not learned</span></span></h3>
+        <h3 data-id="libertty">Engineering <span class="own"><small class="hunter">Libertty</small><span class="todo">Not learned</span></span></h3>
         <ul>
           <li><b>Rough Blasting Powder</b><span class="who hunter soon">Libertty</span><span class="src">Made from Rough Stone out of his own copper veins.</span></li>
           <li><b>Copper Bolts, Copper Tube</b><span class="who hunter soon">Libertty</span><span class="src">Made from his own Copper Bars. The tube also takes Weak Flux.</span></li>
@@ -577,7 +654,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
         </ul>
       </div>
       <div class="card">
-        <h3>Enchanting <span class="own"><small class="warlock">Fatal</small><span class="todo">Not learned</span></span></h3>
+        <h3 data-id="fatal">Enchanting <span class="own"><small class="warlock">Fatal</small><span class="todo">Not learned</span></span></h3>
         <ul>
           <li><b>Strange Dust</b><span class="who warlock soon">Fatal</span><span class="src">Disenchant low-level green gear. Everyone can mail him their spare greens.</span></li>
           <li><b>Lesser Magic Essence</b><span class="who warlock soon">Fatal</span><span class="src">Disenchant low-level greens.</span></li>
@@ -586,7 +663,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
         </ul>
       </div>
       <div class="card">
-        <h3>Tailoring <span class="own"><small class="priest">Corwyn</small><span class="todo">Not learned</span></span></h3>
+        <h3 data-id="corwyn">Tailoring <span class="own"><small class="priest">Corwyn</small><span class="todo">Not learned</span></span></h3>
         <ul>
           <li><b>Linen Cloth</b><span class="who any">Everyone</span><span class="src">Drops from humanoids around level 5–15. Mail full stacks only.</span></li>
           <li><b>Wool Cloth</b><span class="who any">Everyone</span><span class="src">Drops from humanoids around level 15–25.</span></li>
@@ -598,20 +675,23 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
   </section>
 
 
-  <section id="crafting">
-    <div class="sh"><h2>Leveling crafts to 150</h2><p>Recipe routes for each crafting profession. Your current step lights up from the skill you enter in the roster.</p></div>
+  <section id="crafting" data-char>
+    <div class="sh"><h2>Route</h2><p>Where to quest next. Built from the quest log and the level 25 goal. Craft steps stay below.</p></div>
+    <div id="routeBody"></div>
+    <h3 class="h3x" id="plHead">Craft steps</h3>
     <div class="pl-tabs" role="tablist" id="plTabs"></div>
     <div class="pl" id="plBody"></div>
+    <p class="hint" id="plEmpty" hidden>No craft steps for this character.</p>
     <p class="hint">Craft counts are averages from Wowhead's routes, so expect to need a few more or a few less. Working Overtime in the Legacy tree cuts the number of crafts. Rows that end past 150 are shown in full.</p>
   </section>
 
-  <section id="skills">
+  <section id="skills" data-char>
     <div class="sh"><h2>Skills &amp; recipes</h2><p>Read from the Altoholic scan on Nov 12. Keg Kenobi and Sneaky Gnomes haven't been scanned yet.</p></div>
     <div class="skgrid" id="skGrid"></div>
     <p class="hint">Recipe colors are what the game reported at scan time. Orange and yellow still give skill-ups, green sometimes, grey never. DataStore didn't save the Blacksmithing or Leatherworking numbers, so those two are estimated from recipe colors. A profession's recipes only show up after you open its window once with the addon on.</p>
   </section>
 
-  <section id="quests">
+  <section id="quests" data-char>
     <div class="sh"><h2>Quests</h2><p>Completed quests from Questie, and the quests still in the log from Altoholic. Sort by zone, level, or name.</p></div>
     <div class="qbar">
       <div class="inv-tabs" role="tablist" id="qTabs"></div>
@@ -625,19 +705,19 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     <div class="qgrid" id="qBody"></div>
   </section>
 
-  <section id="gear">
+  <section id="gear" data-char>
     <div class="sh"><h2>Gear</h2><p>What each character has equipped, from Altoholic. The number is the average item level.</p></div>
     <div class="inv-tabs" role="tablist" id="gTabs"></div>
     <div id="gBody"></div>
   </section>
 
-  <section id="rep">
+  <section id="rep" data-char>
     <div class="sh"><h2>Reputation</h2><p>Home-city standing. The bar fills the current rank. Honored is the discount for the level 40 mount.</p></div>
     <div class="inv-tabs" role="tablist" id="rTabs"></div>
     <div id="rBody"></div>
   </section>
 
-  <section id="gold">
+  <section id="gold" data-home>
     <div class="sh"><h2>Gold &amp; mail</h2><p>House rules for making money while everyone is broke.</p></div>
     <div class="rules">
       <div class="card">
@@ -670,7 +750,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     </div>
   </section>
 
-  <section id="market">
+  <section id="market" data-home>
     <div class="sh"><h2>Auction House</h2><p>Auctionator full scan on Nov 12 at 10:53 AM. Prices are the lowest buyout for each item.</p></div>
     <div class="stats">
       <div class="stat"><b>5,412</b><span>Items priced</span></div>
@@ -694,7 +774,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     <p class="hint">Leif's bank, Keg Kenobi and Sneaky Gnomes aren't in the scan yet. Open the bank on Leif and log in once on the other two. Quest and bound items show no price.</p>
   </section>
 
-  <section id="bags">
+  <section id="bags" data-home>
     <div class="sh"><h2>Bags</h2><p>Who has an empty bag slot, from the Bagnon save file on Nov 12. Send new bags to the gold rows first.</p></div>
     <div class="stats" id="bagStats"></div>
     <div class="blegend"><span><i style="border:1px dashed var(--gold);background:color-mix(in srgb,var(--gold) 10%,transparent)"></i>Empty slot</span><span><i style="border:1px solid var(--line);background:var(--bg)"></i>Bag equipped</span><span><i style="border:1px solid color-mix(in srgb,var(--gather) 45%,transparent);background:color-mix(in srgb,var(--gather) 10%,transparent)"></i>Profession bag slot (5th)</span></div>
@@ -703,7 +783,7 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
     <p class="hint">Profession bags only hold their own profession's mats and tools. The quiver only holds arrows. Keg Kenobi and Sneaky Gnomes show up after you log into each once with Bagnon on.</p>
   </section>
 
-  <section id="addons">
+  <section id="addons" data-home>
     <div class="sh"><h2>Addons</h2><p>Tick them off as you install them in CurseForge.</p></div>
     <div class="addons">
       <div class="card" id="addonGet"><h3>Get these</h3></div>
@@ -711,6 +791,32 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
       <div class="card" id="addonSkip"><h3>Avoid for now</h3></div>
     </div>
     <p class="hint">If something acts up after installing, log in with addons off at character select, then turn them on and type /reload.</p>
+  </section>
+
+  <section id="legacy" data-home>
+    <div class="sh"><h2>Legacy points</h2><p>Milestones tick themselves off from the roster. You can also check them by hand.</p></div>
+    <div class="lhead">
+      <div class="score" id="score">0<small> / 15 goal</small></div>
+      <div class="bar">
+        <div class="track"><div class="fill" id="fill"></div><div class="goal" id="goalMark" title="15-point goal"></div></div>
+        <div class="ticks" id="ticks"></div>
+      </div>
+    </div>
+    <div class="ltables">
+      <div class="sheet ltable">
+        <table>
+          <thead><tr><th>Class</th><th class="ck">25</th><th class="ck">45</th><th class="ck">60</th></tr></thead>
+          <tbody id="lclass"></tbody>
+        </table>
+      </div>
+      <div class="sheet ltable">
+        <table>
+          <thead><tr><th>Crafting</th><th class="ck">150</th><th class="ck">225</th><th class="ck">300</th></tr></thead>
+          <tbody id="lcraft"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="hint">Each milestone counts once per class or profession, account-wide. The highlighted column is the 15-point goal. Gathering professions don't earn points. Rewards come from Innkeeper Wiley in Ratchet.</p>
   </section>
 
 </div>
@@ -736,8 +842,8 @@ footer a:hover,footer a:focus-visible{text-decoration:underline}
 <script>
 /* BEGIN GENERATED SCAN */
 const GENERATED = {
-  "label": "Nov 12, 1:13 PM",
-  "latestLogout": 1794510799,
+  "label": "Nov 12, 3:09 PM",
+  "latestLogout": 1794517797,
   "scannedCount": 7,
   "missingNote": "Keg Kenobi and Sneaky Gnomes haven't been scanned yet.",
   "prices": {
@@ -3042,6 +3148,12 @@ const GENERATED = {
         "Priest",
         [
           [
+            "Garments of the Light",
+            "4",
+            "Find Mountaineer Dolf and heal his wounds using Lesser Heal (Rank 2). Afterwards, grant him Power Word: Fortitude and then return to Maxan Anvol in Kharanos.",
+            1
+          ],
+          [
             "Hallowed Memorandum",
             "1",
             "Read the Hallowed Memorandum and speak to Branstock Khalder in Anvilmar.",
@@ -3063,6 +3175,12 @@ const GENERATED = {
             "6",
             "Speak to Sam Sarsparilla near Goldshire.",
             7
+          ],
+          [
+            "The Great Outdoors",
+            "6",
+            "Sit near Eric's Basic Campfire and wait until you receive the Boosted Rest buff.",
+            1
           ]
         ]
       ]
@@ -3899,11 +4017,27 @@ const GENERATED = {
         "Camping",
         [
           [
-            "The Great Outdoors",
+            "Camping 101: Cooking",
             "6",
-            "Sit near Eric's Basic Campfire and wait until you receive the Boosted Rest buff.",
+            "Speak with Gremlock Pilsnor in Kharanos to learn to become a cook.",
             1,
             "",
+            0
+          ],
+          [
+            "Camping 101: Skinning",
+            "6",
+            "Speak with Balthus Stoneflayer in Ironforge to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
+            1,
+            "Spell",
+            0
+          ],
+          [
+            "Camping 101: Tailoring",
+            "6",
+            "Speak with Uthrar Threx in Ironforge to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
+            1,
+            "Spell",
             0
           ]
         ]
@@ -3916,7 +4050,7 @@ const GENERATED = {
             "7",
             "Ragnar Thunderbrew in Kharanos wants 6 Crag Boar Ribs and a mug of Rhapsody Malt.",
             1,
-            "1s",
+            "Beer Basted Boar Ribs ×5, Recipe: Beer Basted Boar Ribs, 1s",
             0
           ]
         ]
@@ -3929,7 +4063,7 @@ const GENERATED = {
             "4",
             "Find Mountaineer Dolf and heal his wounds using Lesser Heal (Rank 2). Afterwards, grant him Power Word: Fortitude and then return to Maxan Anvol in Kharanos.",
             1,
-            "",
+            "Friar's Robes of the Light",
             0
           ]
         ]
@@ -4193,7 +4327,7 @@ const GENERATED = {
       ]
     ],
     "corwyn": [
-      0.9,
+      1.3,
       [
         [
           "Shirt",
@@ -4202,8 +4336,8 @@ const GENERATED = {
         ],
         [
           "Chest",
-          "Neophyte's Robe",
-          0
+          "Friar's Robes of the Light",
+          2
         ],
         [
           "Waist",
@@ -4515,6 +4649,8 @@ const GENERATED = {
       "rest": 1508,
       "logout": 1794502063,
       "gold": 9926,
+      "played": 39903,
+      "playedLevel": 5757,
       "sk": [
         90,
         null
@@ -4563,6 +4699,8 @@ const GENERATED = {
       "rest": 10976,
       "logout": 1794502504,
       "gold": 918,
+      "played": 34038,
+      "playedLevel": 5281,
       "sk": [
         78,
         null
@@ -4611,6 +4749,8 @@ const GENERATED = {
       "rest": 64,
       "logout": 1794503156,
       "gold": 127,
+      "played": 13597,
+      "playedLevel": 2451,
       "sk": [
         75,
         75
@@ -4660,6 +4800,8 @@ const GENERATED = {
       "rest": 1760,
       "logout": 1794501318,
       "gold": 267,
+      "played": 5286,
+      "playedLevel": 1154,
       "sk": [
         73,
         null
@@ -4687,6 +4829,8 @@ const GENERATED = {
       "rest": 6,
       "logout": 1794503399,
       "gold": 1131,
+      "played": 5334,
+      "playedLevel": 984,
       "sk": [
         4,
         null
@@ -4721,20 +4865,22 @@ const GENERATED = {
     },
     "corwyn": {
       "lvl": 6,
-      "zone": "Ironforge",
-      "sub": "",
-      "xp": 904,
+      "zone": "Dun Morogh",
+      "sub": "Kharanos",
+      "xp": 1849,
       "maxXP": 3600,
-      "rest": 36,
-      "logout": 1794510799,
+      "rest": 180,
+      "logout": 1794517797,
       "gold": 4,
+      "played": 4601,
+      "playedLevel": 1233,
       "sk": [
         null,
         24
       ],
       "repl": {
         "Tailoring": "",
-        "Mining": "Has Skinning 23 instead"
+        "Mining": "Has Skinning 28 instead"
       },
       "flag": "Tailoring is trained. He still has Skinning instead of Mining, so swap Skinning for Mining when you can.",
       "profs": [
@@ -4747,7 +4893,7 @@ const GENERATED = {
         ],
         [
           "Skinning",
-          23,
+          28,
           75,
           "",
           "g"
@@ -4763,6 +4909,8 @@ const GENERATED = {
       "rest": 444,
       "logout": 1794502212,
       "gold": 5029,
+      "played": 1144,
+      "playedLevel": 1144,
       "sk": [
         null,
         null
@@ -4824,14 +4972,14 @@ const GENERATED = {
       1794503399
     ],
     "corwyn": [
-      9,
+      12,
       44,
-      904,
+      1849,
       3600,
-      36,
-      "Ironforge",
-      "",
-      1794510799
+      180,
+      "Dun Morogh",
+      "Kharanos",
+      1794517797
     ],
     "redstone": [
       2,
@@ -5907,14 +6055,14 @@ const GENERATED = {
     "corwyn": [
       [
         "Ruined Leather Scraps",
-        15,
+        18,
         "bags",
         12,
         3650
       ],
       [
         "Light Leather",
-        5,
+        8,
         "bags",
         26,
         8526
@@ -5955,6 +6103,13 @@ const GENERATED = {
         52
       ],
       [
+        "Boar Intestines",
+        1,
+        "bags",
+        18,
+        4163
+      ],
+      [
         "Bolt of Linen Cloth",
         11,
         "bags",
@@ -5976,6 +6131,13 @@ const GENERATED = {
         0
       ],
       [
+        "Broken Boar Tusk",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
         "Crate of Candles",
         1,
         "bags",
@@ -5984,6 +6146,13 @@ const GENERATED = {
       ],
       [
         "Hearthstone",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Neophyte's Robe",
         1,
         "bags",
         null,
@@ -6180,7 +6349,7 @@ chars.forEach(c=>{
     const [n,t,planned,repl]=p;const key=c.id+"-p"+i;
     const bar=t==="c"?`<span class="mini" data-bar="${key}"><i></i></span>`:"";
     return `<td><div class="prof${planned?" planned":""}"><span class="tag ${t}">${n}</span>${planned?'<span class="todo">Not learned</span>':''}${repl?`<span class="repl">${repl}</span>`:''}<label class="skill">Skill <input class="num" id="${key}" type="number" min="0" max="300" inputmode="numeric" value="${skillOf(c,i)}"></label>${bar}</div></td>`};
-  tr.innerHTML=`<td><span class="name ${c.k}">${c.name}</span><span class="role"><span class="${c.k}">${c.cls}</span>${c.sub?` · ${c.sub}`:""}</span></td>
+  tr.innerHTML=`<td><button type="button" class="name openchar ${c.k}" data-open="${c.id}">${c.name}</button><span class="role"><span class="${c.k}">${c.cls}</span>${c.sub?` · ${c.sub}`:""}</span></td>
     <td><div class="lvlc"><input class="num" id="${c.id}-lvl" type="number" min="1" max="60" inputmode="numeric" aria-label="${c.name} level" value="${lvlOf(c)}"><span class="mini" data-bar="${c.id}-lvl"><i></i></span></div></td>
     <td><div class="rolec"><span class="rchip ${r}">${roleName[r]}</span><b>${spec}</b><span class="rdesc">${desc}</span><span class="rdesc">Level as ${lev}</span><span class="glinks"><a href="${T}${g1}/" target="_blank" rel="noopener">${spec} guide ↗</a><a href="${T}${g2}/" target="_blank" rel="noopener">Leveling ↗</a></span></div></td>
     <td>${c.zone||'<span class="none">—</span>'}</td>${prof(0)}${prof(1)}
@@ -6285,6 +6454,13 @@ const LT={
 const LT_MAX=16;
 const ltNodes={}; Object.entries(LT).forEach(([tree,tiers])=>tiers.forEach((row,ti)=>row.forEach(n=>{ltNodes[n[0]]={id:n[0],name:n[1],max:n[2],fx:n[3],rec:n[4],why:n[5],req:n[6]||"",tree,tier:ti+1}})));
 const PRESETS={crafter:{wo:5,bh:5,fg:3,ff:1,thrill:2},gatherer:{bh:5,wo:2,thrill:5,fg:3,ff:1},redstone:{qd:2,re:1,fg:3,ff:1,thrill:5,wr:4},clear:{}};
+const PRESET_INFO={
+  crafter:{tab:"Professions",sel:"wo",text:"Crafter spends all 16 on faster skill-ups, scarce mats, and Frequent Flier."},
+  gatherer:{tab:"Professions",sel:"bh",text:"Gatherer maxes Bountiful Harvest, then takes speed and flight."},
+  redstone:{tab:"Resourcefulness",sel:"re",text:"Redstone is the bank alt. Reagent Economy makes his teleports and portals free. The other points are flight and a little leveling comfort."},
+  clear:{tab:"Professions",sel:"wo",text:"Cleared."}
+};
+const presetOn=()=>Object.keys(PRESETS).find(id=>{const p=PRESETS[id];const keys=new Set([...Object.keys(p),...Object.keys(ltBuild)]);for(const k of keys) if((p[k]||0)!==(ltBuild[k]||0)) return false;return true})||"";
 let ltBuild={}; try{ltBuild=JSON.parse(JSON.stringify(store["lt-build"]||{}))}catch(e){}
 let ltTab=store["lt-tab"]||"Professions", ltSel=store["lt-sel"]||"wo";
 const ltSpent=()=>Object.values(ltBuild).reduce((a,b)=>a+b,0);
@@ -6303,6 +6479,9 @@ function ltRender(){
     return `<button class="${cls.join(" ")}" data-id="${n.id}" aria-pressed="${n.id===ltSel}"><span class="rec"></span><b>${n.name}</b><span class="pips">${Array.from({length:n.max},(_,k)=>`<i class="${k<r?"on":""}"></i>`).join("")}</span>${n.req?`<small>Needs ${ltNodes[n.req].name}</small>`:""}</button>`}).join("")}</div></div>`).join("");
   tree.querySelectorAll(".node[data-id]").forEach(b=>b.onclick=()=>{ltSel=b.dataset.id;ltSave();ltRender()});
   document.getElementById("ltSpent").textContent=ltSpent();
+  const on=presetOn();
+  document.querySelectorAll("[data-preset]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.preset===on?"true":"false"));
+  const note=document.getElementById("presetNote"); if(note) note.textContent=on?PRESET_INFO[on].text:"";
   const n=ltNodes[ltSel]; const d=document.getElementById("ltDetail");
   if(!n||n.tree!==ltTab||n.rec==="hidden"){d.hidden=true;return} d.hidden=false;
   const r=ltBuild[n.id]||0, left=LT_MAX-ltSpent(), un=ltUnlocked(n);
@@ -6316,7 +6495,7 @@ function ltRender(){
     Object.values(ltNodes).forEach(m=>{if(m.req===n.id&&ltBuild[m.id]&&(ltBuild[n.id]||0)<n.max) delete ltBuild[m.id]});
     ltSave();ltRender()};
 }
-document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{ltBuild={...PRESETS[b.dataset.preset]};ltSave();ltRender()});
+document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{const info=PRESET_INFO[b.dataset.preset];ltBuild={...PRESETS[b.dataset.preset]};ltTab=info.tab;ltSel=info.sel;ltSave();ltRender()});
 
 /* Addons */
 const ADDONS={
@@ -6648,7 +6827,7 @@ function standRender(){
     const done=(GENERATED.quests?.[c.id]||[]).reduce((n,z)=>n+z[1].length,0);
     const log=(GENERATED.log?.[c.id]||[]).reduce((n,z)=>n+z[1].length,0);
     const ilvl=GENERATED.gear?.[c.id]?.[0];
-    return `<article class="stand-card" style="--cc:var(--${c.k})"><b>${esc(c.short)}</b><span>Lv ${lvlOf(c)}</span><span class="mini"><i style="width:${max?Math.round(xp/max*100):0}%"></i></span><small>${xp.toLocaleString()} / ${(max||0).toLocaleString()} xp${rest?` · ${rest.toLocaleString()} rested`:""}</small><small>${g?fmt(g.gold):"—"} · bags ${bags}</small><small>${done} done · ${log} in log${ilvl?` · ilvl ${ilvl}`:""}</small></article>`;
+    return `<article class="stand-card" style="--cc:var(--${c.k})"><button type="button" class="openchar" data-open="${c.id}" style="color:var(--${c.k})"><b>${esc(c.short)}</b></button><span>Lv ${lvlOf(c)}</span><span class="mini"><i style="width:${max?Math.round(xp/max*100):0}%"></i></span><small>${xp.toLocaleString()} / ${(max||0).toLocaleString()} xp${rest?` · ${rest.toLocaleString()} rested`:""}</small><small>${g?fmt(g.gold):"—"} · bags ${bags}</small><small>${playedShort(g?.played)} played${ilvl?` · ilvl ${ilvl}`:""}</small><small>${done} done · ${log} in log</small></article>`;
   }).join("");
 }
 qRender();
@@ -6661,7 +6840,7 @@ document.getElementById("skGrid").innerHTML=SK.map(s=>{const c=chars.find(x=>x.i
     return `<li><span class="${t==="s"?"sec":""}">${t==="s"?n:`<span class="tag ${t}">${n}</span>`}</span><em class="${est?"est":""}">${v}${est?"":` / ${max}`}${est?" (est.)":""}</em><span class="mini${num>=max?" done":""}"><i style="width:${pct(num,max)}%"></i></span></li>`}).join("")}</ul>`
     :`<p class="sk-empty">No professions yet.</p>`;
   const rec=s.rec.map(([n,g,extra])=>`<div class="sk-rec"><h4>${n} recipes</h4>${Object.entries(g).map(([k,list])=>`<div class="chips">${list.map(r=>`<span class="chip ${k}" title="${recWord[k]}">${r}</span>`).join("")}</div>`).join("")}${extra?`<span class="hint">+${extra} WoW: Forever recipe${extra>1?"s":""} the addon can't name</span>`:""}</div>`).join("");
-  return `<div class="card sk" style="--cc:var(--${c.k})"><h3><b>${c.short}</b><small>Lv ${c.lvl} ${c.cls}</small></h3>${profs}${rec}${s.flag?`<p class="sk-flag">${s.flag}</p>`:""}</div>`}).join("");
+  return `<div class="card sk" data-id="${s.id}" style="--cc:var(--${c.k})"><h3><b>${c.short}</b><small>Lv ${c.lvl} ${c.cls}</small></h3>${profs}${rec}${s.flag?`<p class="sk-flag">${s.flag}</p>`:""}</div>`}).join("");
 
 /* Market */
 const SELL=[
@@ -6742,8 +6921,8 @@ const legacyN=()=>all.filter(isOn).length;
 const crafters=()=>chars.filter(c=>craftIdx(c)>=0);
 const daysTo=d=>Math.max(0,Math.ceil((d-new Date())/864e5));
 const current=()=>scanned().sort((a,b)=>SCAN[b.id][7]-SCAN[a.id][7])[0];
-const SHORT={roster:"Roster",next:"Next up",legacy:"Legacy",talents:"Talents",mats:"Mats",crafting:"Crafting",skills:"Skills",quests:"Quests",gear:"Gear",rep:"Reputation",gold:"Gold & mail",market:"Auction House",bags:"Bags",addons:"Addons"};
-const sections=[...document.querySelectorAll("main section")].map(s=>[s.id,s.querySelector("h2").textContent,SHORT[s.id]||s.querySelector("h2").textContent]);
+const SHORT={roster:"Roster",next:"Next up",gold:"Gold & mail",market:"Auction House",bags:"Bags",addons:"Addons",legacy:"Legacy"};
+const sections=[...document.querySelectorAll("main section[data-home]")].map(s=>[s.id,s.querySelector("h2").textContent,SHORT[s.id]||s.querySelector("h2").textContent]);
 let secOn=sections[0][0];
 
 function tpUpdate(){
@@ -6791,7 +6970,8 @@ const POP={
   `<p class="tt-note">Rum's Alchemy is capped at 75 until he trains Journeyman.</p>${link("crafting","Leveling routes")}`,
  alts:()=>`<p class="tt-h">Alts <small>${chars.length} characters</small></p>`+
   [...chars].sort((a,b)=>lvlOf(b)-lvlOf(a)).map(c=>{const s=SCAN[c.id];
-   return line(`${nm(c)} <span class="tt-dim">${lvlOf(c)} ${c.cls}</span>`,s?`<span class="tt-dim">${s[6]||s[5]} · ${ago(s[7])}</span>`:`<span class="tt-dim">not scanned</span>`)}).join("")+link("roster","Roster"),
+   return line(`${nm(c)} <span class="tt-dim">${lvlOf(c)} ${c.cls}</span>`,s?`<span class="tt-dim">${playedShort(GENERATED.chars?.[c.id]?.played)}</span>`:`<span class="tt-dim">not scanned</span>`)}).join("")+
+  line("Account",playedShort(accountPlayed()))+link("roster","Roster"),
  clock:()=>{const d=daysTo(RAIDS);return `<p class="tt-h">${new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})} <small>${new Date().toLocaleDateString([],{weekday:"long",month:"short",day:"numeric"})}</small></p>`+
   line("First raids open",`Dec 9 · ${d?`${d} days`:"now"}`,"tt-y")+line("Last addon scan",`<span class="tt-dim">${new Date((GENERATED.latestLogout||0)*1000).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}</span>`)+
   `<p class="tt-note">Log out or /reload in game, run tools/refresh.bat, then click Reset to scan values.</p>${link("gold","Costs and dates")}`}
@@ -6807,14 +6987,220 @@ const POP={
   document.addEventListener("click",e=>{if(openBtn&&!pop.contains(e.target))close()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")close(true)});
   addEventListener("resize",place);addEventListener("scroll",place,{passive:true});titan.querySelector(".tp-row").addEventListener("scroll",place,{passive:true});
-  if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){secOn=e.target.id;
+  if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&document.body.dataset.view!=="char"){secOn=e.target.id;
     document.getElementById("tpMenu").textContent=(sections.find(s=>s[0]===secOn)||sections[0])[2]}}),{rootMargin:"-40% 0px -55% 0px"});
-    document.querySelectorAll("main section").forEach(s=>io.observe(s))}
+    document.querySelectorAll("main section[data-home]").forEach(s=>io.observe(s))}
   setInterval(tpClock,30000);
 })();
-function refresh(){bars();nextUp();legacy();plRender();tpUpdate();standRender()}
+const PIVOTS=[["build","Build","builds"],["perks","Perks","talents"],["mats","Mats","mats"],["route","Route","crafting"],["skills","Skills","skills"],["quests","Quests","quests"],["gear","Gear","gear"],["rep","Reputation","rep"]];
+const BUILDS={
+  leif:{now:"Feral",later:"Restoration",note:"Cat order through level 30. If you are tanking, take Feral Charge at 20 instead of Shifting Power.",order:[["Ferocity",5],["Feral Swiftness",2],["Feral Instinct",3],["Savage Fury",2],["Shredding Attacks",3],["Shifting Power",1],["Primal Bite",1],["Sharpened Claws",2],["Blood Frenzy",1],["Leader of the Pack",1]]},
+  murus:{now:"Retribution",later:"Protection",note:"Protection is the dungeon plan. This is the faster leveling order. The published level 30 list spends 26 points by treating Talented as five extra points, so stop five short.",steps:["Benediction","Conviction","Seal of Command","Pursuit of Justice","Sanctified Judgement","Sacred Arbiter","Vengeance","Two-Handed Weapon Specialization"]},
+  rum:{now:"Enhancement",note:"The order the leveling guides agree on, through Stormstrike and into Flurry.",order:[["Thundering Strikes",5],["Mental Dexterity",3],["Improved Ghost Wolf",2],["Shamanistic Focus",1],["Elemental Weapons",3],["Ancestral Knowledge",1],["Stormstrike",1],["Flurry",4,5],["Improved Stormstrike",1,2]]},
+  fatal:{now:"Affliction",note:"First 10 points, then the guide for the rest. Skip older lists that max Malediction. That talent is Grim Reach now.",order:[["Suppression",5],["Improved Corruption",5]],steps:["Pandemic","Improved Bane of Agony","Malevolence","Siphon Life"]},
+  libertty:{now:"Beast Mastery",note:"Unleashed Fury and Ferocity come first. The next point is a choice: Summon Hawk, Bestial Discipline for mana, or Intimidation.",steps:["Unleashed Fury","Ferocity","Summon Hawk, Bestial Discipline, or Intimidation"]},
+  corwyn:{now:"Shadow",later:"Holy",note:"Shadow while leveling, then one respec to Holy for dungeons. Lists from before mid-October moved Improved Power Word: Shield and Mental Strength, so follow the guides for the point order."},
+  redstone:{now:"Frost",note:"Open with Improved Frostbolt. Fire waits until later."},
+  warrior:{now:"Arms",later:"Fury",note:"Arms while leveling, Fury after one respec at 60. Skip Fury lists that still take Improved Cleave. That talent was removed.",steps:["Cruelty","Improved Rend","Deep Wounds","Bloodthrill","Sweeping Strikes","Weaponmaster","Mortal Strike"]},
+  rogue:{now:"Combat",note:"This path takes Puncturing Wounds for daggers. With swords, those 3 points go to Endurance and Lightning Reflexes. At 30, the two Remorseless Attacks points move into Dual Wield Specialization and Blade Flurry.",order:[["Remorseless Attacks",2],["Improved Sinister Strike",2],["Improved Eviscerate",3],["Puncturing Wounds",3],["Deflection",3],["Riposte",1],["Precision",3],["Flawless Execution",1],["Dual Wield Specialization",3]]}
+};
+function talentPoints(c){
+  const early=Math.min(5,ltBuild.tal||0);
+  return Math.min(51,Math.max(0,lvlOf(c)-9+early));
+}
+const ROUTES={
+  leif:[
+    ["Auberdine, your level","Bashal'Aran, Buzzbox 411, How Big a Threat?, As Water Cascades, Plagued Lands, and the Cliffspring River. These are the Darkshore quests at 12–15, and you're about to ding."],
+    ["Aquatic form","Lessons Anew is in the log. Turn it in with Dendrite Starblaze in Moonglade."],
+    ["Town","Easy Strider Living, and Camping 101: First Aid with Naleeia Tattermend."],
+    ["Rest of Darkshore","Fruit of the Sea, Cave Mushrooms, Grove of the Ancients, and Deep Ocean, Vast Sea. Save the tower, Murkdeep, and the prospector for 18."],
+    ["Ashenvale for 25","Trek to Ashenvale after that. Skin everything on the way. Leatherworking needs medium leather from 20+ beasts, so don't detour to the Stormwind or Westfall mail."]
+  ],
+  murus:[
+    ["Ironforge errands","Deeprun Rat Roundup, then The Tome of Divinity. Henze Faulk is in Elwynn, and that paladin quest is the one at your level."],
+    ["Blacksmithing quest","Supplying the Front wants 6 Copper Axes and 6 Copper Chain Belts. Craft them. That is skill-ups and a turn-in."],
+    ["Finish Dun Morogh","A Visitor to Dun Morogh at Gol'Bolar, and The Perfect Stout if the shimmerweed is still quick. Leave the level 6 leftovers."],
+    ["At 15","Hall of Thanes, the heirlooms and the restless dead, then Loch Modan. Find Bingles and deliver Stormpike's package are already in the log."],
+    ["Toward 25","Loch Modan, then Wetlands. Gearing Redridge waits until 16. Skip Westfall and the Warsong marks."]
+  ],
+  rum:[
+    ["Back to Kharanos","Finding Warmth, Frosthowl, Frostmane Hold, and The Perfect Stout are the quests at your level. Stormwind is a detour."],
+    ["Train Journeyman","Alchemy is capped at 75. Train it in Ironforge and turn in Camping 101: Alchemy with Vosur Brakthel. Train Journeyman Herbalism before Loch Modan herbs go gray."],
+    ["Still Dun Morogh","Data Hoarders around Gnomeregan at 10, then A Visitor to Dun Morogh."],
+    ["Loch Modan","After Dun Morogh. Stormpike's Delivery is the breadcrumb, and it can wait until 15. Herbs there feed Alchemy toward 150."]
+  ],
+  fatal:[
+    ["Kharanos","Tools for Steelgrill, then the Grizzled Den: Flintfire's Shipment and Secure the Mountain. Candles go to Father Gavin."],
+    ["In town","The Great Outdoors at Eric's campfire, and Beer Basted Boar Ribs."],
+    ["Professions","Train Journeyman Skinning before 75. Train Enchanting in Ironforge. The Runed Copper Rod needs a Copper Rod from Murus."],
+    ["Toward 25","Stay in Dun Morogh through 10, then Loch Modan. Mail spare greens home for disenchanting later. Don't change zones yet."]
+  ],
+  libertty:[
+    ["Goldshire mines","Fargodeep Mine, Kobold Candles, Gold Dust Exchange, and Book Return."],
+    ["The lake","A Net Disaster at Crystal Lake, then Bottles and Baubles at the murloc camp."],
+    ["Camp","The Great Outdoors at Sam's campfire in Goldshire."],
+    ["Engineering","Train it in Stormwind once those quests are in. Mine copper on the road. Mining is at 4."],
+    ["Toward 25","Finish Elwynn, then Westfall. That's the road to 25."]
+  ],
+  corwyn:[
+    ["Class quest","Garments of the Light. Heal Mountaineer Dolf. It's been in the log since level 4."],
+    ["Kharanos","Ammo for Rumbleshot, Stocking Jetsteam, the Grizzled Den, Flintfire's Shipment, the candles, and Secure the Mountain."],
+    ["Train the real professions","Camping wants Cooking, Skinning, and Tailoring. Train Tailoring with Uthrar Threx. Drop Skinning for Mining when you can. Ore goes to Murus, cloth stays for bags."],
+    ["Toward 25","Dun Morogh through 10, then Loch Modan."]
+  ],
+  redstone:[
+    ["Stay the bank","No quests and almost no XP. Trade District is the job: mail and portals."],
+    ["The level 25 point","Only when a main doesn't need you. Start in Northshire and follow Elwynn. Nothing is in the log yet."],
+    ["Herbalism","Optional, and not trained. Don't spend the gold on it until the crafters are moving."]
+  ],
+  warrior:[
+    ["Log in once","No scan yet, so this is the plan rather than a quest log."],
+    ["Train both gathering skills","Mining and Skinning. Ore to Murus, leather to Leif."],
+    ["Starter zone to 10","Quest wherever you wake up. Arms while leveling."],
+    ["Toward 25","The level 10 zone after that. One respec to Fury waits until 60."]
+  ],
+  rogue:[
+    ["Log in once","No scan yet. A gnome starts in Coldridge."],
+    ["Train Herbalism and Skinning","Herbs to Rum, leather to Leif."],
+    ["Dun Morogh to 10","Coldridge, then Kharanos. Combat while leveling."],
+    ["Toward 25","Loch Modan after Dun Morogh."]
+  ]
+};
+function renderRoute(c){
+  const body=document.getElementById("routeBody");
+  if(!body) return;
+  const steps=ROUTES[c.id]||[];
+  const left=Math.max(0,25-lvlOf(c));
+  const esc=s=>String(s).replace(/[&<>]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[ch]));
+  body.innerHTML=`<div class="route-top"><p>${left?`${left} levels to 25.`:"Level 25 is done."} ${esc(c.zone||"No zone scanned")}.</p><a href="${T}${c.rl[5]}/" target="_blank" rel="noopener">Leveling guide ↗</a></div><ol class="tsteps route">${steps.map(([title,text],i)=>`<li class="${i===0?"now":""}"><span class="n">${i+1}</span><span><b>${esc(title)}</b><span class="src">${esc(text)}</span></span></li>`).join("")}</ol>`;
+}
+function renderBuild(c){
+  const b=BUILDS[c.id]||{};
+  const esc=s=>String(s).replace(/[&<>]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[ch]));
+  const links=document.getElementById("buildLinks");
+  const meta=document.getElementById("buildMeta");
+  const body=document.getElementById("buildBody");
+  if(!links||!body) return;
+  const spec=`${T}${c.rl[4]}/`, leveling=`${T}${c.rl[5]}/`;
+  links.innerHTML=`<a href="${spec}" target="_blank" rel="noopener">${esc(c.rl[1])} guide ↗</a><a href="${leveling}" target="_blank" rel="noopener">Leveling guide ↗</a>`;
+  const pts=talentPoints(c);
+  const early=Math.min(5,ltBuild.tal||0);
+  meta.textContent=`${pts} talent point${pts===1?"":"s"} now${early?`, ${early} sooner from Talented`:""}. ${b.now?`Leveling as ${b.now}.`:""}${b.later?` ${b.later} is the later spec.`:""} ${b.note||""}`;
+  let html="";
+  if(b.order){
+    let spent=0;
+    const rows=b.order.map(([name,take,max])=>{
+      const got=Math.max(0,Math.min(take,pts-spent));
+      spent+=got;
+      return {name,take,max:max||take,got,state:got>=take?"done":got>0?"now":""};
+    });
+    if(pts>0&&!rows.some(r=>r.state==="now")){const nxt=rows.find(r=>r.state!=="done");if(nxt)nxt.state="now"}
+    if(!pts&&rows[0]) rows[0].state="now";
+    html+=`<ol class="torder">${rows.map((r,i)=>`<li class="${r.state}"><span class="n">${i+1}</span><b>${esc(r.name)}</b><span class="pips" title="${r.got} of ${r.take}">${Array.from({length:r.take},(_,k)=>`<i class="${k<r.got?"on":""}"></i>`).join("")}${r.max>r.take?`<small> of ${r.max}</small>`:""}</span></li>`).join("")}</ol>`;
+  }
+  if(b.steps) html+=`<ol class="tsteps">${b.steps.map((name,i)=>`<li><span class="n">${i+1}</span><b>${esc(name)}</b></li>`).join("")}</ol>`;
+  body.innerHTML=html;
+}
+const DOLL_L=["Head","Neck","Shoulder","Back","Chest","Shirt","Tabard","Wrist"];
+const DOLL_R=["Hands","Waist","Legs","Feet","Ring","Ring","Trinket","Trinket"];
+const DOLL_B=["Main hand","Off hand","Ranged"];
+function playedParts(sec){
+  sec=Math.max(0,Math.floor(Number(sec)||0));
+  return [Math.floor(sec/86400),Math.floor(sec%86400/3600),Math.floor(sec%3600/60)];
+}
+function playedLong(sec){
+  if(sec==null) return "—";
+  const [d,h,m]=playedParts(sec);
+  const bits=[];
+  if(d) bits.push(`${d} day${d===1?"":"s"}`);
+  if(h) bits.push(`${h} hour${h===1?"":"s"}`);
+  if(m||!bits.length) bits.push(`${m} minute${m===1?"":"s"}`);
+  return bits.join(", ");
+}
+function playedShort(sec){
+  if(sec==null) return "—";
+  const [d,h,m]=playedParts(sec);
+  if(d) return `${d}d ${h}h`;
+  if(h) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+function accountPlayed(){
+  return chars.reduce((n,c)=>n+(GENERATED.chars?.[c.id]?.played||0),0);
+}
+function paintPlayed(){
+  const total=accountPlayed();
+  const fresh=document.getElementById("fresh");
+  if(fresh&&GENERATED.label) fresh.textContent=`Scanned ${GENERATED.label} · Played ${playedShort(total)}`;
+  const foot=document.getElementById("footFresh");
+  if(foot&&GENERATED.label) foot.textContent=`Scanned ${GENERATED.label} · ${playedLong(total)} played`;
+}
+let charId="", charPivot="build";
+function showHome(id){
+  document.body.dataset.view="home";
+  charId="";
+  document.querySelectorAll("[data-char]").forEach(s=>s.classList.remove("show"));
+  const el=id&&document.getElementById(id);
+  if(el&&el.hasAttribute("data-home")) el.scrollIntoView();
+  tpUpdate();
+}
+function showChar(id,pivot){
+  const c=chars.find(x=>x.id===id);
+  if(!c){showHome();return}
+  const same=charId===id&&charPivot===pivot;
+  charId=id;
+  charPivot=PIVOTS.some(p=>p[0]===pivot)?pivot:"build";
+  store["char-pivot"]=charPivot;
+  document.body.dataset.view="char";
+  document.querySelectorAll("[data-char]").forEach(s=>s.classList.remove("show"));
+  document.getElementById(PIVOTS.find(p=>p[0]===charPivot)[2]).classList.add("show");
+  const esc=s=>String(s).replace(/[&<>]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[ch]));
+  document.getElementById("charSwitch").innerHTML=chars.map(x=>`<button type="button" role="tab" aria-selected="${x.id===id}" data-c="${x.id}" style="--cc:var(--${x.k})"><i></i>${esc(x.short)}</button>`).join("");
+  document.querySelectorAll("#charSwitch button").forEach(b=>b.onclick=()=>{location.hash=`c/${b.dataset.c}/${charPivot}`});
+  document.getElementById("charNav").innerHTML=PIVOTS.map(([pid,label])=>`<button type="button" role="tab" aria-selected="${pid===charPivot}" data-p="${pid}">${label}</button>`).join("");
+  document.querySelectorAll("#charNav button").forEach(b=>b.onclick=()=>{location.hash=`c/${id}/${b.dataset.p}`});
+  const scan=GENERATED.scan?.[id], info=GENERATED.chars?.[id];
+  const xp=scan?scan[2]:0, max=scan?scan[3]:0, rest=scan?scan[4]:0;
+  const bags=scan&&scan[1]?`${scan[0]}/${scan[1]}`:"—";
+  const done=(GENERATED.quests?.[id]||[]).reduce((n,z)=>n+z[1].length,0);
+  const logN=(GENERATED.log?.[id]||[]).reduce((n,z)=>n+z[1].length,0);
+  const ilvl=GENERATED.gear?.[id]?.[0];
+  const zone=[info?.zone||c.zone,info?.sub].filter(Boolean).join(" · ")||"—";
+  const pool=(GENERATED.gear?.[id]?.[1]||[]).map(s=>s.slice());
+  const take=name=>{const i=pool.findIndex(s=>s[0]===name);return i<0?null:pool.splice(i,1)[0]};
+  const eq=name=>{const row=take(name), item=row?row[1]:"", q=row?row[2]:0;
+    return `<div class="eq${item?"":" empty"}"><i class="iq${item?q:0}"></i><span><small>${esc(name)}</small><b class="${item?`iq${q}`:""}">${item?esc(item):"Empty"}</b></span></div>`};
+  const restW=max?Math.min(100,Math.round(Math.min(max,xp+rest)/max*100)):0;
+  const xpW=max?Math.round(xp/max*100):0;
+  const points=talentPoints(c);
+  document.getElementById("charStats").innerHTML=`<div class="doll" style="--cc:var(--${c.k})"><div class="doll-top"><div><h2 class="${c.k}">${esc(c.name)}</h2><p>${esc(c.cls)} · ${esc(roleName[c.rl[0]])} · ${esc(zone)}</p></div><div class="lvl"><b>${lvlOf(c)}</b><span>Level</span></div></div><div class="doll-grid"><div class="doll-col">${DOLL_L.map(eq).join("")}</div><div class="doll-mid"><div class="portrait"><b>${lvlOf(c)}</b><span>${esc(c.cls)}</span></div><div class="xbar" title="Experience"><i class="rx" style="width:${restW}%"></i><i class="xp" style="width:${xpW}%"></i></div><small>${xp.toLocaleString()} / ${(max||0).toLocaleString()} xp${rest?` · ${rest.toLocaleString()} rested`:""}</small><dl class="sheet-stats"><div><dt>Item level</dt><dd>${ilvl||"—"}</dd></div><div><dt>Gold</dt><dd>${info?fmt(info.gold):"—"}</dd></div><div><dt>Bags</dt><dd>${bags}</dd></div><div><dt>Talent points</dt><dd>${points}</dd></div><div><dt>Time played</dt><dd>${playedLong(info?.played)}</dd></div><div><dt>This level</dt><dd>${info?playedLong(info.playedLevel):"—"}</dd></div></dl><p class="doll-note">${esc(c.rl[3])}</p><p class="doll-links"><a href="${T}${c.rl[4]}/" target="_blank" rel="noopener">${esc(c.rl[1])} guide ↗</a><a href="${T}${c.rl[5]}/" target="_blank" rel="noopener">Leveling guide ↗</a></p></div><div class="doll-col">${DOLL_R.map(eq).join("")}</div></div><div class="doll-weapons">${DOLL_B.map(eq).join("")}</div><p class="doll-account">Account played ${playedLong(accountPlayed())}</p></div>`;
+  document.querySelectorAll("#mats .card").forEach(card=>card.classList.toggle("match",card.querySelector("[data-id]")?.dataset.id===id));
+  document.querySelectorAll("#skGrid .sk").forEach(el=>el.classList.toggle("match",el.dataset.id===id));
+  const mine=Object.entries(PL).find(([,d])=>d.who===id);
+  if(mine){plTab=mine[0];plRender();document.getElementById("plBody").hidden=false;document.getElementById("plEmpty").hidden=true;document.getElementById("plHead").hidden=false}
+  else{document.getElementById("plBody").hidden=true;document.getElementById("plEmpty").hidden=false;document.getElementById("plHead").hidden=true}
+  store["q-tab"]=id;store["g-tab"]=id;store["r-tab"]=id;save();
+  qRender();gRender();rRender();renderBuild(c);renderRoute(c);
+  document.getElementById("tpMenu").textContent=c.short;
+  if(!same) document.getElementById("charShell").scrollIntoView({block:"start"});
+}
+function route(){
+  const m=location.hash.match(/^#c\/([a-z0-9]+)(?:\/([a-z]+))?$/);
+  if(m&&chars.some(c=>c.id===m[1])) showChar(m[1],m[2]||store["char-pivot"]||"build");
+  else showHome(location.hash.replace("#",""));
+}
+document.getElementById("charBack").onclick=()=>{location.hash="roster"};
+document.getElementById("rows").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)location.hash=`c/${b.dataset.open}/build`});
+document.getElementById("stand").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)location.hash=`c/${b.dataset.open}/build`});
+addEventListener("hashchange",route);
+function refresh(){bars();nextUp();legacy();plRender();tpUpdate();standRender();paintPlayed();if(charId)showChar(charId,charPivot)}
 refresh();
+const savedPreset=presetOn();
+if(savedPreset){
+  const here=Object.values(ltNodes).filter(n=>n.tree===ltTab).reduce((a,n)=>a+(ltBuild[n.id]||0),0);
+  if(!here){ltTab=PRESET_INFO[savedPreset].tab;ltSel=PRESET_INFO[savedPreset].sel}
+}
 ltRender();
+route();
 </script>
 
 </body></html>

@@ -725,6 +725,8 @@ function build(dir, priceBook) {
       rest: infoRow.restXP || 0,
       logout,
       gold: infoRow.money || 0,
+      played: infoRow.played || 0,
+      playedLevel: infoRow.playedThisLevel || 0,
       sk,
       repl,
       flag,
@@ -893,7 +895,8 @@ if (dry) {
     const c = generated.chars[id];
     if (!c) { console.log(`${name}: not scanned`); continue; }
     const profs = c.profs.map(p => `${p[0]} ${p[1]}/${p[2]}`).join(", ") || "no professions";
-    console.log(`${name}  lv ${c.lvl}  ${c.zone}${c.sub ? " / " + c.sub : ""}  ${c.gold}c  bags ${generated.scan[id][0]}/${generated.scan[id][1]}  ${profs}`);
+    const playedH = Math.round((c.played || 0) / 360) / 10;
+    console.log(`${name}  lv ${c.lvl}  ${c.zone}${c.sub ? " / " + c.sub : ""}  ${c.gold}c  played ${playedH}h  bags ${generated.scan[id][0]}/${generated.scan[id][1]}  ${profs}`);
   }
   console.log(`scan ${generated.label}  gold rows ${generated.gold.length}  missing: ${generated.missingNote}`);
   for (const [id, name] of ROSTER) {

@@ -2,7 +2,7 @@
 
 A single-page roster for an Alliance account on WoW: Forever. Open `index.html` in a browser, or use the live copy at [jacobrozell.github.io/forever-tracker](https://jacobrozell.github.io/forever-tracker/).
 
-Levels, zones, gold, experience, professions, bags, and bag contents come from the game's addon save files. Talent plans, crafting routes, gold rules, and the addon list stay in the page and are not overwritten.
+Levels, zones, gold, experience, professions, bags, bag contents, the quest log, equipped gear, and reputation come from the game's addon save files. Completed quests come from Questie. Talent plans, crafting routes, gold rules, and the addon list stay in the page and are not overwritten.
 
 You need [Node.js](https://nodejs.org/) (the refresh script) and, if you publish, [Git](https://git-scm.com/).
 
@@ -10,18 +10,27 @@ You need [Node.js](https://nodejs.org/) (the refresh script) and, if you publish
 
 Install these in CurseForge for the WoW: Forever game, not retail or Classic. On an addon's Files tab, pick a file marked Forever when one exists. The same list is on the page under **Addons**.
 
-These two are required for the refresh. Without them the script has nothing to read.
+These three are required for a full refresh. Without Altoholic and Bagnon the script has nothing to read for the roster. Without Questie the completed-quest list stays empty.
 
 | Addon | Why |
 | --- | --- |
-| Altoholic | Saves level, zone, gold, experience, professions, and items (the DataStore files). |
+| Altoholic | Saves level, zone, gold, experience, professions, items, the quest log, equipped gear, and reputation (the DataStore files). |
 | Bagnon | Saves which bags are equipped and how full they are (the BagBrother file). |
-| Questie | Saves which quests each character has completed. The page can sort them by zone, level, or name, and shows the quest text and level. It does not save the day a quest was turned in. |
-| Altoholic quest log | Quests still in the log, including rewards. Use Show → In the log. |
-| Altoholic gear | Equipped items and average item level. |
-| Altoholic reputation | Home-city standing. The bar fills the current rank. |
+| Questie | Saves which quests each character has finished. |
 
-Log into each character once with both enabled, open the profession windows and the bank if you want those counted, then log out.
+Log into each character once with those enabled, open the profession windows and the bank if you want those counted, then log out. Altoholic writes the quest log, gear, and reputation on that logout. Questie writes the completed list the same way.
+
+## What the page shows from a scan
+
+The home page is the account: the roster, what to do next, gold, the auction house, bags, addons, and Legacy points at the bottom. Open a character's name for that character only. The top of their page is the stat line (level, experience, gold, bags, quests, item level). Under it: Build, Mats, Route, Skills, Quests, Gear, and Reputation. That split follows the Destiny companion: one guardian on screen, with build and gear on their page, and account goals kept off it.
+
+Under the roster, each scanned character also has a strip with the same stats, and the name opens their page.
+
+**Quests** has two lists. **Show → Done** is Questie's completed quests. **Show → In the log** is the quests Altoholic still sees in the log, with the quest text and any reward. **Sort** is Zone, Level, or Name. The browser remembers both choices. Steps that share a name, such as Camping 101, are listed once with a count. Questie does not save the day a quest was turned in, so there is no completion date. A handful of Forever quests have no name in Questie's database and show up as `Quest` plus a number.
+
+**Gear** is what that character had equipped at logout, with the item's quality color and the average item level.
+
+**Reputation** is the home-city standing. The bar fills the current rank, not the whole path to Exalted. Honored is the discount the gold section plans around for the level 40 mount.
 
 Worth adding for play. They are not required to refresh the page.
 
@@ -69,9 +78,9 @@ Check the result without changing the page:
 node tools/refresh.mjs --dry
 ```
 
-That prints each character's level, zone, gold, bag slots, and professions.
+That prints each character's level, zone, gold, bag slots, professions, quests in the log, item level, and the first two reputations.
 
-The header should then say **Scanned** followed by the newest logout time. Keg Kenobi and Sneaky Gnomes stay blank until you log into each of them once with Altoholic and Bagnon enabled.
+The header should then say **Scanned** followed by the newest logout time. Keg Kenobi and Sneaky Gnomes stay blank until you log into each of them once with Altoholic, Bagnon, and Questie enabled.
 
 ## Where the numbers come from
 
@@ -96,7 +105,11 @@ These addons have to be enabled, or the matching file stays empty:
 | Addon | Save file | What it supplies |
 | --- | --- | --- |
 | Altoholic (DataStore) | `DataStore_Characters.lua`, `DataStore_Crafts.lua`, `DataStore_Containers.lua` | Level, zone, gold, experience, professions, items |
+| Altoholic (DataStore) | `DataStore_Quests.lua` | Quests still in the log, and their rewards |
+| Altoholic (DataStore) | `DataStore_Inventory.lua` | Equipped gear and average item level |
+| Altoholic (DataStore) | `DataStore_Reputations.lua` | Faction standing |
 | Bagnon | `BagBrother.lua` | Which bags are equipped and how full they are |
+| Questie | `Questie.lua` | Which quests are finished. Names and zones come from the Questie database installed with the addon |
 
 The script reads those files in place. It does not copy them into this folder. Do not commit the `SavedVariables` folder. It contains account data.
 
@@ -148,4 +161,6 @@ The page usually updates within a minute. Confirm the build under the repo's Pag
 - **"Couldn't find WoW Forever SavedVariables"** — log out of the game once, then set `WOW_SAVED` as shown above. The folder must contain `DataStore_Characters.lua`.
 - **A character you just played did not change** — the game had not written the save yet. Log out or `/reload`, then run the script again. Also click **Reset to scan values** if the browser is still showing a number you typed.
 - **Bags or items are missing** — open the bags, and the bank if you care about bank counts, then log out. Bagnon only records what that character has opened.
+- **Gear, reputation, or the quest log is empty** — that character's Altoholic save has not been written yet. Log out or `/reload`, then refresh.
+- **Completed quests are missing** — Questie was off for that character. Log out once with it enabled.
 - **The command window flashes and closes** — run `node tools/refresh.mjs` from a terminal in this folder so you can read the error.
