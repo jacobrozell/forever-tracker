@@ -123,7 +123,7 @@ A profession skill appears only after you open that profession window once on th
 - Which addons to install
 - Auction House prices
 
-Auctionator's price database is stored in a binary format inside `Auctionator.lua`, so the script cannot read a new scan. Prices already on the page are reused when the same item shows up in bags. To record a new price, edit the `PRICES`, `SELL`, `KEEP`, or `SKIP` lists in `index.html`. Each price is copper: 100 copper is 1 silver, 10000 copper is 1 gold. The third number on a `PRICES` row is how many were listed.
+Auctionator's price database is a CBOR blob inside `Auctionator.lua`. A refresh reads the latest full scan and updates the material prices, the sell, keep, and skip lists, and the auction header. Prices are copper: 100 copper is 1 silver, 10000 copper is 1 gold. The third number on a `PRICES` row is how many were listed. Items the scan cannot name keep the previous price.
 
 ## Add a character
 

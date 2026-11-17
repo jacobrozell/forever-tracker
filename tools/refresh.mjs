@@ -257,15 +257,6 @@ function harvestPrices(html) {
     let m;
     while ((m = re.exec(prices[0]))) take(JSON.parse(`"${m[1]}"`), Number(m[2]), Number(m[3]));
   }
-  const gen = html.match(/const GENERATED = (\{[\s\S]*?\});\r?\n\/\* END GENERATED SCAN \*\//);
-  if (gen) {
-    try {
-      const prev = JSON.parse(gen[1]);
-      for (const [name, pair] of Object.entries(prev.prices || {})) {
-        if (!book.has(name)) take(name, pair[0], pair[1]);
-      }
-    } catch { /* the page still has the handwritten price lists */ }
-  }
   return book;
 }
 
@@ -313,6 +304,258 @@ function cbor(buf, st = { i: 0 }) {
     return null;
   }
   throw new Error("bad cbor");
+}
+
+function luaQuoted(text, i) {
+  const q = text[i++];
+  let out = "";
+  while (i < text.length) {
+    const c = text[i++];
+    if (c === "\\") {
+      const n = text[i] ?? "";
+      if (n >= "0" && n <= "9") {
+        let digits = n;
+        i++;
+        for (let k = 0; k < 2 && i < text.length && text[i] >= "0" && text[i] <= "9"; k++) digits += text[i++];
+        out += String.fromCharCode(Number(digits) & 255);
+      } else {
+        i++;
+        out += n === "n" ? "\n" : n === "r" ? "\r" : n === "t" ? "\t" : n;
+      }
+    } else if (c === q) break;
+    else out += c;
+  }
+  return out;
+}
+
+function money(c) {
+  c = Math.round(Math.abs(c));
+  const g = Math.floor(c / 10000);
+  const s = Math.floor((c % 10000) / 100);
+  const cp = c % 100;
+  if (g) return `${g}g${s ? ` ${s}s` : ""}`;
+  if (s) return `${s}s${cp ? ` ${cp}c` : ""}`;
+  return `${cp}c`;
+}
+
+const PRICE_ALIAS = { "Bolt of Linen": "Bolt of Linen Cloth" };
+const WHO = {
+  leif: "Leif", murus: "Murus", rum: "Rum", fatal: "Fatal", libertty: "Libertty",
+  corwyn: "Corwyn", redstone: "Redstone", warrior: "Keg Kenobi", rogue: "Sneaky Gnomes",
+};
+
+function quoteOf(row) {
+  if (!row || typeof row !== "object" || Array.isArray(row)) return null;
+  const h = row.h;
+  if (!h || typeof h !== "object" || Array.isArray(h)) {
+    if (row.m == null) return null;
+    return { price: row.m, listed: 0, day: 0 };
+  }
+  const day = Math.max(...Object.keys(h).map(Number));
+  if (!Number.isFinite(day)) return null;
+  const key = String(day);
+  const low = row.l && typeof row.l === "object" && !Array.isArray(row.l) ? (row.l[key] ?? row.l[day]) : null;
+  const price = low ?? h[key] ?? h[day] ?? row.m;
+  const listed = row.a && typeof row.a === "object" && !Array.isArray(row.a) ? (row.a[key] ?? row.a[day] ?? 0) : 0;
+  if (price == null) return null;
+  return { price, listed, day };
+}
+
+function loadSuffixNames(root) {
+  const file = path.join(root, "Interface", "AddOns", "Auctionator", "Data_Vanilla", "Suffixes.lua");
+  const names = new Map();
+  if (!fs.existsSync(file)) return names;
+  const text = fs.readFileSync(file, "utf8");
+  const strings = new Map();
+  const stringBlock = text.split("SuffixStringIDTOSuffixString = {")[1]?.split("}")[0] || "";
+  for (const m of stringBlock.matchAll(/\[(\d+)\] = "([^"]+)"/g)) strings.set(Number(m[1]), m[2]);
+  const idBlock = text.split("SuffixIDToSuffixStringID = {")[1]?.split("SuffixStringIDTOSuffixString")[0] || "";
+  for (const m of idBlock.matchAll(/\[(-?\d+)\] = (\d+)/g)) {
+    const label = strings.get(Number(m[2]));
+    if (label) names.set(Number(m[1]), label);
+  }
+  return names;
+}
+
+function loadAuction(savedDir, idToName) {
+  const file = path.join(savedDir, "Auctionator.lua");
+  const empty = { book: new Map(), at: 0, count: 0, day: 0 };
+  if (!fs.existsSync(file)) return empty;
+  const text = fs.readFileSync(file, "latin1");
+  const at = Number((text.match(/\["TimeOfLastBrowseScan"\] = (\d+)/) || [])[1] || 0);
+  const dbAt = text.indexOf("AUCTIONATOR_PRICE_DATABASE");
+  const mark = text.indexOf('["PvE"] = "', dbAt);
+  if (mark < 0) return empty;
+  const blob = luaQuoted(text, text.indexOf('"', mark + 10));
+  let db;
+  try { db = cbor(Buffer.from(blob, "latin1")); }
+  catch { return empty; }
+  const ids = new Set();
+  for (const key of Object.keys(db)) {
+    if (/^\d+$/.test(key)) ids.add(Number(key));
+    const gear = key.match(/^gr:(\d+):/);
+    if (gear) ids.add(Number(gear[1]));
+  }
+  const named = itemLookup(foreverRoot(savedDir), new Set([...ids].filter(id => !idToName.has(id))));
+  for (const [id, name] of named) idToName.set(id, name);
+  const suffixes = loadSuffixNames(foreverRoot(savedDir));
+  const book = new Map();
+  let day = 0;
+  let count = 0;
+  for (const [key, row] of Object.entries(db)) {
+    const quote = quoteOf(row);
+    if (!quote || quote.price == null) continue;
+    if (quote.day > day) day = quote.day;
+    let name = null;
+    if (/^\d+$/.test(key)) name = idToName.get(Number(key));
+    else if (key.startsWith("gr:")) {
+      const [, id, suffix] = key.split(":");
+      const base = idToName.get(Number(id));
+      const label = suffixes.get(Number(suffix)) || (suffix ? suffix.replace(/_/g, " ") : "");
+      if (base && label) name = `${base} ${label}`.replace(/\s+/g, " ").trim();
+    }
+    if (!name) continue;
+    const prev = book.get(name);
+    if (!prev || quote.day >= prev.day) book.set(name, { price: quote.price, listed: quote.listed, day: quote.day });
+  }
+  for (const [alias, real] of Object.entries(PRICE_ALIAS)) {
+    if (book.has(real) && !book.has(alias)) book.set(alias, book.get(real));
+  }
+  for (const quote of book.values()) if (quote.day === day) count++;
+  return { book, at, count, day };
+}
+
+function heldBy(inv, name) {
+  const by = new Map();
+  for (const [id, rows] of Object.entries(inv || {})) {
+    const n = rows.filter(r => r[0] === name).reduce((a, r) => a + r[1], 0);
+    if (n) by.set(id, n);
+  }
+  return by;
+}
+
+function heldTotal(inv, name) {
+  let n = 0;
+  for (const qty of heldBy(inv, name).values()) n += qty;
+  return n;
+}
+
+function spread(by) {
+  return [...by.entries()].sort((a, b) => b[1] - a[1]).map(([id, n]) => `${n} on ${WHO[id] || id}`).join(", ");
+}
+
+function quoteName(book, name) {
+  return book.get(name) || book.get(PRICE_ALIAS[name]) || null;
+}
+
+function marketLists(book, inv) {
+  const sell = [];
+  const keep = [];
+  const skip = [];
+  const consider = (name, who) => {
+    const q = quoteName(book, name);
+    const owners = heldBy(inv, name);
+    const ranked = [...owners.entries()].sort((a, b) => b[1] - a[1]);
+    const owner = ranked[0]?.[0] || who;
+    const qty = ranked.reduce((a, n) => a + n[1], 0);
+    return { name, q, owner, qty, owners };
+  };
+  const worth = [
+    ["Pristine Leather", "leif"],
+    ["Frilled Lichen", "rum"],
+    ["Shadowgem", "redstone"],
+    ["Hunting Buckler", "murus"],
+    ["Copper Chain Boots", "murus"],
+    ["Severing Axe of Magic", "redstone"],
+    ["Tigerseye", "murus"],
+    ["Pyrite", "murus"],
+    ["Coarse Blasting Powder", "redstone"],
+  ];
+  for (const [name, who] of worth) {
+    const row = consider(name, who);
+    if (!row.qty || !row.q) continue;
+    const each = row.q.price;
+    const stack = each * row.qty;
+    const flooded = (each < 100 && row.q.listed > 1000) || (each < 150 && row.q.listed > 1500);
+    if (flooded || stack < 150) {
+      skip.push([name, row.qty, row.owner, each, `${money(each)} each, ${row.q.listed.toLocaleString()} listed.`]);
+      continue;
+    }
+    let why = "";
+    if (name === "Pristine Leather") why = `Scarce mat. About ${money(stack)} for the stack of ${row.qty}.`;
+    else if (name === "Copper Chain Boots") why = `Only ${row.q.listed.toLocaleString()} listed.`;
+    else if (name === "Tigerseye") why = `${spread(row.owners)}. Hold one if Murus's recipes need it.`;
+    else if (name === "Pyrite") why = spread(row.owners);
+    else if (row.q.listed < 80) why = `Only ${row.q.listed.toLocaleString()} listed.`;
+    sell.push([name, row.qty, row.owner, each, row.q.listed, why]);
+  }
+  const keepRows = [
+    ["Copper Bar", "murus", qty => `Blacksmithing skill-ups. ${qty} bars are worth about ${money(qty * quoteName(book, "Copper Bar").price)} on the AH.`],
+    ["Light Leather", "leif", (qty, owners) => `Leatherworking. ${spread(owners)}.`],
+    ["Linen Cloth", "corwyn", (qty, owners) => `Tailoring and First Aid. ${spread(owners)}.`],
+  ];
+  for (const [name, who, whyOf] of keepRows) {
+    const row = consider(name, who);
+    if (!row.qty) continue;
+    keep.push([name, row.qty, row.owner, row.q ? row.q.price : null, whyOf(row.qty, row.owners)]);
+  }
+  const herbs = heldBy(inv, "Peacebloom");
+  const leaves = heldBy(inv, "Silverleaf");
+  const herbOwners = new Map();
+  for (const id of new Set([...herbs.keys(), ...leaves.keys()])) herbOwners.set(id, (herbs.get(id) || 0) + (leaves.get(id) || 0));
+  const herbQty = [...herbOwners.values()].reduce((a, n) => a + n, 0);
+  if (herbQty) {
+    const owner = [...herbOwners.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    keep.push(["Peacebloom & Silverleaf", herbQty, owner, null, `For alchemy once Rum trains Journeyman. ${spread(herbOwners)}.`]);
+  }
+  const skipRows = [
+    ["Elixir of Minor Defense", "rum"],
+    ["Copper Chain Pants", "redstone"],
+    ["Light Armor Kit", "leif"],
+    ["Rough Arrow", "libertty"],
+  ];
+  for (const [name, who] of skipRows) {
+    const row = consider(name, who);
+    if (!row.qty || !row.q) continue;
+    skip.push([name, row.qty, row.owner, row.q.price, `${money(row.q.price)} each, ${row.q.listed.toLocaleString()} listed.`]);
+  }
+  return { sell, keep, skip };
+}
+
+function priceTips(book) {
+  const p = name => quoteName(book, name)?.price;
+  const tips = {};
+  const linen = p("Linen Cloth");
+  const bolt = p("Bolt of Linen Cloth");
+  const wool = p("Wool Cloth");
+  const woolBolt = p("Bolt of Woolen Cloth");
+  if (linen != null && bolt != null && wool != null && woolBolt != null) {
+    const linenDelta = bolt - 2 * linen;
+    const woolDelta = woolBolt - 3 * wool;
+    const side = (delta, unit) => delta === 0 ? `the same as ${unit}` : delta > 0 ? `${money(delta)} more than ${unit}` : `${money(-delta)} less than ${unit}`;
+    tips["Cloth"] = `A Bolt of Linen Cloth sells for ${side(linenDelta, "2 Linen")}. A Bolt of Woolen Cloth sells for ${side(woolDelta, "3 Wool")}.`;
+  }
+  const light = p("Light Leather");
+  if (light != null) tips["Leather & thread"] = `Leif's route to 100 uses about 245 Light Leather, roughly ${money(245 * light)} at these prices.`;
+  const essence = p("Lesser Magic Essence");
+  if (essence != null) tips["Enchanting"] = `Fatal's 20–79 step needs 59 Lesser Magic Essence, about ${money(59 * essence)} if bought.`;
+  const bronze = p("Bronze Bar");
+  const tin = p("Tin Bar");
+  if (bronze != null && tin != null) {
+    tips["Ore, bars & stone"] = bronze < tin
+      ? "Bronze Bars still cost less than Tin Bars. Buy Bronze outright for Murus's 320+ bar route."
+      : "Tin Bars cost less than Bronze Bars, so smelting no longer saves money.";
+  }
+  const herbNames = ["Peacebloom", "Silverleaf", "Earthroot", "Mageroyal", "Bruiseweed", "Briarthorn", "Stranglekelp", "Swiftthistle", "Frilled Lichen"];
+  const herbs = herbNames.map(n => [n, p(n)]).filter(([, v]) => v != null).sort((a, b) => b[1] - a[1]);
+  if (herbs.length) {
+    const starter = [["Peacebloom", p("Peacebloom")], ["Silverleaf", p("Silverleaf")], ["Earthroot", p("Earthroot")]].filter(([, v]) => v != null);
+    const starterText = starter.map(([n, v]) => `${n} ${money(v)}`).join(", ");
+    tips["Herbs & vials"] = `${herbs[0][0]} is the expensive herb at ${money(herbs[0][1])}. Swiftthistle is ${money(p("Swiftthistle"))}. Starter herbs: ${starterText}.`;
+  }
+  const agi = p("Elixir of Minor Agility");
+  if (agi != null) tips["Potions & elixirs"] = `Most of these sell for less than the herbs in them. Elixir of Minor Agility is the exception at ${money(agi)}.`;
+  return tips;
 }
 
 function prettyZone(key) {
@@ -650,7 +893,12 @@ function build(dir, priceBook) {
     const text = buf.toString("utf8");
     const re = /item:(\d+)[^|\r\n]*\|h\[([^\]]+)\]\|h/g;
     let m;
-    while ((m = re.exec(text))) idToName.set(Number(m[1]), m[2]);
+    while ((m = re.exec(text))) if (!idToName.has(Number(m[1]))) idToName.set(Number(m[1]), m[2]);
+  }
+  const auction = loadAuction(dir, idToName);
+  for (const name of [...priceBook.keys()]) {
+    const quote = auction.book.get(name);
+    if (quote) priceBook.set(name, { price: quote.price, listed: quote.listed });
   }
 
   const names = nums(ids.DataStore_CharacterIDs.List);
@@ -714,7 +962,11 @@ function build(dir, priceBook) {
     if (planned.includes("Mining") && !known.Mining && known.Skinning) repl.Mining = `Has Skinning ${known.Skinning.rank} instead`;
     let flag = "";
     if (id === "corwyn" && known.Tailoring && known.Skinning && !known.Mining) {
-      flag = "Tailoring is trained. He still has Skinning instead of Mining, so swap Skinning for Mining when you can.";
+      flag = `Tailoring is ${known.Tailoring.rank}. Skinning is ${known.Skinning.rank} and still in the Mining slot, so drop Skinning for Mining when you can.`;
+    }
+    if (id === "fatal" && known.Enchanting) {
+      const skin = known.Skinning ? ` Skinning is ${known.Skinning.rank}.` : "";
+      flag = `Enchanting is trained at ${known.Enchanting.rank}.${skin}`;
     }
     chars[id] = {
       lvl: level,
@@ -787,6 +1039,8 @@ function build(dir, priceBook) {
     }
     inv[id] = [...totals.entries()].map(([key, qty]) => {
       const [itemName, where] = key.split("|");
+      const quote = auction.book.get(itemName);
+      if (quote) priceBook.set(itemName, { price: quote.price, listed: quote.listed });
       const price = priceBook.get(itemName);
       return [itemName, qty, where, price ? price.price : null, price ? price.listed : 0];
     }).sort((a, b) => ((b[3] || 0) * b[1]) - ((a[3] || 0) * a[1]) || b[1] - a[1] || a[0].localeCompare(b[0]));
@@ -800,6 +1054,7 @@ function build(dir, priceBook) {
     latestLogout: latest,
     scannedCount: Object.keys(scan).length,
     missingNote: missing.length ? `${missing.join(" and ")} ${missing.length > 1 ? "haven't" : "hasn't"} been scanned yet.` : "Every roster character has been scanned.",
+    auction: { at: auction.at, count: auction.count, day: auction.day },
     prices: Object.fromEntries([...priceBook.entries()].filter(([, v]) => v.price != null).map(([n, v]) => [n, [v.price, v.listed]])),
     quests: buildQuests(dir),
     log: buildLog(dir, idToName),
@@ -883,6 +1138,50 @@ const recWord=`);
     '<div class="stat"><b>7<small> / 9</small></b><span>Characters scanned</span></div>',
     '<div class="stat"><b id="mkScanned">7<small> / 9</small></b><span>Characters scanned</span></div>'
   );
+  return applyMarket(html, generated);
+}
+
+function applyMarket(html, generated) {
+  if (!generated.auction?.at) return html;
+  const book = new Map(Object.entries(generated.prices || {}).map(([n, v]) => [n, { price: v[0], listed: v[1] }]));
+  const when = new Date(generated.auction.at * 1000);
+  const stamp = `${when.toLocaleString("en-US", { month: "short", day: "numeric" })} at ${when.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}`;
+  html = html.replace(/Auctionator full scan on [^.]+\./, `Auctionator full scan on ${stamp}.`);
+  html = html.replace(/(<div class="stat"><b>)[\d,]+(<\/b><span>Items priced<\/span>)/, `$1${generated.auction.count.toLocaleString("en-US")}$2`);
+  let hold = 0;
+  for (const rows of Object.values(generated.inv || {})) for (const r of rows) if (r[3]) hold += r[3] * r[1];
+  const gold = (generated.gold || []).reduce((a, g) => a + g[1], 0);
+  html = html.replace(/(<div class="stat"><b>)[^<]+(<\/b><span>Everything you hold, at AH prices<\/span>)/, `$1${money(hold)}$2`);
+  html = html.replace(/(<div class="stat"><b>)[^<]+(<\/b><span>Gold on hand<\/span>)/, `$1${money(gold)}$2`);
+  const linen = quoteName(book, "Linen Cloth");
+  const leather = quoteName(book, "Light Leather");
+  const bar = quoteName(book, "Copper Bar");
+  if (linen && leather && bar) {
+    const call = `<p><b>Sell the scarce stacks, and buy the common mats.</b> Linen is ${money(linen.price)} with ${linen.listed.toLocaleString("en-US")} listed, Light Leather ${money(leather.price)}, Copper Bar ${money(bar.price)}.</p><p>What you hold prices to ${money(hold)}, against ${money(gold)} on hand. Those mats still get the crafts to 150, and buying them costs less than the riding fund.</p>`;
+    html = html.replace(/<div class="callout"><p><b>Sell (?:very little|the scarce stacks)[\s\S]*?<\/div>/, `<div class="callout">${call}</div>`);
+  }
+  const tips = priceTips(book);
+  const prices = html.match(/const PRICES=(\[[\s\S]*?\]);/);
+  if (prices) {
+    const groups = JSON.parse(prices[1]);
+    for (const group of groups) {
+      group[1] = group[1].map(([name, price, listed]) => {
+        const q = quoteName(book, name);
+        return q ? [name, q.price, q.listed] : [name, price, listed];
+      });
+      if (tips[group[0]]) group[2] = tips[group[0]];
+    }
+    const body = groups.map(g => ` ${JSON.stringify(g)}`).join(",\n");
+    html = html.replace(/const PRICES=\[[\s\S]*?\];/, `const PRICES=[\n${body}];`);
+  }
+  const lists = marketLists(book, generated.inv);
+  const dump = (name, rows) => {
+    const body = rows.map(r => ` ${JSON.stringify(r)}`).join(",\n");
+    html = html.replace(new RegExp(`const ${name}=\\[[\\s\\S]*?\\];`), `const ${name}=[\n${body}];`);
+  };
+  dump("SELL", lists.sell);
+  dump("KEEP", lists.keep);
+  dump("SKIP", lists.skip);
   return html;
 }
 
@@ -907,6 +1206,14 @@ if (dry) {
   }
   const leif = generated.inv.leif?.find(r => r[0] === "Light Leather");
   console.log("Leif Light Leather:", leif ? leif.join(" ") : "not found");
+  const book = new Map(Object.entries(generated.prices).map(([n, v]) => [n, { price: v[0], listed: v[1] }]));
+  const lists = marketLists(book, generated.inv);
+  let hold = 0;
+  for (const rows of Object.values(generated.inv)) for (const r of rows) if (r[3]) hold += r[3] * r[1];
+  console.log(`auction ${new Date(generated.auction.at * 1000).toLocaleString("en-US")}  priced ${generated.auction.count}  hold ${hold}c  gold ${generated.gold.reduce((a, g) => a + g[1], 0)}c`);
+  console.log("SELL", lists.sell.map(r => r[0] + " x" + r[1]).join(", "));
+  console.log("KEEP", lists.keep.map(r => r[0] + " x" + r[1]).join(", "));
+  console.log("SKIP", lists.skip.map(r => r[0] + " x" + r[1]).join(", "));
   for (const [id, name] of ROSTER) {
     const log = generated.log[id];
     const gear = generated.gear[id];
