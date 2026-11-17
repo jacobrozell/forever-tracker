@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pagePath = path.join(root, "index.html");
 const dry = process.argv.includes("--dry");
+const ahOnly = process.argv.includes("--ah");
 
 const ROSTER = [
   ["leif", "Leif Ericsky", ["Skinning", "Leatherworking"]],
@@ -1185,8 +1186,53 @@ function applyMarket(html, generated) {
   return html;
 }
 
+function readGenerated(html) {
+  const m = html.match(/const GENERATED = (\{[\s\S]*?\});\r?\n\/\* END GENERATED SCAN \*\//);
+  if (!m) throw new Error("No generated scan on the page. Run a full refresh first.");
+  return JSON.parse(m[1]);
+}
+
+function applyAuctionOnly(html, dir) {
+  const generated = readGenerated(html);
+  const auction = loadAuction(dir, new Map());
+  if (!auction.at) throw new Error("No Auctionator scan in SavedVariables.");
+  const prices = { ...(generated.prices || {}) };
+  for (const name of new Set([...Object.keys(prices), ...harvestPrices(html).keys()])) {
+    const quote = auction.book.get(name) || auction.book.get(PRICE_ALIAS[name]);
+    if (quote) prices[name] = [quote.price, quote.listed];
+  }
+  generated.prices = prices;
+  generated.auction = { at: auction.at, count: auction.count, day: auction.day };
+  for (const rows of Object.values(generated.inv || {})) {
+    for (const row of rows) {
+      const quote = auction.book.get(row[0]) || auction.book.get(PRICE_ALIAS[row[0]]);
+      if (!quote) continue;
+      row[3] = quote.price;
+      row[4] = quote.listed;
+    }
+  }
+  const block = `/* BEGIN GENERATED SCAN */\nconst GENERATED = ${js(generated)};\n/* END GENERATED SCAN */`;
+  html = html.replace(/\/\* BEGIN GENERATED SCAN \*\/[\s\S]*?\/\* END GENERATED SCAN \*\//, block);
+  return { html: applyMarket(html, generated), auction };
+}
+
 const dir = findSavedDir();
 const html = fs.existsSync(pagePath) ? fs.readFileSync(pagePath, "utf8") : "";
+
+if (ahOnly) {
+  if (!html) throw new Error("index.html is missing");
+  const { html: next, auction } = applyAuctionOnly(html, dir);
+  const stamp = new Date(auction.at * 1000).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  if (dry) {
+    console.log(`auction ${stamp}  priced ${auction.count}`);
+    process.exit(0);
+  }
+  fs.writeFileSync(pagePath, next);
+  console.log(`Updated auction prices in ${pagePath}`);
+  console.log(`Auction scan ${stamp}. ${auction.count} items priced. Roster was left as it was.`);
+  process.exit(0);
+}
+
 const generated = build(dir, harvestPrices(html));
 
 if (dry) {

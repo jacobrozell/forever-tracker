@@ -121,9 +121,8 @@ A profession skill appears only after you open that profession window once on th
 - The material lists and the "level this craft to 150" routes
 - Gold and mail rules
 - Which addons to install
-- Auction House prices
 
-Auctionator's price database is a CBOR blob inside `Auctionator.lua`. A refresh reads the latest full scan and updates the material prices, the sell, keep, and skip lists, and the auction header. Prices are copper: 100 copper is 1 silver, 10000 copper is 1 gold. The third number on a `PRICES` row is how many were listed. Items the scan cannot name keep the previous price.
+Auctionator's price database is a CBOR blob inside `Auctionator.lua`. A refresh reads the latest full scan and updates the material prices, the sell, keep, and skip lists, and the auction header. Prices are copper: 100 copper is 1 silver, 10000 copper is 1 gold. The third number on a `PRICES` row is how many were listed. Items the scan cannot name keep the previous price. Quest routes and the bags callout stay hand-written. After a refresh, correct any of those sentences that still cite an old level, zone, quest, or skill.
 
 ## Add a character
 
