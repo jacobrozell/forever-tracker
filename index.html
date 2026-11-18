@@ -568,9 +568,10 @@ body[data-view="char"] #mats .card.match,body[data-view="char"] #skGrid .sk.matc
       <span class="eyebrow">Alliance · WoW: Forever</span>
       <h1>Main Roster &amp; Professions</h1>
       <p>Open a character for their build, materials, and gear. Account gold, bags, and addons stay on this page. Legacy points are at the bottom.</p>
+      <p class="fresh" id="fresh"></p>
+      <p class="fresh" id="playedTotal"></p>
     </div>
     <div class="mast-tools">
-      <p class="fresh" id="fresh"></p>
       <button type="button" class="tool" id="themeBtn">Dark</button>
     </div>
   </div>
@@ -801,12 +802,12 @@ body[data-view="char"] #mats .card.match,body[data-view="char"] #skGrid .sk.matc
   <section id="market" data-home>
     <div class="sh"><h2>Auction House</h2><p>Auctionator full scan on Nov 17 at 5:31 PM. Prices are the lowest buyout for each item.</p></div>
     <div class="stats">
-      <div class="stat"><b>6,628</b><span>Items priced</span></div>
-      <div class="stat"><b>7g 70s</b><span>Everything you hold, at AH prices</span></div>
-      <div class="stat"><b>1g 97s</b><span>Gold on hand</span></div>
+      <div class="stat"><b>1</b><span>Items priced</span></div>
+      <div class="stat"><b>8g 59s</b><span>Everything you hold, at AH prices</span></div>
+      <div class="stat"><b>2g 55s</b><span>Gold on hand</span></div>
       <div class="stat"><b id="mkScanned">7<small> / 9</small></b><span>Characters scanned</span></div>
     </div>
-    <div class="callout"><p><b>Sell the scarce stacks, and buy the common mats.</b> Linen is 21c with 17,716 listed, Light Leather 26c, Copper Bar 1s.</p><p>What you hold prices to 7g 70s, against 1g 97s on hand. Those mats still get the crafts to 150, and buying them costs less than the riding fund.</p></div>
+    <div class="callout"><p><b>Sell the scarce stacks, and buy the common mats.</b> Linen is 21c with 17,716 listed, Light Leather 26c, Copper Bar 1s.</p><p>What you hold prices to 8g 59s, against 2g 55s on hand. Those mats still get the crafts to 150, and buying them costs less than the riding fund.</p></div>
     <div class="rules">
       <div class="card"><h3>Worth listing</h3><ul class="sell" id="mkSell"></ul></div>
       <div class="card"><h3>Keep for crafting</h3><ul class="sell" id="mkKeep"></ul></div>
@@ -827,7 +828,7 @@ body[data-view="char"] #mats .card.match,body[data-view="char"] #skGrid .sk.matc
     <div class="stats" id="bagStats"></div>
     <div class="blegend"><span><i style="border:1px dashed var(--gold);background:color-mix(in srgb,var(--gold) 10%,transparent)"></i>Empty slot</span><span><i style="border:1px solid var(--line);background:var(--bg)"></i>Bag equipped</span><span><i style="border:1px solid color-mix(in srgb,var(--gather) 45%,transparent);background:color-mix(in srgb,var(--gather) 10%,transparent)"></i>Profession bag slot (5th)</span></div>
     <div class="bgrid" id="bagRows"></div>
-    <div class="callout"><p><b>Three bag fixes.</b> Libertty has a Book Bag in his backpack, so equip it. One slot is still empty after that. Fatal and Rum each have one empty slot.</p><p>Rum's profession slot is still a Skinning Satchel, and two Herb Pouches are using regular slots. Move a Herb Pouch into the profession slot. Corwyn's bags are full. Tailoring is 50, and one Red Linen Bag is already equipped, so more of those can fill the empty slots.</p></div>
+    <div class="callout"><p><b>One bag left.</b> Libertty has a Book Bag in his backpack, so equip it. One slot is still empty after that.</p><p>Fatal, Rum, and Murus filled their slots with Red Linen Bags. Rum's profession slot is still a Skinning Satchel.</p></div>
     <p class="hint">Profession bags only hold their own profession's mats and tools. The quiver only holds arrows. Keg Kenobi and Sneaky Gnomes show up after you log into each once with Bagnon on.</p>
   </section>
 
@@ -890,14 +891,14 @@ body[data-view="char"] #mats .card.match,body[data-view="char"] #skGrid .sk.matc
 <script>
 /* BEGIN GENERATED SCAN */
 const GENERATED = {
-  "label": "Nov 17, 3:29 PM",
-  "latestLogout": 1794950993,
+  "label": "Nov 18, 10:03 AM",
+  "latestLogout": 1795017787,
   "scannedCount": 7,
   "missingNote": "Keg Kenobi and Sneaky Gnomes haven't been scanned yet.",
   "auction": {
     "at": 1794958278,
-    "count": 6628,
-    "day": 2512
+    "count": 1,
+    "day": 2513
   },
   "prices": {
     "Peacebloom": [
@@ -1121,8 +1122,8 @@ const GENERATED = {
       309
     ],
     "Minor Troll's Blood Elixir": [
-      15,
-      265
+      23,
+      664
     ],
     "Fine Leather Belt": [
       264,
@@ -1196,13 +1197,9 @@ const GENERATED = {
       8,
       2120
     ],
-    "Rough Sharpening Stone": [
-      3,
-      661
-    ],
-    "Waylaid Crate: Apprentice Ore": [
-      135,
-      749
+    "Goretusk Liver Pie": [
+      125,
+      48
     ],
     "Freshly Baked Bread": [
       6,
@@ -1212,9 +1209,9 @@ const GENERATED = {
       4,
       3919
     ],
-    "Spiked Club of the Eagle": [
-      607,
-      83
+    "Compact Shotgun": [
+      365,
+      91
     ],
     "Blacksmith Hammer": [
       100,
@@ -1224,9 +1221,9 @@ const GENERATED = {
       100,
       54
     ],
-    "Simple Cape": [
-      100,
-      25
+    "Riverpaw Leather Vest": [
+      375,
+      20
     ],
     "Boar Ribs": [
       89,
@@ -1235,10 +1232,6 @@ const GENERATED = {
     "Goretusk Snout": [
       27,
       543
-    ],
-    "Goretusk Liver": [
-      90,
-      1088
     ],
     "Boar Intestines": [
       18,
@@ -1252,29 +1245,73 @@ const GENERATED = {
       35,
       8380
     ],
+    "Copper Modulator": [
+      425,
+      581
+    ],
+    "Copper Tube": [
+      137,
+      1531
+    ],
     "Flask of Oil": [
       25,
       7745
+    ],
+    "Small Red Pouch": [
+      249,
+      67
     ],
     "Okra": [
       6,
       2352
     ],
+    "Hops": [
+      10,
+      645
+    ],
     "Mining Pick": [
       100,
       69
+    ],
+    "Shadowgem": [
+      260,
+      579
+    ],
+    "Rough Sharpening Stone": [
+      3,
+      661
+    ],
+    "Waylaid Crate: Apprentice Ore": [
+      135,
+      749
+    ],
+    "Spiked Club of the Eagle": [
+      599,
+      100
+    ],
+    "Gnoll Hide Boots": [
+      4500,
+      4
+    ],
+    "Simple Cape": [
+      100,
+      25
     ],
     "Rough Grinding Stone": [
       6,
       2341
     ],
     "Small Green Pouch": [
-      238,
-      83
+      248,
+      100
     ],
-    "Gnoll Hide Boots": [
-      4500,
-      4
+    "Linen Bag": [
+      198,
+      268
+    ],
+    "Darnassian Bleu": [
+      8,
+      640
     ],
     "Refreshing Spring Water": [
       8,
@@ -1283,6 +1320,18 @@ const GENERATED = {
     "Elixir of Minor Force": [
       25,
       1333
+    ],
+    "Pattern: Rugged Leather Pants": [
+      200,
+      55
+    ],
+    "Hunting Tunic": [
+      514,
+      29
+    ],
+    "Broken Fang": [
+      299,
+      69
     ],
     "Roasted Boar Meat": [
       6,
@@ -1301,8 +1350,8 @@ const GENERATED = {
       800
     ],
     "Bottle of Dalaran Noir": [
-      95,
-      1016
+      90,
+      165
     ],
     "Beer Basted Boar Ribs": [
       65,
@@ -1316,13 +1365,21 @@ const GENERATED = {
       100,
       1092
     ],
+    "Small Spider Leg": [
+      5,
+      901
+    ],
     "Recipe: Beer Basted Boar Ribs": [
       172,
       51
     ],
-    "Frayed Belt": [
-      100,
-      8
+    "Small Brown Pouch": [
+      199,
+      148
+    ],
+    "Rabbit's Foot": [
+      9,
+      64
     ],
     "Rough Arrow": [
       1,
@@ -1332,29 +1389,29 @@ const GENERATED = {
       10000,
       10
     ],
-    "Darnassian Bleu": [
-      8,
-      640
+    "Green Dye": [
+      125,
+      1800
     ],
-    "Scroll: CWAL": [
-      100,
-      1219
+    "Red Dye": [
+      51,
+      1242
     ],
-    "Red Linen Shirt": [
-      100,
-      78
+    "Raw Bristle Whisker Catfish": [
+      6,
+      7042
     ],
     "Raw Slitherskin Mackerel": [
       9,
       1377
     ],
+    "Raw Brilliant Smallfish": [
+      15,
+      14242
+    ],
     "Bolt of Linen Cloth": [
       58,
       1036
-    ],
-    "Linen Bag": [
-      198,
-      268
     ],
     "Scroll: CHAP BALK WELLES": [
       100,
@@ -1364,17 +1421,21 @@ const GENERATED = {
       137,
       37
     ],
-    "Green Dye": [
-      125,
-      1800
+    "Red Linen Shirt": [
+      100,
+      78
+    ],
+    "Scroll: CWAL": [
+      100,
+      1219
     ],
     "Sturdy Quarterstaff of the Gorilla": [
-      1097,
-      132
+      700,
+      148
     ],
     "Severing Axe of Magic": [
-      290,
-      94
+      297,
+      90
     ],
     "Handstitched Leather Belt": [
       140,
@@ -1384,17 +1445,9 @@ const GENERATED = {
       130,
       103
     ],
-    "Shadowgem": [
-      260,
-      579
-    ],
     "Crawler Meat": [
       100,
       837
-    ],
-    "Small Spider Leg": [
-      5,
-      901
     ],
     "Coarse Blasting Powder": [
       69,
@@ -2702,6 +2755,95 @@ const GENERATED = {
         ]
       ],
       [
+        "Westfall",
+        [
+          [
+            "A Swift Message",
+            "10",
+            "Bring Lewis' Note to Thor the gryphon master.",
+            1
+          ],
+          [
+            "Continue to Stormwind",
+            "10",
+            "Buy a gryphon ride from the gryphon master Thor, then bring Lewis' Note to Osric Strang, in the shop Limited Immunity, in the Old Town of Stormwind.",
+            1
+          ],
+          [
+            "Dungar Longdrink",
+            "10",
+            "Bring Osric's Crate to Dungar Longdrink the gryphon master.",
+            1
+          ],
+          [
+            "Furlbrow's Deed",
+            "9",
+            "Bring Furlbrow's Deed to Farmer Furlbrow.",
+            1
+          ],
+          [
+            "Goretusk Liver Pie",
+            "12",
+            "Salma Saldean needs 8 Goretusk livers to make a Goretusk Liver Pie.",
+            1
+          ],
+          [
+            "Harvesting the Harvesters",
+            "15",
+            "Ozwin Ironsprocket at Saldean's Farm wants you to bring him 14 Golem Isosprings and 5 Harvester Gyrostabilizers.",
+            1
+          ],
+          [
+            "Poor Old Blanchy",
+            "14",
+            "Verna Furlbrow in Westfall wants you to bring her 8 Handfuls of Oats.",
+            1
+          ],
+          [
+            "Red Leather Bandanas",
+            "15",
+            "Bring 15 Red Leather Bandanas to Scout Galiaan at Sentinel Hill.",
+            1
+          ],
+          [
+            "Return to Lewis",
+            "10",
+            "Buy a gryphon ride to Sentinel Hill from the gryphon master Dungar Longdrink, then take Osric's Crate to Lewis at Sentinel Hill.",
+            1
+          ],
+          [
+            "Testing the Wells",
+            "12",
+            "Use the Well Water Sample Kit to collect samples from the wells at the Jansen Stead and the Molsen Farm.",
+            1
+          ],
+          [
+            "The Forgotten Heirloom",
+            "12",
+            "Farmer Furlbrow wants you to retrieve his pocket watch from the wardrobe in his farmhouse at the pumpkin farm to the West.",
+            1
+          ],
+          [
+            "The Killing Fields",
+            "15",
+            "Farmer Saldean wants you to kill 20 Harvest Watchers.",
+            1
+          ],
+          [
+            "The People's Militia",
+            "12",
+            "Gryan Stoutmantle wants you to kill 15 Defias Trappers and 15 Defias Smugglers then return to him on Sentinel Hill.",
+            1
+          ],
+          [
+            "Westfall Stew",
+            "10",
+            "Verna Furlbrow wants you to deliver her recipe for Westfall Stew to Salma Saldean.",
+            1
+          ]
+        ]
+      ],
+      [
         "Dun Morogh",
         [
           [
@@ -2798,41 +2940,6 @@ const GENERATED = {
             "6",
             "Sit near Sam's Basic Campfire and wait until you receive the Boosted Rest buff.",
             7
-          ]
-        ]
-      ],
-      [
-        "Westfall",
-        [
-          [
-            "A Swift Message",
-            "10",
-            "Bring Lewis' Note to Thor the gryphon master.",
-            1
-          ],
-          [
-            "Furlbrow's Deed",
-            "9",
-            "Bring Furlbrow's Deed to Farmer Furlbrow.",
-            1
-          ],
-          [
-            "The Forgotten Heirloom",
-            "12",
-            "Farmer Furlbrow wants you to retrieve his pocket watch from the wardrobe in his farmhouse at the pumpkin farm to the West.",
-            1
-          ],
-          [
-            "The People's Militia",
-            "12",
-            "Gryan Stoutmantle wants you to kill 15 Defias Trappers and 15 Defias Smugglers then return to him on Sentinel Hill.",
-            1
-          ],
-          [
-            "Westfall Stew",
-            "10",
-            "Verna Furlbrow wants you to deliver her recipe for Westfall Stew to Salma Saldean.",
-            1
           ]
         ]
       ],
@@ -2935,6 +3042,179 @@ const GENERATED = {
       ]
     ],
     "rum": [
+      [
+        "Elwynn Forest",
+        [
+          [
+            "A Fishy Peril",
+            "10",
+            "Remy \"Two Times\" wants you to speak with Marshal Dughan in Goldshire.",
+            1
+          ],
+          [
+            "A Man About a Murloc",
+            "7",
+            "Speak with Remy \"Two Times\" about Jason's murloc problems.",
+            1
+          ],
+          [
+            "A Net Disaster",
+            "7",
+            "Check the fishing traps in Crystal Lake.",
+            1
+          ],
+          [
+            "A Threat Within",
+            "1",
+            "Speak with Marshal McBride.",
+            1
+          ],
+          [
+            "Book Inventory",
+            "2",
+            "Speak to Daniel, Brother Paxton's assistant in the library.",
+            1
+          ],
+          [
+            "Bottles and Baubles",
+            "7",
+            "Collect 6 pieces of shiny junk from the nearby Murloc camp.",
+            1
+          ],
+          [
+            "Bounty on Garrick Padfoot",
+            "5",
+            "Kill Garrick Padfoot and bring his head to Deputy Willem at Northshire Abbey.",
+            1
+          ],
+          [
+            "Brotherhood of Thieves",
+            "4",
+            "Bring 12 Red Burlap Bandanas to Deputy Willem outside the Northshire Abbey.",
+            1
+          ],
+          [
+            "Eagan Peltskinner",
+            "2",
+            "Speak with Eagan Peltskinner.",
+            1
+          ],
+          [
+            "Follow That Kobold!",
+            "4",
+            "Speak to Tordrin Sternblade near the stable behind Northshire's Abbey.",
+            1
+          ],
+          [
+            "Gold Dust Exchange",
+            "7",
+            "Bring 10 Gold Dust to Remy \"Two Times\" in Goldshire. Gold Dust is gathered from Kobolds in Elwynn Forest.",
+            1
+          ],
+          [
+            "Grape Manifest",
+            "4",
+            "Bring the Grape Manifest to Brother Neals in Northshire Abbey.",
+            1
+          ],
+          [
+            "Investigate Echo Ridge",
+            "3",
+            "Kill 10 Kobold Workers, then report back to Marshal McBride.",
+            1
+          ],
+          [
+            "Kobold Camp Cleanup",
+            "2",
+            "Kill 10 Kobold Vermin, then return to Marshal McBride.",
+            1
+          ],
+          [
+            "Kobold Candles",
+            "7",
+            "Bring 8 Large Candles to William Pestle in Goldshire.",
+            1
+          ],
+          [
+            "Milly Osworth",
+            "4",
+            "Speak with Milly Osworth.",
+            1
+          ],
+          [
+            "Milly's Harvest",
+            "4",
+            "Bring 8 crates of Milly's Harvest to Milly Osworth at Northshire Abbey.",
+            1
+          ],
+          [
+            "Mining Consultant",
+            "3",
+            "Talk to Kelsey Fargo outside the Echo Ridge Mine in Northshire Valley.",
+            1
+          ],
+          [
+            "Nibbled-On Book",
+            "2",
+            "Return the book to Brother Paxton.",
+            1
+          ],
+          [
+            "Rascally Rodents",
+            "2",
+            "Retrieve 8 Stolen Books from kobolds in Northshire Valley and return them to Brother Paxton.",
+            1
+          ],
+          [
+            "Report to Goldshire",
+            "5",
+            "Take Marshal McBride's Documents to Marshal Dughan in Goldshire.",
+            1
+          ],
+          [
+            "Rest and Relaxation",
+            "5",
+            "Speak with Innkeeper Farley at the Lion's Pride Inn.",
+            1
+          ],
+          [
+            "Shhh! We're Hunting Kobolds",
+            "4",
+            "Follow the kobold tracks and report to Marshal Dughan in Goldshire with your findings and the Kobold Tracking Kit.",
+            1
+          ],
+          [
+            "Skirmish at Echo Ridge",
+            "5",
+            "Kill 12 Kobold Laborers, then return to Marshal McBride at Northshire Abbey.",
+            1
+          ],
+          [
+            "Slimy Menace",
+            "7",
+            "Kill 7 Murlocs and 4 Murloc Streamrunner at Crystal Lake, then return to Jason Mathers.",
+            1
+          ],
+          [
+            "The Big Picture",
+            "3",
+            "Retrieve a Sack of \"Picture\" Books from Shinyfinder Narf. Bring the sack to Marshal McBride just inside Northshire's Abbey.",
+            1
+          ],
+          [
+            "The Fargodeep Mine",
+            "7",
+            "Explore the Fargodeep Mine, then return to Marshal Dughan in Goldshire.",
+            1
+          ],
+          [
+            "Wolves Across the Border",
+            "2",
+            "Bring 8 pieces of Tough Wolf Meat to Eagan Peltskinner outside Northshire Abbey.",
+            1
+          ]
+        ]
+      ],
       [
         "Dun Morogh",
         [
@@ -3120,6 +3400,23 @@ const GENERATED = {
         ]
       ],
       [
+        "Ironforge",
+        [
+          [
+            "The Darkmoon Faire",
+            "60",
+            "Deliver the Free Ticket Voucher to Gelvas Grimgate, located inside the Darkmoon Faire carnival.",
+            1
+          ],
+          [
+            "Your Package Has Arrived",
+            "2",
+            "Deliver Eldrun's misplaced package.",
+            1
+          ]
+        ]
+      ],
+      [
         "Other",
         [
           [
@@ -3150,17 +3447,6 @@ const GENERATED = {
             "4",
             "Bring 2 Felstalker Hooves to Canaga Earthcaller in the Valley of Trials.",
             9
-          ]
-        ]
-      ],
-      [
-        "Ironforge",
-        [
-          [
-            "Your Package Has Arrived",
-            "2",
-            "Deliver Eldrun's misplaced package.",
-            1
           ]
         ]
       ],
@@ -4069,72 +4355,6 @@ const GENERATED = {
   "log": {
     "leif": [
       [
-        "Ashenvale",
-        [
-          [
-            "Trek to Ashenvale",
-            "19",
-            "Find Raene Wolfrunner in Ashenvale.",
-            1,
-            "",
-            0
-          ]
-        ]
-      ],
-      [
-        "Darkshore",
-        [
-          [
-            "Buzzbox 525",
-            "16",
-            "Collect 4 Grizzled Scalps from Grizzled Thistle Bears to the south of Auberdine and place them in Buzzbox 525.",
-            1,
-            "8s",
-            0
-          ],
-          [
-            "Deep Ocean, Vast Sea",
-            "17",
-            "Recover the Silver Dawning's Lockbox and the Mist Veil's Lockbox for Gorbold Steelhand in Auberdine. Both items should be found aboard the wreckage of the ships to the north of the village.",
-            1,
-            "Welldrip Gloves, Noosegrip Gauntlets, Murloc-hide Gloves, 18s",
-            0
-          ],
-          [
-            "Fruit of the Sea",
-            "17",
-            "Collect 6 Fine Crab Chunks for Gubber Blump in Auberdine.",
-            1,
-            "Shucking Gloves, Crustacean Boots",
-            0
-          ],
-          [
-            "Onu",
-            "17",
-            "Speak with Onu at the Grove of the Ancients.",
-            1,
-            "",
-            0
-          ],
-          [
-            "The Blackwood Corrupted",
-            "18",
-            "Fill the Empty Cleansing Bowl at the Auberdine Moonwell. Gather a sample of fruit, nut, and grain from the northern Blackwood furbolg camps. Mix the bowl and place it near the bonfire closest to the Cliffspring River at the northern camp…",
-            1,
-            "Moonstone Wand, Wildkeeper Leggings, Guststorm Legguards, 20s",
-            0
-          ],
-          [
-            "A Lost Master",
-            "20",
-            "Find 5 Fine Moonstalker Pelts and return them to Terenthis in Auberdine.",
-            1,
-            "",
-            0
-          ]
-        ]
-      ],
-      [
         "Dun Morogh",
         [
           [
@@ -4164,22 +4384,6 @@ const GENERATED = {
         "Stormwind City",
         [
           [
-            "Wine Shop Advert",
-            "2",
-            "Go to the Gallina Winery, and bring Suzetta Gallina the Wine Ticket for a free bottle of wine.",
-            1,
-            "Bottle of Dalaran Noir",
-            0
-          ],
-          [
-            "Exploring the Alliance",
-            "13",
-            "Speak with Randal Emerson in Stormwind Keep to receive further instructions. Use the instructions received to locate and speak with King Magni Bronzebeard, High Tinker Mekkatorque, and Tyrande Whisperwind.",
-            1,
-            "6s",
-            0
-          ],
-          [
             "Humble Beginnings",
             "15",
             "Go to Baros Alexston's house in Westfall and search for his compass, then return it to him in Cathedral Square of Stormwind.",
@@ -4207,14 +4411,6 @@ const GENERATED = {
             1,
             "Tunneler's Boots, Dusty Mining Gloves, Worn Miner's Waistcord",
             0
-          ],
-          [
-            "Underground Assault",
-            "20",
-            "Retrieve the Gnoam Sprecklesprocket from the Deadmines and return it to Shoni the Shilent in Stormwind.",
-            1,
-            "Polar Gauntlets, Sable Wand, Bravo's Armbands, Dreamer's Leggings",
-            0
           ]
         ]
       ],
@@ -4230,40 +4426,16 @@ const GENERATED = {
             0
           ]
         ]
-      ],
+      ]
+    ],
+    "murus": [
       [
-        "Westfall",
+        "Darkshore",
         [
           [
-            "Journey to Sentinel Hill",
-            "13",
-            "Report To Gryan Stoutmantle at Sentinel Hill in Westfall.",
-            1,
-            "3s",
-            0
-          ]
-        ]
-      ],
-      [
-        "Camping",
-        [
-          [
-            "Camping 101: First Aid",
-            "6",
-            "Speak with Naleeia Tattermend in Shen'dar Village to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
-            1,
-            "Spell",
-            0
-          ]
-        ]
-      ],
-      [
-        "Druid",
-        [
-          [
-            "Curing the Sick",
-            "14",
-            "Use the Curative Animal Salve on 10 Sickly Deer that are located throughout Darkshore; doing so should cure them. Sickly Deer have been reported starting south of the Cliffspring River to the north of Auberdine and extending all the way…",
+            "Business in Auberdine",
+            "17",
+            "Check on Gorbold Steelhand in Auberdine in Darkshore. Borgus mentioned a boat on the southern-most dock in Stormwind Harbor that can take you there.",
             1,
             "",
             0
@@ -4271,20 +4443,18 @@ const GENERATED = {
         ]
       ],
       [
-        "Fishing",
+        "Deeprun Tram",
         [
           [
-            "Electropellers",
+            "Deeprun Rat Roundup",
             "12",
-            "Bring 12 Electropellers to Wizbang Cranktoggle in Auberdine.",
+            "Capture 5 Deeprun Rats by using the Rat Catcher's Flute. Lead the rats back to Monty. Don't forget to turn in the flute when you're finished.",
             1,
-            "5s",
+            "",
             0
           ]
         ]
-      ]
-    ],
-    "murus": [
+      ],
       [
         "Dun Morogh",
         [
@@ -4333,7 +4503,7 @@ const GENERATED = {
             "9",
             "Bring 6 Shimmerweeds to Rejold Barleybrew in the Brewnall Village.",
             1,
-            "Goat Fur Cloak, Ivy-weave Bracers",
+            "",
             0
           ],
           [
@@ -4388,133 +4558,6 @@ const GENERATED = {
             "18",
             "Retrieve 4 Miners' Union Cards and return them to Wilder Thistlenettle in Stormwind.",
             1,
-            "Tunneler's Boots, Dusty Mining Gloves, Worn Miner's Waistcord",
-            0
-          ]
-        ]
-      ],
-      [
-        "Westfall",
-        [
-          [
-            "Continue to Stormwind",
-            "10",
-            "Buy a gryphon ride from the gryphon master Thor, then bring Lewis' Note to Osric Strang, in the shop Limited Immunity, in the Old Town of Stormwind.",
-            1,
-            "1s",
-            0
-          ],
-          [
-            "Goretusk Liver Pie",
-            "12",
-            "Salma Saldean needs 8 Goretusk livers to make a Goretusk Liver Pie.",
-            1,
-            "Goretusk Liver Pie ×3, Recipe: Goretusk Liver Pie",
-            0
-          ],
-          [
-            "Murloc Gills",
-            "12",
-            "Alba Fairmoon wants you to collect 7 Longshore Murloc Gills along the shoreline of Westfall.",
-            1,
-            "2s",
-            0
-          ],
-          [
-            "Testing the Wells",
-            "12",
-            "Use the Well Water Sample Kit to collect samples from the wells at the Jansen Stead and the Molsen Farm.",
-            1,
-            "2s",
-            0
-          ],
-          [
-            "Westfall Stew",
-            "13",
-            "Salma Saldean wants 3 Stringy Vulture Meat, 3 Goretusk Snouts, 3 Murloc Eyes, 3 Okra.",
-            1,
-            "Westfall Stew ×3, Recipe: Westfall Stew, Salma's Oven Mitts, Sharp Kitchen Knife",
-            0
-          ],
-          [
-            "Patrolling Westfall",
-            "14",
-            "Bring 8 Gnoll Paws to Captain Danuvin on Sentinel Hill.",
-            1,
-            "Belt of the People's Militia, Bracers of the People's Militia",
-            0
-          ],
-          [
-            "Poor Old Blanchy",
-            "14",
-            "Verna Furlbrow in Westfall wants you to bring her 8 Handfuls of Oats.",
-            1,
-            "Old Blanchy's Blanket, Old Blanchy's Feed Pouch",
-            0
-          ],
-          [
-            "The People's Militia",
-            "14",
-            "Gryan Stoutmantle wants you to kill 15 Defias Pillagers and 15 Defias Looters and return to him on Sentinel Hill.",
-            1,
-            "6s",
-            0
-          ],
-          [
-            "Harvesting the Harvesters",
-            "15",
-            "Ozwin Ironsprocket at Saldean's Farm wants you to bring him 14 Golem Isosprings and 5 Harvester Gyrostabilizers.",
-            1,
-            "5s",
-            0
-          ],
-          [
-            "Red Leather Bandanas",
-            "15",
-            "Bring 15 Red Leather Bandanas to Scout Galiaan at Sentinel Hill.",
-            1,
-            "Cloak of the People's Militia, Greaves of the People's Militia, Leggings of the People's Militia",
-            0
-          ],
-          [
-            "The Killing Fields",
-            "15",
-            "Farmer Saldean wants you to kill 20 Harvest Watchers.",
-            1,
-            "Harvester's Pants, Harvester's Robe, Harvester's Pestslayer",
-            0
-          ],
-          [
-            "The Defias Brotherhood",
-            "18",
-            "Gryan Stoutmantle wants you to talk to Wiley in Lakeshire.",
-            1,
-            "",
-            0
-          ]
-        ]
-      ],
-      [
-        "Darkshore",
-        [
-          [
-            "Business in Auberdine",
-            "17",
-            "Check on Gorbold Steelhand in Auberdine in Darkshore. Borgus mentioned a boat on the southern-most dock in Stormwind Harbor that can take you there.",
-            1,
-            "",
-            0
-          ]
-        ]
-      ],
-      [
-        "Deeprun Tram",
-        [
-          [
-            "Deeprun Rat Roundup",
-            "12",
-            "Capture 5 Deeprun Rats by using the Rat Catcher's Flute. Lead the rats back to Monty. Don't forget to turn in the flute when you're finished.",
-            1,
             "",
             0
           ]
@@ -4528,7 +4571,7 @@ const GENERATED = {
             "15",
             "Collect 8 Dwarven Heirlooms from the Hall of Thanes.",
             1,
-            "Dwarven Tome, Tomb Robber's Gloves, 7s",
+            "7s",
             0
           ],
           [
@@ -4536,7 +4579,7 @@ const GENERATED = {
             "15",
             "Kill 15 Enraged Apparitions, 10 Tormented Souls and put the spirit of Anvilmar to rest.",
             1,
-            "Dusty Belt, Cryptwalker Bracers, 7s",
+            "7s",
             0
           ]
         ]
@@ -4555,6 +4598,59 @@ const GENERATED = {
         ]
       ],
       [
+        "Westfall",
+        [
+          [
+            "Murloc Gills",
+            "12",
+            "Alba Fairmoon wants you to collect 7 Longshore Murloc Gills along the shoreline of Westfall.",
+            1,
+            "2s",
+            0
+          ],
+          [
+            "Westfall Stew",
+            "13",
+            "Salma Saldean wants 3 Stringy Vulture Meat, 3 Goretusk Snouts, 3 Murloc Eyes, 3 Okra.",
+            1,
+            "",
+            0
+          ],
+          [
+            "Patrolling Westfall",
+            "14",
+            "Bring 8 Gnoll Paws to Captain Danuvin on Sentinel Hill.",
+            1,
+            "",
+            0
+          ],
+          [
+            "The People's Militia",
+            "14",
+            "Gryan Stoutmantle wants you to kill 15 Defias Pillagers and 15 Defias Looters and return to him on Sentinel Hill.",
+            1,
+            "6s",
+            0
+          ],
+          [
+            "The Defias Brotherhood",
+            "18",
+            "Gryan Stoutmantle wants you to talk to Wiley in Lakeshire.",
+            1,
+            "",
+            0
+          ],
+          [
+            "... and that note you found",
+            "22",
+            "Charred remains of the note serve as your only guide.",
+            1,
+            "7s",
+            0
+          ]
+        ]
+      ],
+      [
         "Blacksmithing",
         [
           [
@@ -4562,7 +4658,7 @@ const GENERATED = {
             "12",
             "Bring 6 Copper Axes and 6 Copper Chain Belts to Thorvald in the southern guard tower of Loch Modan.",
             1,
-            "Plans: Copper Chain Vest",
+            "",
             0
           ],
           [
@@ -4570,7 +4666,7 @@ const GENERATED = {
             "16",
             "Tormus Deepforge wants you to bring 4 Runed Copper Belts and 4 Heavy Copper Mauls to Verner Osgood in Redridge.",
             1,
-            "Plans: Ironforge Breastplate",
+            "",
             0
           ]
         ]
@@ -4596,7 +4692,7 @@ const GENERATED = {
             "7",
             "Ragnar Thunderbrew in Kharanos wants 6 Crag Boar Ribs and a mug of Rhapsody Malt.",
             1,
-            "Beer Basted Boar Ribs ×5, Recipe: Beer Basted Boar Ribs, 1s",
+            "1s",
             0
           ]
         ]
@@ -4657,14 +4753,54 @@ const GENERATED = {
         ]
       ],
       [
-        "Ironforge",
+        "Elwynn Forest",
         [
           [
-            "The Darkmoon Faire",
-            "60",
-            "Deliver the Free Ticket Voucher to Gelvas Grimgate, located inside the Darkmoon Faire carnival.",
+            "Book Return",
+            "6",
+            "Find 6 Lost Books and \"Fun with Elementals\" and return them to Marshal Dughan.",
+            1,
+            "Book Bag, 2s",
+            0
+          ],
+          [
+            "An Enticing Offer",
+            "7",
+            "Collect 6 Vials of Animal Blood and 18 Duskweed Petals for murloc bait, then return to Remy \"Two Times\" in Goldshire.",
+            1,
+            "Fightin' Fish",
+            0
+          ],
+          [
+            "Shipment to Stormwind",
+            "7",
+            "Bring William's Shipment to Morgan Pestle in the Stormwind Trade District.",
+            1,
+            "Explosive Rocket ×15, Oil of Olaf ×5, Elixir of Lion's Strength ×2, 3s",
+            0
+          ],
+          [
+            "Further Concerns",
+            "10",
+            "Marshal Dughan wants you to speak with Guard Thomas.",
             1,
             "",
+            0
+          ],
+          [
+            "Report to Gryan Stoutmantle",
+            "10",
+            "Talk to Gryan Stoutmantle. He usually can be found in the stone tower on Sentinel Hill, just off the road, in the middle of Westfall.",
+            1,
+            "2s",
+            0
+          ],
+          [
+            "The Jasperlode Mine",
+            "10",
+            "Explore the Jasperlode Mine, then report back to Marshal Dughan in Goldshire.",
+            1,
+            "3s",
             0
           ]
         ]
@@ -4689,6 +4825,14 @@ const GENERATED = {
             "Camping 101: Alchemy",
             "6",
             "Speak with Vosur Brakthel in Ironforge to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
+            1,
+            "Spell",
+            0
+          ],
+          [
+            "Camping 101: Fishing",
+            "6",
+            "Speak with Lee Brown near Goldshire to learn to craft a camping item for your profession once you have shown proficiency in your skill.",
             1,
             "Spell",
             0
@@ -5003,14 +5147,6 @@ const GENERATED = {
         "Elwynn Forest",
         [
           [
-            "Baited for Success",
-            "7",
-            "Return to Jason Mathers.",
-            1,
-            "",
-            0
-          ],
-          [
             "Collecting Kelp",
             "7",
             "Bring 4 Crystal Kelp Fronds to William Pestle in Goldshire.",
@@ -5253,7 +5389,7 @@ const GENERATED = {
       ]
     ],
     "rum": [
-      3.9,
+      3.4,
       [
         [
           "Shirt",
@@ -5308,7 +5444,7 @@ const GENERATED = {
       ]
     ],
     "fatal": [
-      3.3,
+      3.6,
       [
         [
           "Shirt",
@@ -5337,8 +5473,8 @@ const GENERATED = {
         ],
         [
           "Hands",
-          "Rabbit Handler Gloves",
-          1
+          "Heavy Linen Gloves",
+          2
         ],
         [
           "Back",
@@ -5524,31 +5660,31 @@ const GENERATED = {
         [
           "Alliance",
           "Friendly",
-          425,
+          525,
           6000
         ],
         [
           "Stormwind",
-          "Friendly",
-          5650,
-          6000
+          "Honored",
+          325,
+          12000
         ],
         [
           "Ironforge",
           "Friendly",
-          910,
+          1010,
           6000
         ],
         [
           "Darnassus",
           "Friendly",
-          225,
+          325,
           6000
         ],
         [
           "Gnomeregan",
           "Friendly",
-          985,
+          1135,
           6000
         ],
         [
@@ -5565,32 +5701,38 @@ const GENERATED = {
         [
           "Alliance",
           "Friendly",
-          337,
+          350,
           6000
         ],
         [
           "Stormwind",
           "Friendly",
-          137,
+          1687,
           6000
         ],
         [
           "Ironforge",
           "Friendly",
-          3428,
+          3441,
           6000
         ],
         [
           "Darnassus",
           "Friendly",
-          137,
+          150,
           6000
         ],
         [
           "Gnomeregan",
           "Friendly",
-          2528,
+          2541,
           6000
+        ],
+        [
+          "Darkmoon Faire",
+          "Neutral",
+          50,
+          3000
         ]
       ]
     ],
@@ -5748,11 +5890,11 @@ const GENERATED = {
       "sub": "Auberdine",
       "xp": 13445,
       "maxXP": 17700,
-      "rest": 492,
-      "logout": 1794922857,
-      "gold": 11843,
-      "played": 51579,
-      "playedLevel": 5892,
+      "rest": 1804,
+      "logout": 1794965705,
+      "gold": 11613,
+      "played": 51777,
+      "playedLevel": 6090,
       "sk": [
         116,
         94
@@ -5801,18 +5943,18 @@ const GENERATED = {
       ]
     },
     "murus": {
-      "lvl": 15,
-      "zone": "Stormwind City",
-      "sub": "Trade District",
-      "xp": 10060,
-      "maxXP": 14400,
-      "rest": 526,
-      "logout": 1794865488,
-      "gold": 1522,
-      "played": 43434,
-      "playedLevel": 2,
+      "lvl": 16,
+      "zone": "Westfall",
+      "sub": "Sentinel Hill",
+      "xp": 12903,
+      "maxXP": 16000,
+      "rest": 1306,
+      "logout": 1795017787,
+      "gold": 6617,
+      "played": 50251,
+      "playedLevel": 3412,
       "sk": [
-        81,
+        83,
         75
       ],
       "repl": {
@@ -5830,7 +5972,7 @@ const GENERATED = {
         ],
         [
           "Mining",
-          81,
+          83,
           150,
           "",
           "g"
@@ -5859,18 +6001,18 @@ const GENERATED = {
       ]
     },
     "rum": {
-      "lvl": 9,
-      "zone": "Stormwind City",
-      "sub": "Mage Quarter",
-      "xp": 3486,
-      "maxXP": 6500,
-      "rest": 64,
-      "logout": 1794503156,
-      "gold": 127,
-      "played": 13597,
-      "playedLevel": 2451,
+      "lvl": 10,
+      "zone": "Lion's Pride Inn",
+      "sub": "",
+      "xp": 5984,
+      "maxXP": 7600,
+      "rest": 1266,
+      "logout": 1795009272,
+      "gold": 2283,
+      "played": 18334,
+      "playedLevel": 3316,
       "sk": [
-        75,
+        76,
         75
       ],
       "repl": {
@@ -5888,17 +6030,10 @@ const GENERATED = {
         ],
         [
           "Herbalism",
-          75,
+          76,
           150,
           "",
           "g"
-        ],
-        [
-          "Cooking",
-          7,
-          75,
-          "",
-          "s"
         ],
         [
           "Fishing",
@@ -5911,24 +6046,24 @@ const GENERATED = {
     },
     "fatal": {
       "lvl": 10,
-      "zone": "Stormwind City",
-      "sub": "Trade District",
-      "xp": 3146,
+      "zone": "Lion's Pride Inn",
+      "sub": "",
+      "xp": 3810,
       "maxXP": 7600,
-      "rest": 870,
-      "logout": 1794922946,
-      "gold": 808,
-      "played": 12866,
-      "playedLevel": 1698,
+      "rest": 1302,
+      "logout": 1795009313,
+      "gold": 412,
+      "played": 14270,
+      "playedLevel": 3102,
       "sk": [
-        88,
+        90,
         26
       ],
       "repl": {
         "Skinning": "",
         "Enchanting": ""
       },
-      "flag": "Enchanting is trained at 26. Skinning is 88.",
+      "flag": "Enchanting is trained at 26. Skinning is 90.",
       "profs": [
         [
           "Enchanting",
@@ -5939,7 +6074,7 @@ const GENERATED = {
         ],
         [
           "Skinning",
-          88,
+          90,
           150,
           "",
           "g"
@@ -6005,28 +6140,28 @@ const GENERATED = {
     },
     "corwyn": {
       "lvl": 11,
-      "zone": "Elwynn Forest",
-      "sub": "Goldshire",
+      "zone": "Stormwind City",
+      "sub": "Trade District",
       "xp": 5527,
       "maxXP": 8800,
-      "rest": 0,
-      "logout": 1794950993,
-      "gold": 2198,
-      "played": 17163,
-      "playedLevel": 2,
+      "rest": 716,
+      "logout": 1795009188,
+      "gold": 1338,
+      "played": 21815,
+      "playedLevel": 4654,
       "sk": [
         null,
-        50
+        61
       ],
       "repl": {
         "Tailoring": "",
         "Mining": "Has Skinning 86 instead"
       },
-      "flag": "Tailoring is 50. Skinning is 86 and still in the Mining slot, so drop Skinning for Mining when you can.",
+      "flag": "Tailoring is 61. Skinning is 86 and still in the Mining slot, so drop Skinning for Mining when you can.",
       "profs": [
         [
           "Tailoring",
-          50,
+          61,
           75,
           "",
           "c"
@@ -6047,8 +6182,8 @@ const GENERATED = {
         ],
         [
           "Fishing",
-          1,
-          75,
+          78,
+          150,
           "",
           "s"
         ]
@@ -6076,44 +6211,44 @@ const GENERATED = {
   },
   "scan": {
     "leif": [
-      24,
+      21,
       44,
       13445,
       17700,
-      492,
+      1804,
       "Darkshore",
       "Auberdine",
-      1794922857
+      1794965705
     ],
     "murus": [
-      39,
-      44,
-      10060,
-      14400,
-      526,
-      "Stormwind City",
-      "Trade District",
-      1794865488
+      42,
+      52,
+      12903,
+      16000,
+      1306,
+      "Westfall",
+      "Sentinel Hill",
+      1795017787
     ],
     "rum": [
-      18,
-      34,
-      3486,
-      6500,
-      64,
-      "Stormwind City",
-      "Mage Quarter",
-      1794503156
+      31,
+      50,
+      5984,
+      7600,
+      1266,
+      "Lion's Pride Inn",
+      "",
+      1795009272
     ],
     "fatal": [
-      22,
-      38,
-      3146,
+      29,
+      52,
+      3810,
       7600,
-      870,
-      "Stormwind City",
-      "Trade District",
-      1794922946
+      1302,
+      "Lion's Pride Inn",
+      "",
+      1795009313
     ],
     "libertty": [
       9,
@@ -6126,14 +6261,14 @@ const GENERATED = {
       1794503399
     ],
     "corwyn": [
-      27,
+      30,
       46,
       5527,
       8800,
-      0,
-      "Elwynn Forest",
-      "Goldshire",
-      1794950993
+      716,
+      "Stormwind City",
+      "Trade District",
+      1795009188
     ],
     "redstone": [
       0,
@@ -6149,19 +6284,23 @@ const GENERATED = {
   "gold": [
     [
       "leif",
-      11843
+      11613
     ],
     [
-      "corwyn",
-      2198
+      "murus",
+      6617
+    ],
+    [
+      "rum",
+      2283
     ],
     [
       "redstone",
       2159
     ],
     [
-      "murus",
-      1522
+      "corwyn",
+      1338
     ],
     [
       "libertty",
@@ -6169,11 +6308,7 @@ const GENERATED = {
     ],
     [
       "fatal",
-      808
-    ],
-    [
-      "rum",
-      127
+      412
     ]
   ],
   "bags": [
@@ -6206,20 +6341,20 @@ const GENERATED = {
       "murus",
       [
         [
-          "Small Red Pouch",
-          6
+          "Red Linen Bag",
+          8
         ],
         [
-          "Book Bag",
-          6
+          "Red Linen Bag",
+          8
         ],
         [
-          "Linen Bag",
-          6
+          "Red Linen Bag",
+          8
         ],
         [
-          "Linen Bag",
-          6
+          "Old Blanchy's Feed Pouch",
+          8
         ]
       ],
       [
@@ -6235,14 +6370,17 @@ const GENERATED = {
           6
         ],
         [
-          "Apprentice's Herb Pouch",
-          4
+          "Red Linen Bag",
+          8
         ],
         [
-          "Apprentice's Herb Pouch",
-          4
+          "Red Linen Bag",
+          8
         ],
-        null
+        [
+          "Red Linen Bag",
+          8
+        ]
       ],
       [
         "Apprentice's Skinning Satchel",
@@ -6253,18 +6391,21 @@ const GENERATED = {
       "fatal",
       [
         [
-          "Canvas Latchbag",
-          6
+          "Red Linen Bag",
+          8
         ],
         [
-          "Small Brown Pouch",
-          6
+          "Red Linen Bag",
+          8
         ],
         [
-          "Small Red Pouch",
-          6
+          "Red Linen Bag",
+          8
         ],
-        null
+        [
+          "Red Linen Bag",
+          8
+        ]
       ],
       [
         "Apprentice's Skinning Satchel",
@@ -6362,13 +6503,6 @@ const GENERATED = {
         128
       ],
       [
-        "Small Egg",
-        11,
-        "bank",
-        25,
-        3528
-      ],
-      [
         "Pristine Leather",
         3,
         "bank",
@@ -6381,6 +6515,20 @@ const GENERATED = {
         "bags",
         26,
         24235
+      ],
+      [
+        "Gustberry Juice",
+        19,
+        "bags",
+        38,
+        227
+      ],
+      [
+        "Linen Cloth",
+        33,
+        "bank",
+        21,
+        17716
       ],
       [
         "Light Hide",
@@ -6397,25 +6545,11 @@ const GENERATED = {
         16
       ],
       [
-        "Linen Cloth",
-        33,
+        "Strider Meat",
+        1,
         "bank",
-        21,
-        17716
-      ],
-      [
-        "Gustberry Juice",
-        19,
-        "bags",
-        38,
-        227
-      ],
-      [
-        "Oily Blackmouth",
-        6,
-        "bank",
-        27,
-        8069
+        349,
+        2052
       ],
       [
         "Light Feather",
@@ -6425,18 +6559,18 @@ const GENERATED = {
         2233
       ],
       [
-        "Stringy Wolf Meat",
-        4,
+        "Crawler Claw",
+        8,
         "bank",
-        49,
-        1473
+        35,
+        307
       ],
       [
-        "Brilliant Smallfish",
-        18,
-        "bags",
-        3,
-        2868
+        "Small Egg",
+        11,
+        "bank",
+        25,
+        3528
       ],
       [
         "Coarse Thread",
@@ -6453,25 +6587,11 @@ const GENERATED = {
         1846
       ],
       [
-        "Clam Meat",
-        6,
-        "bank",
-        25,
-        1376
-      ],
-      [
         "Linen Bandage",
         20,
         "bags",
         10,
         4974
-      ],
-      [
-        "Scroll of Spirit",
-        7,
-        "bank",
-        25,
-        309
       ],
       [
         "Plans: Gemmed Copper Gauntlets",
@@ -6481,32 +6601,25 @@ const GENERATED = {
         13
       ],
       [
-        "Strider Stew",
-        5,
-        "bags",
-        20,
-        198
+        "Stringy Wolf Meat",
+        4,
+        "bank",
+        49,
+        1473
       ],
       [
-        "Peacebloom",
-        2,
+        "Scroll of Spirit",
+        7,
         "bank",
-        39,
-        12320
+        25,
+        309
       ],
       [
-        "Crawler Claw",
-        8,
+        "Oily Blackmouth",
+        6,
         "bank",
-        35,
-        307
-      ],
-      [
-        "Strider Meat",
-        1,
-        "bank",
-        349,
-        2052
+        27,
+        8069
       ],
       [
         "Light Armor Kit",
@@ -6516,6 +6629,27 @@ const GENERATED = {
         2884
       ],
       [
+        "Clam Meat",
+        6,
+        "bank",
+        25,
+        1376
+      ],
+      [
+        "Minor Troll's Blood Elixir",
+        5,
+        "bank",
+        23,
+        664
+      ],
+      [
+        "Raw Longjaw Mud Snapper",
+        38,
+        "bank",
+        3,
+        11010
+      ],
+      [
         "Tigerseye",
         1,
         "bank",
@@ -6523,11 +6657,11 @@ const GENERATED = {
         536
       ],
       [
-        "Copper Ore",
-        1,
-        "bank",
-        96,
-        10800
+        "Strider Stew",
+        5,
+        "bags",
+        20,
+        198
       ],
       [
         "Scroll of Protection",
@@ -6544,18 +6678,18 @@ const GENERATED = {
         60
       ],
       [
+        "Copper Ore",
+        1,
+        "bank",
+        96,
+        10800
+      ],
+      [
         "Malachite",
         6,
         "bank",
         15,
         3017
-      ],
-      [
-        "Ruined Leather Scraps",
-        7,
-        "bank",
-        9,
-        2051
       ],
       [
         "Raw Rainbow Fin Albacore",
@@ -6565,18 +6699,11 @@ const GENERATED = {
         2801
       ],
       [
-        "Raw Longjaw Mud Snapper",
-        38,
+        "Peacebloom",
+        2,
         "bank",
-        3,
-        11010
-      ],
-      [
-        "Minor Troll's Blood Elixir",
-        5,
-        "bank",
-        15,
-        265
+        39,
+        12320
       ],
       [
         "Bear Meat",
@@ -6586,6 +6713,13 @@ const GENERATED = {
         384
       ],
       [
+        "Ruined Leather Scraps",
+        7,
+        "bank",
+        9,
+        2051
+      ],
+      [
         "Red-speckled Mushroom",
         10,
         "bags",
@@ -6593,11 +6727,11 @@ const GENERATED = {
         375
       ],
       [
-        "Shiny Bauble",
-        1,
+        "Brilliant Smallfish",
+        18,
         "bags",
-        28,
-        181
+        3,
+        2868
       ],
       [
         "Sharp Claw",
@@ -6614,6 +6748,13 @@ const GENERATED = {
         714
       ],
       [
+        "Shiny Bauble",
+        1,
+        "bags",
+        28,
+        181
+      ],
+      [
         "Ice Cold Milk",
         1,
         "bags",
@@ -6621,18 +6762,18 @@ const GENERATED = {
         982
       ],
       [
-        "Ruined Leather Scraps",
-        1,
-        "bags",
-        9,
-        2051
-      ],
-      [
         "Coarse Thread",
         1,
         "bags",
         13,
         768
+      ],
+      [
+        "Ruined Leather Scraps",
+        1,
+        "bags",
+        9,
+        2051
       ],
       [
         "Advisor Emerson's Instructions",
@@ -6708,15 +6849,8 @@ const GENERATED = {
     "murus": [
       [
         "Copper Bar",
-        59,
+        101,
         "bank",
-        100,
-        11309
-      ],
-      [
-        "Copper Bar",
-        42,
-        "bags",
         100,
         11309
       ],
@@ -6729,28 +6863,21 @@ const GENERATED = {
       ],
       [
         "Copper Ore",
-        10,
+        13,
         "bags",
         96,
         10800
       ],
       [
-        "Small Egg",
-        6,
-        "bags",
-        25,
-        3528
-      ],
-      [
-        "Waylaid Crate: Apprentice Ore",
-        1,
-        "bags",
-        135,
-        749
+        "Copper Ore",
+        10,
+        "bank",
+        96,
+        10800
       ],
       [
         "Stringy Wolf Meat",
-        13,
+        19,
         "bank",
         49,
         1473
@@ -6763,11 +6890,46 @@ const GENERATED = {
         3491
       ],
       [
+        "Copper Modulator",
+        2,
+        "bags",
+        425,
+        581
+      ],
+      [
+        "Chunk of Boar Meat",
+        20,
+        "bank",
+        35,
+        8380
+      ],
+      [
+        "Copper Tube",
+        5,
+        "bags",
+        137,
+        1531
+      ],
+      [
         "Spiked Club of the Eagle",
         1,
+        "bank",
+        599,
+        100
+      ],
+      [
+        "Boar Ribs",
+        6,
         "bags",
-        607,
-        83
+        89,
+        1293
+      ],
+      [
+        "Flask of Oil",
+        18,
+        "bags",
+        25,
+        7745
       ],
       [
         "Tigerseye",
@@ -6777,74 +6939,81 @@ const GENERATED = {
         536
       ],
       [
-        "Linen Cloth",
-        19,
-        "bank",
-        21,
-        17716
-      ],
-      [
-        "Boar Ribs",
-        4,
-        "bags",
-        89,
-        1293
-      ],
-      [
         "Chunk of Boar Meat",
-        14,
+        12,
         "bags",
         35,
         8380
-      ],
-      [
-        "Goretusk Liver",
-        5,
-        "bags",
-        90,
-        1088
-      ],
-      [
-        "Stringy Wolf Meat",
-        6,
-        "bags",
-        49,
-        1473
-      ],
-      [
-        "Chunk of Boar Meat",
-        13,
-        "bank",
-        35,
-        8380
-      ],
-      [
-        "Linen Cloth",
-        13,
-        "bags",
-        21,
-        17716
       ],
       [
         "Goretusk Snout",
-        10,
+        15,
         "bags",
         27,
         543
       ],
       [
-        "Rough Stone",
-        27,
+        "Linen Bag",
+        2,
+        "bank",
+        198,
+        268
+      ],
+      [
+        "Riverpaw Leather Vest",
+        1,
         "bags",
-        7,
-        40944
+        375,
+        20
+      ],
+      [
+        "Compact Shotgun",
+        1,
+        "bags",
+        365,
+        91
+      ],
+      [
+        "Tin Ore",
+        2,
+        "bags",
+        150,
+        5789
+      ],
+      [
+        "Shadowgem",
+        1,
+        "bags",
+        260,
+        579
+      ],
+      [
+        "Goretusk Liver Pie",
+        2,
+        "bags",
+        125,
+        48
+      ],
+      [
+        "Small Red Pouch",
+        1,
+        "bags",
+        249,
+        67
+      ],
+      [
+        "Small Red Pouch",
+        1,
+        "bank",
+        249,
+        67
       ],
       [
         "Small Green Pouch",
         1,
         "bank",
-        238,
-        83
+        248,
+        100
       ],
       [
         "Stringy Vulture Meat",
@@ -6854,11 +7023,11 @@ const GENERATED = {
         1229
       ],
       [
-        "Ice Cold Milk",
-        10,
+        "Explosive Rocket",
+        7,
         "bags",
-        18,
-        982
+        30,
+        1822
       ],
       [
         "Rough Grinding Stone",
@@ -6868,25 +7037,60 @@ const GENERATED = {
         2341
       ],
       [
-        "Explosive Rocket",
-        8,
-        "bags",
-        30,
-        1822
-      ],
-      [
         "Boar Intestines",
-        6,
+        11,
         "bags",
         18,
         3203
       ],
       [
-        "Flask of Oil",
-        4,
+        "Rough Stone",
+        27,
+        "bank",
+        7,
+        40944
+      ],
+      [
+        "Ice Cold Milk",
+        10,
+        "bags",
+        18,
+        982
+      ],
+      [
+        "Hops",
+        16,
+        "bags",
+        10,
+        645
+      ],
+      [
+        "Small Egg",
+        6,
         "bags",
         25,
-        7745
+        3528
+      ],
+      [
+        "Waylaid Crate: Apprentice Ore",
+        1,
+        "bank",
+        135,
+        749
+      ],
+      [
+        "Coarse Stone",
+        2,
+        "bags",
+        60,
+        3076
+      ],
+      [
+        "Light Leather",
+        4,
+        "bank",
+        26,
+        24235
       ],
       [
         "Blacksmith Hammer",
@@ -6912,9 +7116,23 @@ const GENERATED = {
       [
         "Simple Cape",
         1,
-        "bags",
+        "bank",
         100,
         25
+      ],
+      [
+        "Okra",
+        16,
+        "bags",
+        6,
+        2352
+      ],
+      [
+        "Rough Stone",
+        11,
+        "bags",
+        7,
+        40944
       ],
       [
         "Longjaw Mud Snapper",
@@ -6924,27 +7142,6 @@ const GENERATED = {
         3919
       ],
       [
-        "Minor Healing Potion",
-        4,
-        "bags",
-        5,
-        956
-      ],
-      [
-        "Light Leather",
-        2,
-        "bags",
-        26,
-        24235
-      ],
-      [
-        "Light Leather",
-        2,
-        "bank",
-        26,
-        24235
-      ],
-      [
         "Freshly Baked Bread",
         10,
         "bags",
@@ -6952,11 +7149,11 @@ const GENERATED = {
         375
       ],
       [
-        "Rough Sharpening Stone",
-        11,
+        "Lesser Healing Potion",
+        2,
         "bags",
-        3,
-        661
+        25,
+        2226
       ],
       [
         "Malachite",
@@ -6966,49 +7163,42 @@ const GENERATED = {
         3017
       ],
       [
-        "Okra",
-        4,
-        "bags",
-        6,
-        2352
+        "Rough Sharpening Stone",
+        11,
+        "bank",
+        3,
+        661
       ],
       [
         "Minor Healing Potion",
-        1,
-        "bank",
+        4,
+        "bags",
         5,
         956
       ],
       [
-        "Boar Intestines",
+        "Silverleaf",
         1,
-        "bank",
-        18,
-        3203
+        "bags",
+        19,
+        5688
       ],
       [
         "Rough Weightstone",
-        2,
+        1,
         "bags",
         8,
         2120
       ],
       [
-        "Red Leather Bandana",
-        8,
-        "bags",
-        null,
-        0
-      ],
-      [
-        "Handful of Oats",
-        6,
-        "bags",
-        null,
-        0
-      ],
-      [
         "Dwarven Heirloom",
+        4,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Gnoll Paw",
         4,
         "bags",
         null,
@@ -7022,7 +7212,21 @@ const GENERATED = {
         0
       ],
       [
+        "A Simple Compass",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
         "Barrel of Thunder Ale",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Book Bag",
         1,
         "bags",
         null,
@@ -7036,14 +7240,14 @@ const GENERATED = {
         0
       ],
       [
-        "Hearthstone",
+        "Greaves of the People's Militia",
         1,
         "bags",
         null,
         0
       ],
       [
-        "Lewis' Note",
+        "Hearthstone",
         1,
         "bags",
         null,
@@ -7066,19 +7270,19 @@ const GENERATED = {
       [
         "Rumi of Gnomeregan: The Collected Works",
         1,
-        "bags",
-        null,
-        0
-      ],
-      [
-        "Well Water Sample Kit",
-        1,
-        "bags",
+        "bank",
         null,
         0
       ]
     ],
     "rum": [
+      [
+        "Frilled Lichen",
+        1,
+        "bags",
+        2450,
+        686
+      ],
       [
         "Peacebloom",
         23,
@@ -7087,11 +7291,18 @@ const GENERATED = {
         12320
       ],
       [
-        "Frilled Lichen",
+        "Hunting Tunic",
         1,
         "bags",
-        2450,
-        686
+        514,
+        29
+      ],
+      [
+        "Silverleaf",
+        26,
+        "bags",
+        19,
+        5688
       ],
       [
         "Linen Cloth",
@@ -7101,18 +7312,32 @@ const GENERATED = {
         17716
       ],
       [
+        "Copper Ore",
+        4,
+        "bags",
+        96,
+        10800
+      ],
+      [
         "Light Leather",
-        12,
+        13,
         "bags",
         26,
         24235
       ],
       [
-        "Silverleaf",
-        23,
+        "Broken Fang",
+        1,
         "bags",
-        19,
-        5688
+        299,
+        69
+      ],
+      [
+        "Minor Troll's Blood Elixir",
+        12,
+        "bags",
+        23,
+        664
       ],
       [
         "Ruined Leather Scraps",
@@ -7122,18 +7347,18 @@ const GENERATED = {
         2051
       ],
       [
+        "Pattern: Rugged Leather Pants",
+        1,
+        "bags",
+        200,
+        55
+      ],
+      [
         "Elixir of Minor Defense",
-        54,
+        39,
         "bags",
         5,
         2138
-      ],
-      [
-        "Minor Troll's Blood Elixir",
-        14,
-        "bags",
-        15,
-        265
       ],
       [
         "Boar Intestines",
@@ -7141,6 +7366,13 @@ const GENERATED = {
         "bank",
         18,
         3203
+      ],
+      [
+        "Tigerseye",
+        1,
+        "bags",
+        110,
+        536
       ],
       [
         "Fishing Pole",
@@ -7157,32 +7389,11 @@ const GENERATED = {
         1252
       ],
       [
-        "Skinning Knife",
-        1,
+        "Linen Cloth",
+        4,
         "bags",
-        100,
-        60
-      ],
-      [
-        "Elixir of Minor Force",
-        3,
-        "bags",
-        25,
-        1333
-      ],
-      [
-        "Shiny Bauble",
-        1,
-        "bank",
-        28,
-        181
-      ],
-      [
-        "Elixir of Minor Force",
-        2,
-        "bank",
-        25,
-        1333
+        21,
+        17716
       ],
       [
         "Crag Boar Rib",
@@ -7192,11 +7403,39 @@ const GENERATED = {
         800
       ],
       [
+        "Elixir of Minor Force",
+        2,
+        "bags",
+        25,
+        1333
+      ],
+      [
+        "Elixir of Minor Force",
+        2,
+        "bank",
+        25,
+        1333
+      ],
+      [
+        "Stringy Wolf Meat",
+        1,
+        "bags",
+        49,
+        1473
+      ],
+      [
         "Elixir of Minor Defense",
         8,
         "bank",
         5,
         2138
+      ],
+      [
+        "Refreshing Spring Water",
+        5,
+        "bags",
+        8,
+        1017
       ],
       [
         "Roasted Boar Meat",
@@ -7206,11 +7445,32 @@ const GENERATED = {
         1730
       ],
       [
+        "Rough Stone",
+        5,
+        "bags",
+        7,
+        40944
+      ],
+      [
+        "Shiny Bauble",
+        1,
+        "bank",
+        28,
+        181
+      ],
+      [
         "Empty Vial",
         4,
         "bags",
         6,
         3048
+      ],
+      [
+        "Darnassian Bleu",
+        2,
+        "bags",
+        8,
+        640
       ],
       [
         "Slitherskin Mackerel",
@@ -7220,28 +7480,28 @@ const GENERATED = {
         940
       ],
       [
-        "Refreshing Spring Water",
+        "Apprentice's Herb Pouch",
+        3,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Vial of Animal Blood",
         2,
         "bags",
-        8,
-        1017
+        null,
+        0
+      ],
+      [
+        "Book Bag",
+        1,
+        "bags",
+        null,
+        0
       ],
       [
         "Earth Totem",
-        1,
-        "bags",
-        null,
-        0
-      ],
-      [
-        "Free Ticket Voucher",
-        1,
-        "bags",
-        null,
-        0
-      ],
-      [
-        "Gnarled Short Staff",
         1,
         "bags",
         null,
@@ -7263,6 +7523,20 @@ const GENERATED = {
       ],
       [
         "Package for Stormpike",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Shiny Silver Coin",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "William's Shipment",
         1,
         "bags",
         null,
@@ -7306,11 +7580,32 @@ const GENERATED = {
         346
       ],
       [
+        "Small Red Pouch",
+        1,
+        "bags",
+        249,
+        67
+      ],
+      [
+        "Small Brown Pouch",
+        1,
+        "bags",
+        199,
+        148
+      ],
+      [
         "Recipe: Beer Basted Boar Ribs",
         1,
         "bags",
         172,
         51
+      ],
+      [
+        "Stringy Wolf Meat",
+        3,
+        "bags",
+        49,
+        1473
       ],
       [
         "Copper Rod",
@@ -7320,18 +7615,18 @@ const GENERATED = {
         1092
       ],
       [
-        "Frayed Belt",
-        1,
-        "bags",
-        100,
-        8
-      ],
-      [
         "Skinning Knife",
         1,
         "bags",
         100,
         60
+      ],
+      [
+        "Bottle of Dalaran Noir",
+        1,
+        "bags",
+        90,
+        165
       ],
       [
         "Refreshing Spring Water",
@@ -7341,25 +7636,18 @@ const GENERATED = {
         1017
       ],
       [
-        "Bottle of Dalaran Noir",
-        1,
+        "Ruined Leather Scraps",
+        8,
         "bags",
-        95,
-        1016
+        9,
+        2051
       ],
       [
-        "Minor Healing Potion",
-        3,
+        "Light Leather",
+        2,
         "bags",
-        5,
-        956
-      ],
-      [
-        "Earthroot",
-        1,
-        "bags",
-        42,
-        5232
+        26,
+        24235
       ],
       [
         "Roasted Boar Meat",
@@ -7369,18 +7657,46 @@ const GENERATED = {
         1730
       ],
       [
-        "Ruined Leather Scraps",
-        4,
-        "bags",
-        9,
-        2051
-      ],
-      [
         "Linen Cloth",
-        1,
+        2,
         "bags",
         21,
         17716
+      ],
+      [
+        "Earthroot",
+        1,
+        "bags",
+        42,
+        5232
+      ],
+      [
+        "Rabbit's Foot",
+        2,
+        "bags",
+        9,
+        64
+      ],
+      [
+        "Minor Healing Potion",
+        3,
+        "bags",
+        5,
+        956
+      ],
+      [
+        "Small Spider Leg",
+        3,
+        "bags",
+        5,
+        901
+      ],
+      [
+        "Malachite",
+        1,
+        "bags",
+        15,
+        3017
       ],
       [
         "Slitherskin Mackerel",
@@ -7390,11 +7706,18 @@ const GENERATED = {
         940
       ],
       [
-        "Malachite",
+        "Darnassian Bleu",
         1,
         "bags",
-        15,
-        3017
+        8,
+        640
+      ],
+      [
+        "Canvas Latchbag",
+        1,
+        "bags",
+        null,
+        0
       ],
       [
         "Crate of Candles",
@@ -7412,6 +7735,13 @@ const GENERATED = {
       ],
       [
         "Package for Stormpike",
+        1,
+        "bags",
+        null,
+        0
+      ],
+      [
+        "Rabbit Handler Gloves",
         1,
         "bags",
         null,
@@ -7455,13 +7785,6 @@ const GENERATED = {
         17716
       ],
       [
-        "Brilliant Smallfish",
-        18,
-        "bags",
-        3,
-        2868
-      ],
-      [
         "Copper Ore",
         2,
         "bags",
@@ -7497,11 +7820,11 @@ const GENERATED = {
         1017
       ],
       [
-        "Rough Stone",
-        2,
+        "Brilliant Smallfish",
+        18,
         "bags",
-        7,
-        40944
+        3,
+        2868
       ],
       [
         "Light Armor Kit",
@@ -7509,6 +7832,13 @@ const GENERATED = {
         "bags",
         15,
         2884
+      ],
+      [
+        "Rough Stone",
+        2,
+        "bags",
+        7,
+        40944
       ],
       [
         "Half-Eaten Fish",
@@ -7534,11 +7864,18 @@ const GENERATED = {
     ],
     "corwyn": [
       [
-        "Light Leather",
+        "Small Pumpkin",
+        1,
+        "bags",
+        10000,
+        10
+      ],
+      [
+        "Bolt of Linen Cloth",
         18,
         "bags",
-        26,
-        24235
+        58,
+        1036
       ],
       [
         "Linen Bag",
@@ -7548,11 +7885,11 @@ const GENERATED = {
         268
       ],
       [
-        "Stringy Wolf Meat",
-        8,
-        "bags",
-        49,
-        1473
+        "Light Leather",
+        20,
+        "bank",
+        26,
+        24235
       ],
       [
         "Heavy Linen Gloves",
@@ -7562,9 +7899,16 @@ const GENERATED = {
         37
       ],
       [
-        "Ruined Leather Scraps",
-        23,
+        "Stringy Wolf Meat",
+        8,
         "bags",
+        49,
+        1473
+      ],
+      [
+        "Ruined Leather Scraps",
+        29,
+        "bank",
         9,
         2051
       ],
@@ -7574,6 +7918,13 @@ const GENERATED = {
         "bags",
         65,
         346
+      ],
+      [
+        "Red Dye",
+        4,
+        "bags",
+        51,
+        1242
       ],
       [
         "Copper Ore",
@@ -7590,25 +7941,32 @@ const GENERATED = {
         51
       ],
       [
-        "Bolt of Linen Cloth",
-        3,
+        "Raw Brilliant Smallfish",
+        11,
         "bags",
-        58,
-        1036
+        15,
+        14242
       ],
       [
-        "Bolt of Linen Cloth",
+        "Raw Longjaw Mud Snapper",
+        51,
+        "bags",
         3,
-        "bank",
-        58,
-        1036
+        11010
       ],
       [
-        "Copper Ore",
+        "Green Dye",
         1,
-        "bank",
-        96,
-        10800
+        "bags",
+        125,
+        1800
+      ],
+      [
+        "Coarse Thread",
+        9,
+        "bags",
+        13,
+        768
       ],
       [
         "Boar Intestines",
@@ -7618,11 +7976,18 @@ const GENERATED = {
         3203
       ],
       [
-        "Green Dye",
-        1,
-        "bank",
-        125,
-        1800
+        "Chunk of Boar Meat",
+        3,
+        "bags",
+        35,
+        8380
+      ],
+      [
+        "Raw Bristle Whisker Catfish",
+        17,
+        "bags",
+        6,
+        7042
       ],
       [
         "Fishing Pole",
@@ -7641,7 +8006,7 @@ const GENERATED = {
       [
         "Red Linen Shirt",
         1,
-        "bags",
+        "bank",
         100,
         78
       ],
@@ -7655,7 +8020,7 @@ const GENERATED = {
       [
         "Scroll: CWAL",
         1,
-        "bags",
+        "bank",
         100,
         1219
       ],
@@ -7667,25 +8032,11 @@ const GENERATED = {
         60
       ],
       [
-        "Chunk of Boar Meat",
-        3,
-        "bags",
-        35,
-        8380
-      ],
-      [
-        "Ruined Leather Scraps",
-        6,
+        "Copper Ore",
+        1,
         "bank",
-        9,
-        2051
-      ],
-      [
-        "Light Leather",
-        2,
-        "bank",
-        26,
-        24235
+        96,
+        10800
       ],
       [
         "Refreshing Spring Water",
@@ -7695,11 +8046,11 @@ const GENERATED = {
         1017
       ],
       [
-        "Linen Cloth",
+        "Silverleaf",
         1,
-        "bags",
-        21,
-        17716
+        "bank",
+        19,
+        5688
       ],
       [
         "Raw Slitherskin Mackerel",
@@ -7709,25 +8060,11 @@ const GENERATED = {
         1377
       ],
       [
-        "Silverleaf",
-        1,
-        "bank",
-        19,
-        5688
-      ],
-      [
         "Crag Boar Rib",
         1,
         "bank",
         8,
         800
-      ],
-      [
-        "Small Pumpkin",
-        1,
-        "bags",
-        10000,
-        10
       ],
       [
         "Darnassian Bleu",
@@ -7800,13 +8137,6 @@ const GENERATED = {
         0
       ],
       [
-        "Shiny Silver Coin",
-        1,
-        "bags",
-        null,
-        0
-      ],
-      [
         "Snow Boots",
         1,
         "bags",
@@ -7816,7 +8146,7 @@ const GENERATED = {
       [
         "Spiked Club of Healing",
         1,
-        "bags",
+        "bank",
         null,
         0
       ],
@@ -7837,11 +8167,11 @@ const GENERATED = {
         190
       ],
       [
-        "Sturdy Quarterstaff of the Gorilla",
-        1,
+        "Copper Chain Boots",
+        2,
         "bank",
-        1097,
-        132
+        1100,
+        194
       ],
       [
         "Light Feather",
@@ -7858,18 +8188,18 @@ const GENERATED = {
         17716
       ],
       [
-        "Crawler Meat",
-        6,
-        "bank",
-        100,
-        837
-      ],
-      [
         "Shadowgem",
         3,
         "bank",
         260,
         579
+      ],
+      [
+        "Sturdy Quarterstaff of the Gorilla",
+        1,
+        "bank",
+        700,
+        148
       ],
       [
         "Copper Chain Pants",
@@ -7879,11 +8209,11 @@ const GENERATED = {
         103
       ],
       [
-        "Copper Chain Boots",
-        2,
+        "Crawler Meat",
+        6,
         "bank",
-        1100,
-        194
+        100,
+        837
       ],
       [
         "Tigerseye",
@@ -7896,8 +8226,22 @@ const GENERATED = {
         "Severing Axe of Magic",
         1,
         "bank",
-        290,
-        94
+        297,
+        90
+      ],
+      [
+        "Bear Meat",
+        8,
+        "bank",
+        37,
+        384
+      ],
+      [
+        "Crawler Claw",
+        8,
+        "bank",
+        35,
+        307
       ],
       [
         "Small Furry Paw",
@@ -7914,25 +8258,11 @@ const GENERATED = {
         1376
       ],
       [
-        "Bear Meat",
-        8,
-        "bank",
-        37,
-        384
-      ],
-      [
         "Schematic: EZ-Thro Dynamite",
         1,
         "bank",
         199,
         76
-      ],
-      [
-        "Crawler Claw",
-        8,
-        "bank",
-        35,
-        307
       ],
       [
         "Light Armor Kit",
@@ -7949,18 +8279,18 @@ const GENERATED = {
         1429
       ],
       [
-        "Rough Stone",
-        13,
-        "bank",
-        7,
-        40944
-      ],
-      [
         "Pyrite",
         1,
         "bank",
         129,
         3491
+      ],
+      [
+        "Rough Stone",
+        13,
+        "bank",
+        7,
+        40944
       ],
       [
         "Silverleaf",
@@ -8031,9 +8361,8 @@ function applyRoster(){
   if(bagsP&&GENERATED.label) bagsP.textContent="Who has an empty bag slot, from the Bagnon save on "+GENERATED.label+". Send new bags to the gold rows first.";
   const scanned=document.getElementById("mkScanned");
   if(scanned&&GENERATED.scannedCount!=null) scanned.innerHTML=GENERATED.scannedCount+"<small> / "+chars.length+"</small>";
-  const freshText=GENERATED.label?"Scanned "+GENERATED.label:"";
-  const fresh=document.getElementById("fresh"); if(fresh) fresh.textContent=freshText;
-  const footFresh=document.getElementById("footFresh"); if(footFresh) footFresh.textContent=freshText;
+  const fresh=document.getElementById("fresh"); if(fresh&&GENERATED.label) fresh.textContent="Last updated "+GENERATED.label;
+  const footFresh=document.getElementById("footFresh"); if(footFresh&&GENERATED.label) footFresh.textContent="Last updated "+GENERATED.label;
   const learned=new Set(Object.values(GENERATED.chars).flatMap(c=>(c.profs||[]).map(p=>p[0])));
   document.querySelectorAll("#mats h3").forEach(h=>{
     const name=h.childNodes[0]&&h.childNodes[0].textContent.trim();
@@ -8557,19 +8886,19 @@ document.getElementById("skGrid").innerHTML=SK.map(s=>{const c=chars.find(x=>x.i
 const SELL=[
  ["Pristine Leather",3,"leif",494,524,"Scarce mat. About 14s 82c for the stack of 3."],
  ["Frilled Lichen",1,"rum",2450,686,""],
- ["Shadowgem",3,"redstone",260,579,""],
+ ["Shadowgem",4,"redstone",260,579,""],
  ["Copper Chain Boots",2,"redstone",1100,194,"Only 194 listed."],
- ["Severing Axe of Magic",1,"redstone",290,94,""],
- ["Tigerseye",8,"murus",110,536,"4 on Murus, 3 on Redstone, 1 on Leif. Hold one if Murus's recipes need it."]];
+ ["Severing Axe of Magic",1,"redstone",297,90,""],
+ ["Tigerseye",9,"murus",110,536,"4 on Murus, 3 on Redstone, 1 on Leif, 1 on Rum. Hold one if Murus's recipes need it."]];
 const KEEP=[
  ["Copper Bar",101,"murus",100,"Blacksmithing skill-ups. 101 bars are worth about 1g 1s on the AH."],
- ["Light Leather",74,"leif",26,"Leatherworking. 38 on Leif, 20 on Corwyn, 12 on Rum, 4 on Murus."],
- ["Linen Cloth",139,"redstone",21,"Tailoring and First Aid. 39 on Redstone, 33 on Leif, 32 on Murus, 20 on Rum, 13 on Libertty, 1 on Fatal, 1 on Corwyn."],
- ["Peacebloom & Silverleaf",53,"rum",null,"For alchemy once Rum trains Journeyman. 46 on Rum, 4 on Redstone, 2 on Leif, 1 on Corwyn."]];
+ ["Light Leather",77,"leif",26,"Leatherworking. 38 on Leif, 20 on Corwyn, 13 on Rum, 4 on Murus, 2 on Fatal."],
+ ["Linen Cloth",111,"redstone",21,"Tailoring and First Aid. 39 on Redstone, 33 on Leif, 24 on Rum, 13 on Libertty, 2 on Fatal."],
+ ["Peacebloom & Silverleaf",57,"rum",null,"For alchemy once Rum trains Journeyman. 49 on Rum, 4 on Redstone, 2 on Leif, 1 on Murus, 1 on Corwyn."]];
 const SKIP=[
  ["Pyrite",8,"murus",129,"1s 29c each, 3,491 listed."],
  ["Coarse Blasting Powder",2,"redstone",69,"69c each, 1,429 listed."],
- ["Elixir of Minor Defense",62,"rum",5,"5c each, 2,138 listed."],
+ ["Elixir of Minor Defense",47,"rum",5,"5c each, 2,138 listed."],
  ["Copper Chain Pants",5,"redstone",130,"1s 30c each, 103 listed."],
  ["Light Armor Kit",21,"leif",15,"15c each, 2,884 listed."],
  ["Rough Arrow",621,"libertty",1,"1c each, 92,252 listed."]];
@@ -8724,31 +9053,25 @@ function talentPoints(c){
 }
 const ROUTES={
   leif:[
-    ["Auberdine, your level","Buzzbox 525, Deep Ocean, Vast Sea, Fruit of the Sea, Onu, The Blackwood Corrupted, and A Lost Master are the Darkshore quests in the log. You're 17 and most of the way to 18."],
-    ["Druid quest","Curing the Sick is the class quest in the log. Lessons Anew is already out of it."],
-    ["Town","Camping 101: First Aid is still open, with Naleeia Tattermend."],
-    ["Leave the leftovers","Data Hoarders, Find Bingles, Stormpike's Delivery, Collecting Memories, and the Stormwind and Westfall mail are still in the log. Don't ride back for them."],
-    ["Ashenvale","Trek to Ashenvale is already in the log. Skin everything on the way. Leatherworking needs medium leather from 20+ beasts."]
+    ["Auberdine","You're 17 in Auberdine, most of the way to 18. The Darkshore quests are out of the log."],
+    ["What's left","Data Hoarders, Find Bingles, Humble Beginnings, Stormpike's Delivery, Collecting Memories, and Fight for Warsong Gulch. Don't ride back for them."],
+    ["Toward 25","Skin everything on the way to Ashenvale. Leatherworking needs medium leather from 20+ beasts."]
   ],
   murus:[
-    ["Stormwind, then the craft quest","You're in the Trade District. Deeprun Rat Roundup is still open. Supplying the Front wants 6 Copper Axes and 6 Copper Chain Belts. Craft them. That is skill-ups and a turn-in."],
-    ["Hall of Thanes","Important Heirlooms and The Restless Dead are in the log. Do those before you leave the city."],
-    ["Dun Morogh leftovers","Ammo for Rumbleshot, Stocking Jetsteam, The Grizzled Den, The Perfect Stout, and A Visitor to Dun Morogh are still open. Take the short ones if you pass through. Leave the level 6 leftovers."],
-    ["At 15","Find Bingles and Stormpike's Delivery are the Loch Modan breadcrumbs. Go there next."],
-    ["Hold the other zones","Westfall, Gearing Redridge, Business in Auberdine, and the Warsong marks are in the log early. Loch Modan, then Wetlands. Redridge can wait until 16."]
+    ["Sentinel Hill","You're 16 in Westfall, most of the way to 17. Murloc Gills, Westfall Stew, Patrolling Westfall, The People's Militia, The Defias Brotherhood, and ... and that note you found are in the log."],
+    ["Craft quest","Supplying the Front is still open. Craft the copper axes and belts. That is skill-ups and a turn-in."],
+    ["Still in the log","Deeprun Rat Roundup, Important Heirlooms, The Restless Dead, and Gearing Redridge are open. The Dun Morogh quests are leftovers. Take them only if you pass through."]
   ],
   rum:[
-    ["Back to Kharanos","You're in the Mage Quarter, and the quests at your level are still Finding Warmth, Frosthowl, Frostmane Hold, and The Perfect Stout."],
-    ["Train Journeyman","Alchemy is capped at 75. Train it in Ironforge and turn in Camping 101: Alchemy. It's still in the log. Train Journeyman Herbalism before Loch Modan herbs go gray."],
-    ["Still Dun Morogh","Data Hoarders around Gnomeregan at 10, then A Visitor to Dun Morogh."],
-    ["Loch Modan","After Dun Morogh. Stormpike's Delivery is the breadcrumb, and it can wait until 15. Herbs there feed Alchemy toward 150."]
+    ["Lion's Pride","You're 10 at the Lion's Pride Inn, most of the way to 11. Book Return, An Enticing Offer, Shipment to Stormwind, Further Concerns, Report to Gryan Stoutmantle, and The Jasperlode Mine are in the log."],
+    ["Train Journeyman","Alchemy is still capped at 75. Camping 101: Alchemy is in the log. Herbalism is 76."],
+    ["Dun Morogh leftovers","Finding Warmth, Frosthowl, Frostmane Hold, The Perfect Stout, Data Hoarders, and A Visitor to Dun Morogh are still open. Grab them only if you're already there."]
   ],
   fatal:[
-    ["Stormwind","You're 10, in the Trade District. Enchanting is 26 and Skinning is 88. The Grizzled Den is behind you."],
+    ["Lion's Pride","You're 10 at the Lion's Pride Inn. Enchanting is 26 and Skinning is 90."],
     ["Westfall is started","Report to Gryan Stoutmantle, The Jasperlode Mine, Protect the Frontier, Red Linen Goods, and Shipping Label are in the log. Follow those."],
     ["Dun Morogh leftovers","Evershine, Dawn in the Mountains, and Data Hoarders are still open. Grab them only if you're already there."],
-    ["Disenchant","Enchanting is 26. Mail him spare greens."],
-    ["Toward 25","Westfall, then Loch Modan. Don't start a new zone until those turn-ins are in."]
+    ["Disenchant","Enchanting is 26. Mail him spare greens."]
   ],
   libertty:[
     ["Goldshire mines","Fargodeep Mine, Kobold Candles, Gold Dust Exchange, and Book Return are all still in the log."],
@@ -8758,11 +9081,11 @@ const ROUTES={
     ["Toward 25","Finish Elwynn, then Westfall. That's the road to 25."]
   ],
   corwyn:[
-    ["Goldshire","You're 11, in Goldshire. Gold Dust Exchange, Kobold Candles, Collecting Kelp, Good Steel, Rough Wolf Pelts, and The Jasperlode Mine are in the log."],
+    ["Goldshire quests","You're 11, in the Trade District. Gold Dust Exchange, Kobold Candles, Collecting Kelp, Good Steel, Rough Wolf Pelts, and The Jasperlode Mine are still in the log."],
     ["Westfall is started","Report to Gryan Stoutmantle, Protect the Frontier, Downstream, Cloth and Leather Armor, and Elmore's Task are already picked up."],
-    ["Class and camp","Confounding Flash, Stolen Enchanting Supplies, Baited for Success, and Camping 101: Fishing are in the log."],
+    ["Class and camp","Confounding Flash, Stolen Enchanting Supplies, and Camping 101: Fishing are in the log."],
     ["Dun Morogh leftovers","Dawn in the Mountains, Frosthowl, Shimmer Stout, Data Hoarders, and A Visitor to Dun Morogh are still open. Grab them only if you're already there."],
-    ["Professions","Tailoring is 50, so Red Linen Bags are available. Skinning is 86 and still in the Mining slot. Drop it for Mining when you can."]
+    ["Professions","Tailoring is 61. Skinning is 86 and still in the Mining slot. Drop it for Mining when you can."]
   ],
   redstone:[
     ["Stay the bank","Level 1 in the Trade District, four Red Linen Bags equipped, and nothing in them. Mail and portals are the job."],
@@ -8846,9 +9169,11 @@ function accountPlayed(){
 function paintPlayed(){
   const total=accountPlayed();
   const fresh=document.getElementById("fresh");
-  if(fresh&&GENERATED.label) fresh.textContent=`Scanned ${GENERATED.label} · Played ${playedShort(total)}`;
+  if(fresh&&GENERATED.label) fresh.textContent=`Last updated ${GENERATED.label}`;
+  const played=document.getElementById("playedTotal");
+  if(played) played.textContent=`Played ${playedLong(total)}`;
   const foot=document.getElementById("footFresh");
-  if(foot&&GENERATED.label) foot.textContent=`Scanned ${GENERATED.label} · ${playedLong(total)} played`;
+  if(foot&&GENERATED.label) foot.textContent=`Last updated ${GENERATED.label} · ${playedLong(total)} played`;
 }
 let charId="", charPivot="build";
 function showHome(id){

@@ -1096,9 +1096,8 @@ function applyRoster(){
   if(bagsP&&GENERATED.label) bagsP.textContent="Who has an empty bag slot, from the Bagnon save on "+GENERATED.label+". Send new bags to the gold rows first.";
   const scanned=document.getElementById("mkScanned");
   if(scanned&&GENERATED.scannedCount!=null) scanned.innerHTML=GENERATED.scannedCount+"<small> / "+chars.length+"</small>";
-  const freshText=GENERATED.label?"Scanned "+GENERATED.label:"";
-  const fresh=document.getElementById("fresh"); if(fresh) fresh.textContent=freshText;
-  const footFresh=document.getElementById("footFresh"); if(footFresh) footFresh.textContent=freshText;
+  const fresh=document.getElementById("fresh"); if(fresh&&GENERATED.label) fresh.textContent="Last updated "+GENERATED.label;
+  const footFresh=document.getElementById("footFresh"); if(footFresh&&GENERATED.label) footFresh.textContent="Last updated "+GENERATED.label;
   const learned=new Set(Object.values(GENERATED.chars).flatMap(c=>(c.profs||[]).map(p=>p[0])));
   document.querySelectorAll("#mats h3").forEach(h=>{
     const name=h.childNodes[0]&&h.childNodes[0].textContent.trim();
